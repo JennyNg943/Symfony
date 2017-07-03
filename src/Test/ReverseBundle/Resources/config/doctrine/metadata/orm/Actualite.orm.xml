@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Actualite" table="actualite">
+    <id name="idActualite" type="integer" column="Id_Actualite">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="titreactualite" type="text" column="TitreActualite" length="65535" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="lienactualite" type="text" column="LienActualite" length="65535" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="descriptioncourte" type="text" column="DescriptionCourte" length="65535" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="descriptionlongue" type="text" column="DescriptionLongue" length="65535" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="datecreation" type="datetime" column="DateCreation" nullable="false"/>
+    <field name="datemodification" type="datetime" column="DateModification" nullable="false"/>
+    <field name="datefinpublication" type="datetime" column="DateFinPublication" nullable="false"/>
+    <field name="idRedacteur" type="integer" column="Id_Redacteur" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="flagenligne" type="integer" column="FlagEnLigne" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

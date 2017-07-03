@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Annoncecandidatmailing" table="annoncecandidatmailing">
+    <indexes>
+      <index name="Id_Annonce" columns="Id_Annonce"/>
+      <index name="Id_Candidat" columns="Id_Candidat"/>
+    </indexes>
+    <id name="idAnnoncecandidatmailing" type="bigint" column="Id_AnnonceCandidatMailing">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="idAnnonce" type="bigint" column="Id_Annonce" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="idCandidat" type="bigint" column="Id_Candidat" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="flagenvoi" type="integer" column="FlagEnvoi" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="dateenvoi" type="date" column="DateEnvoi" nullable="false"/>
+    <field name="etatgeographique" type="boolean" column="EtatGeographique" nullable="false"/>
+  </entity>
+</doctrine-mapping>

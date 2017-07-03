@@ -1,0 +1,44 @@
+{% extends "OCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+	Candidature
+{% endblock %}
+
+{% block body %}
+	{% if erreur == "Vous avez déjà postulé à cette annonce" %}
+	<p style = 'display:block; background-color:red; color:white; text-align: center; padding:2%; '>{{ erreur }}</p>
+	{% endif %}
+	{% block Poste %}
+	<h1>Rappel du poste <a href="{{ path('oc_platform_offreEmploi') }}"><input type="submit" value="Retour" id="BoutonAnnonce"></a></h1>
+	<table id="AnnonceTable">
+		<tr>
+			<th  COLSPAN=2>
+				<p id="Titre">{{ annonce.datepublication|date('d/m/Y') }}</p>
+				<p id="TitreAnnonce">{{ annonce.TitreAnnonce|upper }} - {{ annonce.GrandeVilleProche }} ({{ annonce.idDepartement }})</p>
+			</th>
+		</tr>
+		<tr>
+			<td COLSPAN=2><b><p id="TitrePetit">Le poste :  </p></b>{{ annonce.DescriptifAnnonce }}</td>
+		</tr>
+		<tr>
+			<td COLSPAN=2><b><p id="TitrePetit">Profil recherché :  </p></b>{{ annonce.ProfilRecherche }}</td>
+		</tr>
+		<tr>
+			<td><b><p id="TitrePetit">Rémunération :   </p></b>{{ annonce.Remuneration }}</td>
+			<td>
+				<b><p id="TitrePetit">Référence :   </p></b>{{ annonce.id }}
+			</td>
+		</tr>
+	</table>
+	{% endblock %}		
+	{% block Candidature %}
+		<h1>Candidature</h1>
+
+		{{ form(form) }}
+		{{ form_row(form.cvcandidat) }}
+		{{ form_end(form) }}
+
+	{% endblock %}	
+	
+		
+{% endblock %}

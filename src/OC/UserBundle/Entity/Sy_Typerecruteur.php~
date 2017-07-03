@@ -1,0 +1,74 @@
+<?php
+
+namespace OC\UserBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Sy_Typerecruteur
+ * 
+ * @ORM\Table(name="Sy_typerecruteur")
+ * @ORM\Entity
+ */
+class Sy_Typerecruteur
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="IntituleTypeRecruteur", type="string", length=255, nullable=false)
+     */
+    private $intituletyperecruteur;
+
+
+
+    /**
+     * Get idTyperecruteur
+     *
+     * @return integer
+     */
+    public function getIdTyperecruteur()
+    {
+        return $this->idTyperecruteur;
+    }
+
+    /**
+     * Set intituletyperecruteur
+     *
+     * @param string $intituletyperecruteur
+     *
+     * @return Typerecruteur
+     */
+    public function setIntituletyperecruteur($intituletyperecruteur)
+    {
+        $this->intituletyperecruteur = $intituletyperecruteur;
+
+        return $this;
+    }
+
+    /**
+     * Get intituletyperecruteur
+     *
+     * @return string
+     */
+    public function getIntituletyperecruteur()
+    {
+        return $this->intituletyperecruteur;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+}

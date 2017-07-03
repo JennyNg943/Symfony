@@ -1,0 +1,40 @@
+{% extends "OCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+	Ajouter une annonce
+{% endblock %}
+
+{% block body %}
+
+	<h1>Ajouter une annonce</h1>
+				{{ form_start(form)}}
+					{{ form_row(form.idSiteEmploi)}}
+					{{ form_row(form.idFonction)}}
+				{{ form_end (form)}}	 
+
+<script>
+var $sport = $('#site_test_idSiteEmploi');
+$(document).ready(function () {
+     
+    $sport.change(function(){
+        var $form = $(this).closest('form');
+        var data = {};
+        data[$sport] = $sport.val();       
+        
+ 
+            $.ajax({
+                type: $form.attr('method'),
+                data: data,
+                url: Routing.generate('test'),
+                success: function(html){
+                     
+                    $('#site_test_idFonction').replaceWith(                     
+                            $(html).find('#site_test_idFonction')
+                     );
+                                }
+                            });
+                    });
+				}
+
+</script>
+{% endblock %}

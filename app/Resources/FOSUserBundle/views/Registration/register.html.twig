@@ -1,0 +1,19 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% block fos_user_content %}
+	<table id="Inscription">
+		<tr><th>Inscription</th></tr>
+		<tr id="InscriptionFOS">
+			<td>
+				{% include '@OCUserBundle/Resources/views/FOSUser/register_content.html.twig' %}
+			</td>
+		</tr>
+		<tr id="ConnexionOption">
+			<td id="ResetMDP">
+				<a href="{{path('fos_user_resetting_request')}}" >Mot de passe oublié?</a></td>
+			<td id="ConnexionIns">
+				<a href="{{ path('fos_user_security_login') }}" >Déjà inscrit?</a> 
+			</td>	
+		</tr>
+	</table>
+{% endblock fos_user_content %}

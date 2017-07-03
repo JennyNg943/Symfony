@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Salon" table="salon">
+    <id name="idSalon" type="integer" column="Id_Salon">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nomsalon" type="string" column="NomSalon" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="datedebut" type="date" column="DateDebut" nullable="false"/>
+    <field name="ville" type="string" column="Ville" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="pays" type="string" column="Pays" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="siteinternet" type="string" column="SiteInternet" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="descriptionrapide" type="text" column="DescriptionRapide" length="65535" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="descriptioncomplete" type="text" column="DescriptionComplete" length="65535" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="logo" type="string" column="logo" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="datecreation" type="date" column="DateCreation" nullable="false"/>
+  </entity>
+</doctrine-mapping>

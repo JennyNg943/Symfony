@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Ecole" table="ecole">
+    <id name="idEcole" type="integer" column="Id_Ecole">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nomecole" type="string" column="NomEcole" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="idCivilitecontactprincipal" type="integer" column="Id_CiviliteContactPrincipal" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="nomcontactprincipal" type="string" column="NomContactPrincipal" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="prenomcontactprincipal" type="string" column="PrenomContactPrincipal" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="mailcontactprincipal" type="string" column="MailContactPrincipal" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="idCivilitecontactrecrutement" type="integer" column="Id_CiviliteContactRecrutement" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="nomcontactrecrutement" type="string" column="NomContactRecrutement" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="prenomcontactrecrutement" type="string" column="PrenomContactRecrutement" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="mailcontactrecrutement" type="string" column="MailContactRecrutement" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="adresseecole" type="string" column="AdresseEcole" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="cpecole" type="string" column="CpEcole" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="villeecole" type="string" column="VilleEcole" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="telecole" type="string" column="TelEcole" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="fax" type="string" column="Fax" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="formationadulte" type="integer" column="FormationAdulte" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="formationinitiale" type="integer" column="FormationInitiale" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="logoecole" type="string" column="LogoEcole" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="siteinternetecole" type="string" column="SiteInternetEcole" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="pwd" type="string" column="Pwd" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="formationproposee" type="text" column="FormationProposee" length="65535" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="newsletter" type="boolean" column="Newsletter" nullable="true"/>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,15 @@
+{% extends "OCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+	Recrutic
+{% endblock %}
+
+{% block body %}
+	<p>Candidature bien envoyée</p>
+	{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+		<p>Vous pouvez voir toutes vos candidatures dans votre espace</p>
+	{% else %}	
+		<a href="{{ path('fos_user_registration_register') }}"><p>Inscrivez vous pour suivre toutes vos candidatures</p></a> 
+	{% endif %}	
+	
+{% endblock %}

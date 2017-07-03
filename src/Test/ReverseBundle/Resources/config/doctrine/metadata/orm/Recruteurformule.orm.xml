@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Recruteurformule" table="recruteurformule">
+    <id name="idRecruteurformule" type="integer" column="Id_RecruteurFormule">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nbannoncedispodiffusion" type="integer" column="NbAnnonceDispoDiffusion" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="nbannoncedispovisibilite" type="integer" column="NbAnnonceDispoVisibilite" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="nbannoncedispoperformance" type="integer" column="NbAnnonceDispoPerformance" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="nbannoncedisporeussite" type="integer" column="NbAnnonceDispoReussite" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="historiquediffusion" type="integer" column="HistoriqueDiffusion" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="historiquevisibilite" type="integer" column="HistoriqueVisibilite" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="historiqueperformance" type="integer" column="HistoriquePerformance" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="historiquereussite" type="integer" column="HistoriqueReussite" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

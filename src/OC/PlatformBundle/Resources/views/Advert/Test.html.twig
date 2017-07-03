@@ -1,0 +1,65 @@
+{% extends "OCPlatformBundle::layout.html.twig" %}
+ 
+{% block title %}
+  {{ parent() }}
+{% endblock %}
+ 
+{% block body %}
+<h2>{{ action }} </h2>
+<div class="row">
+  <div class="span10">
+    <div class="well">
+      {{ form_start(form) }}
+        {{ form_errors(form) }}
+         
+          <div class="row">
+            <div class="span3">
+              {{ form_label (form.site, "Site") }}
+              {{ form_widget(form.site, {'attr' : {'class' : 'paysclass span3'}}) }}
+              {{ form_errors(form.site) }}
+            </div>
+            <div class="span3">
+              {{ form_label (form.fonction, "Fonction") }}
+              {{ form_widget(form.fonction, {'attr' : {'class' : 'regionclass span3'}}) }}
+              {{ form_errors(form.fonction) }}
+            </div>
+          </div>
+    
+        <input type="submit" class="btn btn-info btn-block btn-small" />
+    {{ form_end(form) }}   
+  </div>
+</div>
+	<script type="text/javascript">
+		$(function () {
+    jQuery(document).ready(function() {
+        console.log("jQuery est prêt !");
+                 
+        $(".payclass").change(function() {
+            mafonctionchange('region','pay');
+        }).trigger('change');
+ 
+                 
+        function mafonctionchange(selecteur,selecteurparent)
+        {         
+            $.ajax({
+                url: 'http://localhost/Symfony/web/app_dev.php/form/rempli',
+                type: 'POST',
+                data:
+                {
+                    id : $("select."+selecteurparent+"class option:selected").val(),
+                    select : selecteur
+                },
+                dataType: 'json',
+                success: function(reponse) {
+                              
+                    $('.'+selecteur+'class').empty();
+                    $.each(reponse, function(index, element) {
+                        $('.' + selecteur + 'class').append('<option value="'+ element.id +'" selected="selected"> '+ element.nom +' </option>');
+                    });                             
+                }
+            });
+        }
+    });
+});
+</script>
+{% endblock %}

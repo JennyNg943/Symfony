@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Nbadresseip" table="nbadresseip">
+    <id name="idAdresseip" type="integer" column="Id_AdresseIp">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="adresseIp" type="string" column="Adresse_Ip" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="datevisite" type="date" column="DateVisite" nullable="true"/>
+    <field name="adresseUrl" type="string" column="Adresse_Url" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="robot" type="boolean" column="Robot" nullable="false"/>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,613 @@
+<?php
+namespace OC\UserBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Sy_Societe
+ * @ORM\Table(name="Sy_societe")
+ * @ORM\Entity
+ */
+class Sy_Societe
+{
+	/**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+	
+	/**
+     * @var integer
+     *
+     * @ORM\ManyToOne(targetEntity="OC\UserBundle\Entity\Sy_Civilite")
+     */
+    private $civilite;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Nom", type="string", length=255, nullable=false)
+     */
+    private $nom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Prenom", type="string", length=255, nullable=false)
+     */
+    private $prenom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Adresse", type="string", length=255, nullable=false)
+     */
+    private $adresse;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Cp", type="string", length=255, nullable=false)
+     */
+    private $cp;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Ville", type="string", length=255, nullable=false)
+     */
+    private $ville;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Tel", type="string", length=255, nullable=false)
+     */
+    private $tel;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="NomSociete", type="string", length=255, nullable=false)
+     */
+	private $nomSociete;
+	
+	/**
+     * @var integer
+     *
+     * @ORM\ManyToOne(targetEntity="OC\UserBundle\Entity\Sy_Civilite")
+     */
+	private $civiliteSourcing;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="NomSourcing", type="string", length=255, nullable=false)
+     */
+	private $nomSourcing;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="PrenomSourcing", type="string", length=255, nullable=false)
+     */
+	private $prenomSourcing;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="mailSourcing", type="string", length=255, nullable=false)
+     */
+	private $mailSourcing;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="Description", type="string", length=255, nullable=true)
+     */
+	private $description;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="Site", type="string", length=255, nullable=true)
+     */
+	private $site;
+	
+	/**
+     * @var integer
+     *
+     * @ORM\Column(name="Fax", type="integer", length=255, nullable=true)
+     */
+	private $fax;
+	
+	/**
+     * @var integer
+     *
+     * @ORM\ManyToOne(targetEntity="OC\UserBundle\Entity\Sy_Typerecruteur")
+     */
+	private $typeSociete;
+
+
+	/**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="DateCreation", type="date", nullable=false)
+     */
+    private $datecreation;
+	
+	/**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="DateMaj", type="date", nullable=true)
+     */
+    private $datemaj;
+	
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nom
+     *
+     * @param string $nom
+     *
+     * @return Societe
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Get nom
+     *
+     * @return string
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * Set prenom
+     *
+     * @param string $prenom
+     *
+     * @return Societe
+     */
+    public function setPrenom($prenom)
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    /**
+     * Get prenom
+     *
+     * @return string
+     */
+    public function getPrenom()
+    {
+        return $this->prenom;
+    }
+
+    /**
+     * Set adresse
+     *
+     * @param string $adresse
+     *
+     * @return Societe
+     */
+    public function setAdresse($adresse)
+    {
+        $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    /**
+     * Get adresse
+     *
+     * @return string
+     */
+    public function getAdresse()
+    {
+        return $this->adresse;
+    }
+
+    /**
+     * Set cp
+     *
+     * @param string $cp
+     *
+     * @return Societe
+     */
+    public function setCp($cp)
+    {
+        $this->cp = $cp;
+
+        return $this;
+    }
+
+    /**
+     * Get cp
+     *
+     * @return string
+     */
+    public function getCp()
+    {
+        return $this->cp;
+    }
+
+    /**
+     * Set ville
+     *
+     * @param string $ville
+     *
+     * @return Societe
+     */
+    public function setVille($ville)
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+    /**
+     * Get ville
+     *
+     * @return string
+     */
+    public function getVille()
+    {
+        return $this->ville;
+    }
+
+    /**
+     * Set tel
+     *
+     * @param string $tel
+     *
+     * @return Societe
+     */
+    public function setTel($tel)
+    {
+        $this->tel = $tel;
+
+        return $this;
+    }
+
+    /**
+     * Get tel
+     *
+     * @return string
+     */
+    public function getTel()
+    {
+        return $this->tel;
+    }
+
+    /**
+     * Set nomSociete
+     *
+     * @param string $nomSociete
+     *
+     * @return Societe
+     */
+    public function setNomSociete($nomSociete)
+    {
+        $this->nomSociete = $nomSociete;
+
+        return $this;
+    }
+
+    /**
+     * Get nomSociete
+     *
+     * @return string
+     */
+    public function getNomSociete()
+    {
+        return $this->nomSociete;
+    }
+
+    /**
+     * Set nomSourcing
+     *
+     * @param string $nomSourcing
+     *
+     * @return Societe
+     */
+    public function setNomSourcing($nomSourcing)
+    {
+        $this->nomSourcing = $nomSourcing;
+
+        return $this;
+    }
+
+    /**
+     * Get nomSourcing
+     *
+     * @return string
+     */
+    public function getNomSourcing()
+    {
+        return $this->nomSourcing;
+    }
+
+    /**
+     * Set prenomSourcing
+     *
+     * @param string $prenomSourcing
+     *
+     * @return Societe
+     */
+    public function setPrenomSourcing($prenomSourcing)
+    {
+        $this->prenomSourcing = $prenomSourcing;
+
+        return $this;
+    }
+
+    /**
+     * Get prenomSourcing
+     *
+     * @return string
+     */
+    public function getPrenomSourcing()
+    {
+        return $this->prenomSourcing;
+    }
+
+    /**
+     * Set mailSourcing
+     *
+     * @param string $mailSourcing
+     *
+     * @return Societe
+     */
+    public function setMailSourcing($mailSourcing)
+    {
+        $this->mailSourcing = $mailSourcing;
+
+        return $this;
+    }
+
+    /**
+     * Get mailSourcing
+     *
+     * @return string
+     */
+    public function getMailSourcing()
+    {
+        return $this->mailSourcing;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Societe
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set site
+     *
+     * @param string $site
+     *
+     * @return Societe
+     */
+    public function setSite($site)
+    {
+        $this->site = $site;
+
+        return $this;
+    }
+
+    /**
+     * Get site
+     *
+     * @return string
+     */
+    public function getSite()
+    {
+        return $this->site;
+    }
+
+    /**
+     * Set fax
+     *
+     * @param integer $fax
+     *
+     * @return Societe
+     */
+    public function setFax($fax)
+    {
+        $this->fax = $fax;
+
+        return $this;
+    }
+
+    /**
+     * Get fax
+     *
+     * @return integer
+     */
+    public function getFax()
+    {
+        return $this->fax;
+    }
+
+    /**
+     * Set datecreation
+     *
+     * @param \DateTime $datecreation
+     *
+     * @return Societe
+     */
+    public function setDatecreation($datecreation)
+    {
+        $this->datecreation = $datecreation;
+
+        return $this;
+    }
+
+    /**
+     * Get datecreation
+     *
+     * @return \DateTime
+     */
+    public function getDatecreation()
+    {
+        return $this->datecreation;
+    }
+
+    /**
+     * Set datemaj
+     *
+     * @param \DateTime $datemaj
+     *
+     * @return Societe
+     */
+    public function setDatemaj($datemaj)
+    {
+        $this->datemaj = $datemaj;
+
+        return $this;
+    }
+
+    /**
+     * Get datemaj
+     *
+     * @return \DateTime
+     */
+    public function getDatemaj()
+    {
+        return $this->datemaj;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \OC\UserBundle\Entity\User $user
+     *
+     * @return Societe
+     */
+    public function setUser(\OC\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \OC\UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set civilite
+     *
+     * @param \OC\UserBundle\Entity\Civilite $civilite
+     *
+     * @return Societe
+     */
+    public function setCivilite(\OC\UserBundle\Entity\Civilite $civilite = null)
+    {
+        $this->civilite = $civilite;
+
+        return $this;
+    }
+
+    /**
+     * Get civilite
+     *
+     * @return \OC\UserBundle\Entity\Civilite
+     */
+    public function getCivilite()
+    {
+        return $this->civilite;
+    }
+
+    /**
+     * Set civiliteSourcing
+     *
+     * @param \OC\UserBundle\Entity\Civilite $civiliteSourcing
+     *
+     * @return Societe
+     */
+    public function setCiviliteSourcing(\OC\UserBundle\Entity\Civilite $civiliteSourcing = null)
+    {
+        $this->civiliteSourcing = $civiliteSourcing;
+
+        return $this;
+    }
+
+    /**
+     * Get civiliteSourcing
+     *
+     * @return \OC\UserBundle\Entity\Civilite
+     */
+    public function getCiviliteSourcing()
+    {
+        return $this->civiliteSourcing;
+    }
+
+    /**
+     * Set typeSociete
+     *
+     * @param \OC\UserBundle\Entity\Typerecruteur $typeSociete
+     *
+     * @return Societe
+     */
+    public function setTypeSociete(\OC\UserBundle\Entity\Typerecruteur $typeSociete = null)
+    {
+        $this->typeSociete = $typeSociete;
+
+        return $this;
+    }
+
+    /**
+     * Get typeSociete
+     *
+     * @return \OC\UserBundle\Entity\Typerecruteur
+     */
+    public function getTypeSociete()
+    {
+        return $this->typeSociete;
+    }
+}

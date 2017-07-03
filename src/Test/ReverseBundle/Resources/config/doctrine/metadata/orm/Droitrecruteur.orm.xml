@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Droitrecruteur" table="droitrecruteur">
+    <id name="idDroitrecruteur" type="integer" column="Id_DroitRecruteur">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nomdroitrecruteur" type="string" column="NomDroitRecruteur" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="accescvtheque" type="integer" column="AccesCvTheque" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="accescoordonnees" type="integer" column="AccesCoordonnees" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="annonceteteliste" type="integer" column="AnnonceTeteListe" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="affichagelogo" type="integer" column="AffichageLogo" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="affichagemissionaccueil" type="integer" column="AffichageMissionAccueil" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="affichagerecruteuraccueil" type="integer" column="AffichageRecruteurAccueil" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

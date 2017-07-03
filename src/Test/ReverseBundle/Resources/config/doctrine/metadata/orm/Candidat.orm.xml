@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Candidat" table="candidat">
+    <indexes>
+      <index name="IDX_6AB5B471210B8748" columns="id_civilite_id"/>
+    </indexes>
+    <unique-constraints>
+      <unique-constraint name="UNIQ_6AB5B471A76ED395" columns="user_id"/>
+    </unique-constraints>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nomcandidat" type="string" column="NomCandidat" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="prenomcandidat" type="string" column="PrenomCandidat" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="adressecandidat" type="string" column="AdresseCandidat" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="cpcandidat" type="string" column="CpCandidat" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="villecandidat" type="string" column="VilleCandidat" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="telfixecandidat" type="string" column="TelFixeCandidat" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="telportcandidat" type="string" column="TelPortCandidat" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="mailcandidat" type="string" column="MailCandidat" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="cvcandidat" type="string" column="cvcandidat" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="datecreation" type="date" column="DateCreation" nullable="false"/>
+    <field name="pwd" type="string" column="Pwd" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="photo" type="string" column="Photo" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="newsletter" type="integer" column="Newsletter" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="anonymat" type="integer" column="Anonymat" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="flagstatut" type="integer" column="FlagStatut" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="numcandidat" type="string" column="NumCandidat" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="cvindexe" type="integer" column="CvIndexe" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="datemaj" type="date" column="DateMaj" nullable="true"/>
+    <field name="datenewsletter" type="date" column="DateNewsletter" nullable="true"/>
+    <field name="idAnciense" type="string" column="Id_AncienSE" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="user" target-entity="User" fetch="LAZY">
+      <join-columns>
+        <join-column name="user_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idCivilite" target-entity="SyCivilite" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_civilite_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

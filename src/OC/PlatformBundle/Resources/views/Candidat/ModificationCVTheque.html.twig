@@ -1,0 +1,16 @@
+{% extends "OCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+	Modifications CVTheque
+{% endblock %}
+
+{% block body %}
+	{% if message == "Le candidat a été modifié" %}
+			<p style="display:block; text-align: center; background-color: green;color:white;padding:1%;">Le candidat a été modifié</p>
+	{% endif %}
+	<table id='ModifCV'>
+		<tr><th>Modification d'un candidat <a href="{{ path('CVtheque') }}"><input type="submit" value="Retour" id="BoutonAnnonce" style='color:white;'></a></th></tr>
+		<tr><td>{{ form(form)}}</td></tr>
+	</table>	
+	
+{% endblock %}

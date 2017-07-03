@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="SyCandidature" table="Sy_Candidature">
+    <indexes>
+      <index name="IDX_F77FC913210B8748" columns="id_civilite_id"/>
+      <index name="IDX_F77FC913F6BD1646" columns="site_id"/>
+    </indexes>
+    <id name="id" association-key="true"/>
+    <field name="nomcandidat" type="string" column="NomCandidat" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="prenomcandidat" type="string" column="PrenomCandidat" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="adressecandidat" type="string" column="AdresseCandidat" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="cp" type="string" column="Cp" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="villecandidat" type="string" column="VilleCandidat" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="telfixecandidat" type="string" column="TelFixeCandidat" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="telportcandidat" type="string" column="TelPortCandidat" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="mailcandidat" type="string" column="MailCandidat" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="cvcandidat" type="string" column="cvcandidat" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="datemaj" type="date" column="DateMaj" nullable="true"/>
+    <field name="datecreation" type="date" column="DateCreation" nullable="false"/>
+    <field name="pwd" type="string" column="Pwd" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="photo" type="string" column="Photo" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="newsletter" type="integer" column="Newsletter" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="anonymat" type="integer" column="Anonymat" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="flagstatut" type="integer" column="FlagStatut" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="numcandidat" type="string" column="NumCandidat" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="cvindexe" type="integer" column="CvIndexe" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="datenewsletter" type="date" column="DateNewsletter" nullable="true"/>
+    <field name="idAnciense" type="string" column="Id_AncienSE" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="commentaire" type="string" column="Commentaire" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="departement" type="string" column="Departement" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <one-to-one field="id" target-entity="User" fetch="LAZY">
+      <join-columns>
+        <join-column name="id" referenced-column-name="id"/>
+      </join-columns>
+    </one-to-one>
+    <many-to-one field="idCivilite" target-entity="SyCivilite" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_civilite_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="site" target-entity="SySiteemploi" fetch="LAZY">
+      <join-columns>
+        <join-column name="site_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-many field="syFonction" target-entity="SyFonction" inversed-by="syCandidature" fetch="LAZY">
+      <join-table name="sy_candidature_sy_fonction">
+        <join-columns>
+          <join-column name="sy_candidature_id" referenced-column-name="id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="sy_fonction_id" referenced-column-name="Id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+    <many-to-many field="syAnnonce" target-entity="SyAnnonce" inversed-by="syCandidature" fetch="LAZY">
+      <join-table name="sy_candidature_sy_annonce">
+        <join-columns>
+          <join-column name="sy_candidature_id" referenced-column-name="id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="sy_annonce_id" referenced-column-name="id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+    <many-to-many field="annonce" target-entity="Annonce" inversed-by="syCandidature" fetch="LAZY">
+      <join-table name="sy_candidature_annonce">
+        <join-columns>
+          <join-column name="sy_candidature_id" referenced-column-name="id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="annonce_id" referenced-column-name="id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+  </entity>
+</doctrine-mapping>

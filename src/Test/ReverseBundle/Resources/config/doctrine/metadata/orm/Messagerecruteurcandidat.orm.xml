@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Messagerecruteurcandidat" table="messagerecruteurcandidat">
+    <id name="idMessagerecruteurcandidat" type="integer" column="Id_MessageRecruteurCandidat">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="message" type="text" column="Message" length="65535" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="objet" type="string" column="Objet" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="idRecruteur" type="integer" column="Id_Recruteur" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="idCandidat" type="integer" column="Id_Candidat" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="sens" type="integer" column="Sens" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="datecreation" type="date" column="DateCreation" nullable="false"/>
+    <field name="idReponse" type="integer" column="Id_Reponse" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="idAnnonce" type="integer" column="Id_Annonce" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

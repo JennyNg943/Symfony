@@ -1,0 +1,27 @@
+{% extends "OCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+	Inscription
+{% endblock %}
+
+{% block body %}
+	<h1>Inscription</h1>
+	<div id = "JeSuisRecruteur">
+		
+		<a href="{{path('user_two_registration')}}" id = "JeSuisCandidatInf">
+			{% image 'bundles/app/img/Candidat.png' %}
+				<img src="{{ asset_url }}" />
+			{% endimage %}
+			Je suis recruteur</a>
+		
+	</div>
+	<div id = "JeSuisEmployeur">
+		<a href="{{ path('user_three_registration') }}" id = "JeSuisEmployeurInf">
+			{% image 'bundles/app/img/Employeur.png' %}
+				<img src="{{ asset_url }}" />
+			{% endimage %}
+			Je suis employeur</a> 
+		
+		
+	</div>
+{% endblock %}

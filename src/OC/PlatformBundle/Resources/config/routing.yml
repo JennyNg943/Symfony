@@ -1,0 +1,203 @@
+#																	Default
+oc_platform_homepage:
+    path:     /
+    defaults: { _controller: OCPlatformBundle:Default:index }
+
+mapage:
+    path:	  /User/MaPage
+    defaults: { _controller: OCPlatformBundle:Default:MaPage } 
+
+CVtheque:
+    path:     /CVTheque/
+    defaults: { _controller: OCPlatformBundle:Default:CVtheque }
+    
+oc_platform_offreEmploi:
+    path:     /Nos_offres_d_emploi/
+    defaults: { _controller: OCPlatformBundle:Default:NosOffresDEmploi }
+
+retour:
+    path:     /Retour/
+    defaults: { _controller: OCPlatformBundle:Default:Retour }
+    
+APropos:  
+    path:     /APropos
+    defaults: { _controller: OCPlatformBundle:Default:APropos }
+    
+contact:  
+    path:     /Contact
+    defaults: { _controller: OCPlatformBundle:Default:Contact }
+    
+#																Inscription
+register:
+    path:     /Inscription
+    defaults: { _controller: OCUserBundle:Inscription:register }
+    
+register2:
+    path:     /InscriptionPro
+    defaults: { _controller: OCUserBundle:Inscription:register2 }
+    
+registration_ok:
+    path:     /User/Inscription_Confirmé
+    defaults: { _controller: OCUserBundle:Inscription:InscriptionSuite }
+   
+desinscription:
+    path:     /User/Desinscription
+    defaults: { _controller: OCUserBundle:Inscription:Desinscription }
+
+#																	Recruteur
+
+recruteurModif:
+    path:     /User/ModificationRecruteur
+    defaults: { _controller: OCPlatformBundle:Recruteur:recruteurModif }
+    
+
+#																	AnnonceAncienne
+
+admin_annonce:
+    path:	  /Admin/Annonce
+    defaults: {_controller: OCPlatformBundle:Advert:Admin_Annonce}
+    
+admin_modif_annonce:
+    path:	  /Admin/Annonce/Modif/{idAnnonce}
+    defaults: {_controller: OCPlatformBundle:Advert:Admin_Modif_Annonce}
+    
+delete:		 
+    path:	  /Admin/Annonce/Del/{idAnnonce}
+    defaults: {_controller: OCPlatformBundle:Advert:delete}
+    
+validerAnnonce:
+    path:	  /Admin/Annonce/{idAnnonce}
+    defaults: {_controller: OCPlatformBundle:Advert:validerAnnonce}    
+    
+DevaliderAnnonce:
+    path:	  /Admin/Annonce/{idAnnonce}
+    defaults: {_controller: OCPlatformBundle:Advert:devaliderAnnonce}  
+    
+admin_annonce_valide:
+    path:	/Admin/PublierAnnonce
+    defaults: {_controller: OCPlatformBundle:Advert:PublicationAnnonce}
+    
+premiumOld:
+    path:	/User/Sponsoriser/{idAnnonce}
+    defaults: {_controller: OCPlatformBundle:Advert:SponsoriserAnnonce}    
+    
+DepremiumOld:
+    path:	/User/DeSponsoriser/{idAnnonce}
+    defaults: {_controller: OCPlatformBundle:Advert:DeSponsoriserAnnonce}    
+
+#																	AnnonceNouvelle
+
+annonceAjoutEmp:
+    path:	/User/AjoutAnnonceEmp
+    defaults: {_controller: OCPlatformBundle:NewAdvert:AjoutAnnonceEmp}
+
+annonceAjout:
+    path:	/User/AjoutAnnonce
+    defaults: {_controller: OCPlatformBundle:NewAdvert:AjoutAnnonce}
+
+annonceConsultation:
+    path:	/User/ConsulterAnnonce
+    defaults: {_controller: OCPlatformBundle:NewAdvert:ConsultAnnonce}    
+    
+premium:
+    path:	/User/SponsoriserSy/{idAnnonce}
+    defaults: {_controller: OCPlatformBundle:NewAdvert:SponsoriserAnnonce}
+    
+Depremium:
+    path:	/User/DeSponsoriserSy/{idAnnonce}
+    defaults: {_controller: OCPlatformBundle:NewAdvert:DeSponsoriserAnnonce}
+    
+admin_modif_syannonce:
+    path:	  /Admin/SyAnnonce/Modif/{idAnnonce}
+    defaults: {_controller: OCPlatformBundle:NewAdvert:Admin_Modif_Sy_Annonce}
+    
+deleteSyAnnonce:		 
+    path:	  /Admin/SyAnnonce/Del/{idAnnonce}
+    defaults: {_controller: OCPlatformBundle:NewAdvert:deleteSyAnnonce}
+    
+validerSyAnnonce:
+    path:	  /Admin/SyAnnonce/{idAnnonce}
+    defaults: {_controller: OCPlatformBundle:NewAdvert:validerSyAnnonce}    
+    
+DevaliderSyAnnonce:
+    path:	  /Admin/SyAnnonce/{idAnnonce}
+    defaults: {_controller: OCPlatformBundle:NewAdvert:devaliderSyAnnonce}  
+    
+admin_Syannonce_valide:
+    path:	/Admin/PublierSyAnnonce
+    defaults: {_controller: OCPlatformBundle:NewAdvert:PublicationSyAnnonce}
+    
+#																		Candidat
+
+admin_candidat:
+    path:	  /Admin/Candidat
+    defaults: {_controller: OCPlatformBundle:Candidat:Admin_Candidat}
+    
+oc_platform_formPar:
+    path:	  /User/Candidature/{id}
+    defaults: {_controller: OCUserBundle:Inscription:FormPar}
+    
+oc_platform_formParNew:
+    path:	  /User/Candidature/Annonce/{id}
+    defaults: {_controller: OCUserBundle:Inscription:FormParNew}
+    
+CandidatureConsultation:
+    path:	  /User/ConsultationCandidature
+    defaults: {_controller: OCPlatformBundle:Candidat:CandidatureConsultation}
+    
+candidatModif:
+    path:     /User/ModificationCandidat
+    defaults: { _controller: OCPlatformBundle:Candidat:candidatModif }
+    
+CandidatCompetence:    
+    path:     /User/ModificationCompetenceCandidat
+    defaults: { _controller: OCPlatformBundle:Candidat:candidatCompetence }
+    
+admin_maneom:
+    path:     /User/Maneom
+    defaults: { _controller: OCUserBundle:HelloService:ManeomSQL }
+    
+consultCVTheque:
+    path:     /ConsultationCVTheque/{id}
+    defaults: { _controller: OCPlatformBundle:Candidat:candidatCVTheque }
+    
+deleteCv:
+    path:     /Admin/Delete/{id}
+    defaults: { _controller: OCPlatformBundle:Candidat:delete }
+    
+modifCv: 
+    path:     /Admin/ModifCv/{id}
+    defaults: { _controller: OCPlatformBundle:Candidat:modification }
+    
+contactCandidat:
+    path:     /Contacter/{id}
+    defaults: { _controller: OCPlatformBundle:Candidat:contacterCandidat }
+    
+#																		Flux RSS    
+
+FluxRSS:
+    path:	 /FluxRss
+    defaults: {_controller: OCUserBundle:HelloService:FluxRss}
+    
+soap:
+    path:	/soap
+    defaults: {_controller: OCUserBundle:HelloService:index}
+    
+moulinette:
+    path:	/Moulinette
+    defaults: {_controller: OCUserBundle:HelloService:Moulinette}
+    
+test:
+    path:	/Test
+    defaults: {_controller: OCPlatformBundle:Advert:Test}
+    
+    
+#																		Fonction
+
+admin_fonction:
+    path:	/Admin/Fonction
+    defaults: {_controller: OCPlatformBundle:Fonction:index}
+
+admin_fonction_delete:
+    path:	/Admin/Fonction/Supp/{id}
+    defaults: {_controller: OCPlatformBundle:Fonction:delete}

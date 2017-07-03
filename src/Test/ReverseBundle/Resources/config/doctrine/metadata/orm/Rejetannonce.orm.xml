@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Rejetannonce" table="rejetannonce">
+    <id name="idRejetannonce" type="integer" column="Id_RejetAnnonce">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="intitulerejetadmin" type="string" column="IntituleRejetAdmin" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="intitulerejetrecruteur" type="string" column="IntituleRejetRecruteur" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="corpsmail" type="text" column="CorpsMail" length="65535" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

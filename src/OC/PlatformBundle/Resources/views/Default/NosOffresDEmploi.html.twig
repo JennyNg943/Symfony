@@ -1,0 +1,70 @@
+{% extends "OCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+	Nos offres d'emploi
+{% endblock %}
+
+{% block body %}
+	{{ form(form)}}
+	<div class="navigation">
+		{{ knp_pagination_render(pagination) }}
+	</div>	
+		Nombre total annonces : <b>{{ pagination.getTotalItemCount }}</b>
+<table>
+	{% for annonce in pagination %}
+	<table id="AnnonceTable">
+		<tr>
+			{% if annonce.premium == 1 %}
+				<th  id="Premium" COLSPAN=3>
+					{% image 'bundles/app/img/Premium.png' %}
+						<img src="{{ asset_url }}" style="width: 5%; float:left"/>
+					{% endimage %}
+			{% else %}		
+				<th  id="NoPremium" COLSPAN=3>
+					<p id="Titre">{{ annonce.datepublication|date('d/m/Y') }}</p>
+			{% endif %}
+				
+				<p id="TitreAnnonce">{{ annonce.TitreAnnonce|upper }} - {{ annonce.GrandeVilleProche }} ({{ annonce.idDepartement }})</p>
+					{% if annonce.premium == 1 %}
+						{% image 'bundles/app/img/Premium.png' %}
+							<img src="{{ asset_url }}" style="width: 5%; float:right"/>
+						{% endimage %}
+					{% endif %}
+			{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+				{% if app.user.type == "Candidat" %}
+					{% if annonce.New == 1 %}
+						<a href="{{ path('oc_platform_formParNew',{'id': annonce.id})}}"><input type="submit" value="Postuler" id="BoutonAnnonce"></a>	
+					{% else %}
+						<a href="{{ path('oc_platform_formPar',{'id': annonce.id})}}"><input type="submit" value="Postuler" id="BoutonAnnonce"></a>
+					{% endif %}		
+				{% endif %}	
+			{% else %}	
+				<a href="{{ path('user_one_registration') }}"><input type="submit" value="Postuler" id="BoutonAnnonce"></a>
+			{% endif %}	
+			</th>
+		</tr>
+		<tr>
+			<td COLSPAN=3><b><p id="TitrePetit">Le poste (ref: {{ annonce.id }}) :  </p></b>{{ annonce.DescriptifAnnonce }}</td>
+		</tr>
+		<tr>
+			<td COLSPAN=3><b><p id="TitrePetit">Profil recherché :  </p></b>{{ annonce.ProfilRecherche }}</td>
+		</tr>
+		<tr>
+			<td><b><p id="TitrePetit">Rémunération :   </p></b>{{ annonce.Remuneration }}</td>
+			<td COLSPAN=2><b><p id="TitrePetit">Avantage :   </p></b>{% if annonce.avantage == "Null" %}A voir{% else %}{{ annonce.avantage }}{% endif %}</td>
+		</tr>
+		<tr>
+			<td><b><p id="TitrePetit">Horaire :   </p></b>{% if annonce.idHoraire == 0 %}A voir{% else %}{{ annonce.idHoraire }}{% endif %}</td>
+			<td><b><p id="TitrePetit">Contrat :   </p></b>{% if annonce.idTypecontrat == 0 %}A voir{% else %}{{ annonce.idTypecontrat }}{% endif %}</td>
+			<td><b><p id="TitrePetit">Nombre d'heures :   </p></b>{{ annonce.nbHeure }}</td>
+		</tr>
+		</table>
+		{% endfor %}
+	</table>	
+	<div class="navigation">
+		{{ knp_pagination_render(pagination) }}
+	</div>	
+{% endblock %}
+
+
+

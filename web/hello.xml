@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<source> 
+	<jobs> 
+		<title>Tourneurs-Fraiseurs.com</title> 
+		<description>Site emploi reservé aux metiers de l'usinage.</description> 
+		<lastBuildDate>Wed, 04 Apr 13 09:08:41 +0100</lastBuildDate> 
+		<job> 
+			<reference>Jen</reference> 
+			<titre><![CDATA[Régleur]]></titre> 
+			<etablissement><![CDATA[Nous sommes un groupe industriel qui conçoit, fabrique et commercialise des machines pour la fabrication du papier. Nous réalisons une grosse partie de notre CA à l'export.]]></etablissement> 
+			<description><![CDATA[Au sein d’une entreprise spécialisée en fabrication de machines de papèterie, sous la responsabilité du directeur industriel, vous gérerez un portefeuille d’achat de pièces mécaniques usinées le plus souvent unitaire ou en petite série. Il s’agit d’achat en mode projet.]]></description> 
+			<profil><![CDATA[De formation technique en mécanique (Cap/Bep Tourneur-Fraiseur, Bac Professionnel Productique ou Usinage, BTS Productique…), vous justifiez d’une première expérience en usinage, fraisage, tournage, alésage… 
+			Organisé et rigoureux, vous êtes reconnu pour votre facilité d’intégration et vos capacités d’adaptation.]]></profil> 
+			<ville><![CDATA[Nantes]]></ville> 
+			<departement><![CDATA[44]]></departement> 
+			<contrat><![CDATA[CDI]]></contrat> 
+			<fonction><![CDATA[Programmeur régleur CN]]></fonction> 
+			<horaire><![CDATA[Journée]]></horaire> 
+			<login><![CDATA[candidat@maneom.com]]></login> 
+			<niveau><![CDATA[Confirmé]]></niveau> 
+			<recruteur><![CDATA[Tourneurs-Fraiseurs.com, site emploi entièrement dédié aux métiers de l'usinage.]]></recruteur> 
+			<salaire><![CDATA[2500 brut / mois]]></salaire> 
+			<avantages><![CDATA[Participation à la mutuelle]]></avantages> 
+			<nombreheure><![CDATA[35h]]></nombreheure> 
+			<dureecontrat><![CDATA[]]></dureecontrat> 
+			<premium><![CDATA[oui]]></premium> 
+			<adressereponse><![CDATA[]]></adressereponse> 
+		</job> 
+	</jobs> 
+</source>

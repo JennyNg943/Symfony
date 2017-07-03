@@ -1,0 +1,19 @@
+{% extends "OCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+	Recrutic
+{% endblock %}
+
+{% block body %}
+	<table class="recruteurTable">
+		<tr>
+			<th>Modification des informations <a href="{{ path('mapage') }}"><input type="submit" value="Retour" id="BoutonAnnonce"></a></th>
+		</tr>
+		<tr>
+			<td>{{ form(form) }}</td>
+		</tr>
+		<tr>
+			<td><a href="{{ path('desinscription')}}" style="color:red" onclick="return confirm('Souhaitez vous vraiment vous désinscrire de Recrutic ?')">Se désinscrire</a></td>
+		</tr>
+	</table>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "OCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+	Mes annonces
+{% endblock %}
+
+{% block body %}
+	<div class="navigation">
+		{{ knp_pagination_render(pagination) }}
+	</div>
+	Nombre total annonces : {{ pagination.getTotalItemCount }}
+	<div id="info">
+		Si le titre de votre annonce est <p style="background-color: rgb(242,128,179);display: initial;">rose</p>, elle n'est pas encore validée et donc pas publiée.</br>
+		Si le titre de votre annonce est <p style="background-color: rgb(224,234,137);display: initial;">vert</p>, elle est validée et publiée.
+	</div>
+	<table>
+	{% for annonce in pagination %}
+		<table id="Admin">
+		{{ include("OCPlatformBundle:AdvertNew:AffichageAnnonce.html.twig") }}
+		</table>
+		{% endfor %}
+	</table>
+	<div class="navigation">
+		{{ knp_pagination_render(pagination) }}
+	</div>
+	
+{% endblock %}

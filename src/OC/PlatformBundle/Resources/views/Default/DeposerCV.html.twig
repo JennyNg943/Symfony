@@ -1,0 +1,83 @@
+{% extends "OCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+	Notre CVThèque
+{% endblock %}
+
+{% block body %}
+	
+	{{ form(form)}}
+   
+			<div class="navigation">
+				{{ knp_pagination_render(pagination) }}
+			</div>	
+				<table id="CVTable">
+					<tr>
+						<th COLSPAN="6" id="Cvtheque">CVThèque</th>
+					</tr>
+					<tr>
+						<th>Nom</th>
+						<th>Prénom</th>
+						<th>CP</th>
+						<th>Mail</th>
+						<th>Domaine</th>
+						<th>Voir / Contacter</th>
+					</tr>
+					{% for candidat in pagination %}
+						{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+							{% if app.user.type == "Admin" %}
+								<tr>
+									<td>{{ candidat.nom }}</td>
+									<td>{{ candidat.prenom }}</td>
+									<td>{{ candidat.cp }}</td>
+									<td>{{ candidat.mail  }}</td>
+									<td>{{ candidat.idSite.domaine }}</td>
+									<td>
+										{% image 'bundles/app/img/voir.png' %}
+											<img src="{{ asset_url }}" alt="Recrutic" id="CVThequeImg"/>
+										{% endimage %}
+										{% image 'bundles/app/img/Mail.png' %}
+											<img src="{{ asset_url }}" alt="Recrutic" id="CVThequeImg"/>
+										{% endimage %}
+									</td>
+								</tr>
+							{% else %}	
+								<tr>
+									<td>{{ candidat.nom| truncate(3) }}</td>
+									<td>{{ candidat.prenom }}</td>
+									<td>{{ candidat.cp }}</td>
+									<td>{{ candidat.mail| truncate(3)  }}</td>
+									<td>{{ candidat.idSite.domaine }}</td>
+								</tr>	
+							{% endif %}
+						{% else %}
+							<tr>
+								<td>{{ candidat.nom| truncate(3) }}</td>
+								<td>{{ candidat.prenom }}</td>
+								<td>{{ candidat.cp }}</td>
+								<td>{{ candidat.mail| truncate(3)  }}</td>
+								<td>{{ candidat.idSite.domaine }}</td>
+								<td><a href="{{ path('register2')}}">
+										{% image 'bundles/app/img/voir.png' %}
+											<img src="{{ asset_url }}" alt="Recrutic" id="CVThequeImg"/>
+										{% endimage %}
+										{% image 'bundles/app/img/Mail.png' %}
+											<img src="{{ asset_url }}" alt="Recrutic" id="CVThequeImg"/>
+										{% endimage %}</a>
+								</td>
+							</tr>
+						{% endif %}
+							
+
+
+						
+						
+			{% endfor %}
+				</table>
+			<div class="navigation">
+				{{ knp_pagination_render(pagination) }}
+			</div>		
+		
+	
+	
+{% endblock %}

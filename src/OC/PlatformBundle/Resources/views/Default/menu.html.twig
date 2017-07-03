@@ -1,0 +1,76 @@
+{# src/OC/PlatformBundle/Resources/views/Advert/menu.html.twig #}
+
+<nav id="site-navigation" class="main-navigation" role="navigation">
+	<div style="margin-top: 5%;" class="topnav" id="myTopnav">
+	<ul id="Menu_Connexion">
+		<li>
+			
+			<a href="{{ path('oc_platform_homepage') }}">Accueil</a>
+		</li>
+		<li>
+			<a href="{{ path('oc_platform_offreEmploi') }}" style="color:red">Voir toutes nos offres</a>
+		</li>
+		<li>
+			<a href="{{ path('CVtheque') }}">Evaluer notre CVThèque</a> 
+		</li>
+		{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+			{% if (app.user.type != "Candidat") and (app.user.type != "Employeur") %}
+				<li>
+					<a href="{{ path('annonceAjout')}}">Ajouter une annonce</a>
+				</li>
+			{% endif %}	
+			{% if app.user.type == "Employeur" %}
+				<li>
+					<a href="{{ path('annonceAjoutEmp')}}">Ajouter une annonce</a>
+				</li>
+			{% endif %}
+		{% else %}	
+			<li>
+				<a href="{{ path('fos_user_security_login')}}">Ajouter une annonce</a>
+			</li>
+		{% endif %}
+		{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+			<li class="bouton_droite">
+				<a href="{{ path('mapage') }}">Mon espace</a>
+				<ul>
+					<li>
+						<a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></br>
+					</li>
+				</ul>
+			</li>		
+			{% if app.user.type == "Admin" %}
+				<li class="bouton_droite">
+					Admin
+					<ul>
+						<li><a href="{{ path('admin_annonce')}}">Gestion des annonces</a></li> 
+						<li><a href="{{ path('admin_annonce_valide')}}">Publier des annonces</a></li>
+						<li><a href="{{ path('CVtheque') }}">Gestion des candidats</a></li> 
+						<li><a href="{{ path('admin_fonction') }}">Gestion des fonctions</a></li> 
+					</ul>	
+				</li>
+			{% endif %}
+			{% else %}
+				<li class="bouton_droite">
+					<a href="{{ path('fos_user_security_login') }}">Connexion</a>
+				</li>
+				<li class="bouton_droite">
+					<a href="{{ path('register') }}">Inscription</a>
+				</li>
+			{% endif %}
+			<li>
+				<a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+			</li>
+	</ul>
+	</div>
+</nav>
+			
+<script>
+function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
+    }
+}
+</script>			

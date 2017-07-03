@@ -1,0 +1,55 @@
+{# src/OC/PlatformBundle/Resources/views/Advert/menu.html.twig #}
+
+<nav id="site-navigation" class="main-navigation" role="navigation">
+	<div class="menu-recrutics-menu-container">
+	<ul id="Menu_Connexion">
+		<li id="menu-item-21" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-21">
+			{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+				{{ app.user.type }} -
+				Connecté en tant que <b>{{ app.user.username }}</b></br>
+			</li>
+			<li>
+				<a href="{{ path('mapage',{'id':app.user.id}) }}">Mon espace</a> -
+				<a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></br>
+			</li>
+			
+			{% if app.user.type == "Admin" %}
+				<li>	
+					<a href="{{ path('admin_annonce')}}">Gestion des annonces</a> - 
+					<a href="{{ path('admin_annonce_valide')}}">Publier des annonces</a> 
+				</li>
+			{% endif %}
+			
+			{% else %}
+				<li>
+					<a href="{{ path('fos_user_security_login') }}">Connexion</a> - 
+					<a href="{{ path('fos_user_registration_register') }}">Inscription</a>
+				</li></br>
+				
+			{% endif %}
+			
+	</ul>
+	<ul>
+		<li id="menu-item-23" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-23">
+			<a href="{{ path('oc_platform_homepage') }}">Accueil</a>
+		</li>
+		<li id="menu-item-68" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-68">
+			<a href="{{ path('oc_platform_offreEmploi') }}">Nos offres d'emploi</a>
+		</li>
+		<li id="menu-item-68" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-68">
+			<a href="{{ path('oc_platform_deposerCV') }}">Déposer un CV</a> 
+		</li>
+		{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+			{% if app.user.type != "Candidat" %}
+				<li>
+					<a href="{{ path('annonceAjout')}}">Ajouter une annonce</a>
+				</li>
+			{% endif %}	
+		{% else %}	
+			<li id="menu-item-68" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-68">
+				<a href="{{ path('fos_user_security_login')}}">Ajouter une annonce</a>
+			</li>
+		{% endif %}
+	</ul>
+	</div>
+</nav>

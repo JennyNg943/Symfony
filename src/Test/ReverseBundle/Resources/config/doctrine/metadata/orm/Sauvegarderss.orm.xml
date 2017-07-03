@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Sauvegarderss" table="sauvegarderss">
+    <id name="idSauvegarderss" type="integer" column="Id_SauvegardeRss">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="cp" type="string" column="Cp" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="fonctions" type="string" column="Fonctions" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="motscles" type="string" column="MotsCles" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="urlrss" type="string" column="UrlRss" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="datecreation" type="date" column="DateCreation" nullable="false"/>
+    <field name="datedernierelecture" type="datetime" column="DateDerniereLecture" nullable="false"/>
+    <field name="datemaj" type="date" column="DateMaj" nullable="false"/>
+    <field name="nomrecherche" type="string" column="NomRecherche" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="idAnnonce" type="integer" column="Id_Annonce" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

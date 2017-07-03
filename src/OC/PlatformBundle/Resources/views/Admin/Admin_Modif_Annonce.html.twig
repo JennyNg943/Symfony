@@ -1,0 +1,112 @@
+{% extends "OCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+	Recrutic
+{% endblock %}
+
+{% block body %}
+	{% for annonce in annonce %}
+	<div id="ModifAnnonce">
+		{% if message == "L'annonce a été validée" %}
+			<p style="display:block; text-align: center; background-color: green;color:white;padding:1%;">L'annonce a été modifiée</p>
+		{% endif %}
+	
+	<h1>{% if annonce.premium == 1 %}
+				{% image 'bundles/app/img/Premium.png' %}
+					<img src="{{ asset_url }}" style="width: 10%;"/>
+				{% endimage %}
+		{% endif %}
+				Modification de l'offre - {{ annonce.id }}
+		
+	{% if app.user.type == "Admin" %}	 
+		{% if retour == 1 %}
+			<a href="{{ path('admin_annonce_valide') }}"><input type="submit" value="Retour" id="BoutonAnnonce"></a>
+		{% else %}
+			<a href="{{ path('admin_annonce') }}"><input type="submit" value="Retour" id="BoutonAnnonce"></a>
+		{% endif %}	
+			{{ include("OCPlatformBundle:Advert:FonctionAnnonce.html.twig") }}
+	{% endif %}
+	</h1>
+		<div class="well">
+				{{ form_start(form)}}
+					{{ form_row(form.TitreAnnonce)}}
+					{{ form_row(form.DescriptifAnnonce)}}
+					{{ form_row(form.ProfilRecherche)}}
+					{% for site in form.site %}
+						{{ form_row(form.site) }}
+					{% endfor %}	
+						<a href="#" id="add_category" class="btn btn-default" style="color:blue">Ajouter un site et une fonction</a>
+					{{ form_rest(form)}}
+				{{ form_end (form)}}	
+		 </div>
+	{% endfor %}	 
+
+	</div>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+{# Voici le script en question : #}
+
+<script type="text/javascript">
+
+  $(document).ready(function() {
+    // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
+    var $container = $('div#annonce_site');
+	$container.attr('data-prototype')
+        .replace(/__name__label__/g, 'Site')
+    // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
+    var index = $container.find(':input').length;
+    // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
+    $('#add_category').click(function(e) {
+      addCategory($container);
+      e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+      return false;
+    });
+    // On ajoute un premier champ automatiquement s'il n'en existe pas déjà un (cas d'une nouvelle annonce par exemple).
+    if (index == 0) {
+      addCategory($container);
+    } else {
+      // S'il existe déjà des catégories, on ajoute un lien de suppression pour chacune d'entre elles
+      $container.children('div').each(function() {
+        addDeleteLink($(this));
+      });
+    }
+
+    // La fonction qui ajoute un formulaire CategoryType
+    function addCategory($container) {
+      // Dans le contenu de l'attribut « data-prototype », on remplace :
+      // - le texte "__name__label__" qu'il contient par le label du champ
+      // - le texte "__name__" qu'il contient par le numéro du champ
+      var template = $container.attr('data-prototype')
+        .replace(/__name__label__/g, 'Site')
+        .replace(/__name__/g,        'Site')
+      ;
+      // On crée un objet jquery qui contient ce template
+      var $prototype = $(template);
+      // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
+      addDeleteLink($prototype);
+      // On ajoute le prototype modifié à la fin de la balise <div>
+      $container.append($prototype);
+      // Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
+      index++;
+    }
+    // La fonction qui ajoute un lien de suppression d'une catégorie
+
+    function addDeleteLink($prototype) {
+      // Création du lien
+      var $deleteLink = $('<a href="#" class="btn btn-danger" style="color:red">Supprimer</a>');
+      // Ajout du lien
+      $prototype.append($deleteLink);
+      // Ajout du listener sur le clic du lien pour effectivement supprimer la catégorie
+      $deleteLink.click(function(e) {
+        $prototype.remove();
+        e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+        return false;
+      });
+    }
+  });
+</script>
+	
+{% endblock %}

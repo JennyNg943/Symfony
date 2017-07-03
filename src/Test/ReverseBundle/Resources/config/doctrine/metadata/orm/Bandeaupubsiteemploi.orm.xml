@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Bandeaupubsiteemploi" table="bandeaupubsiteemploi">
+    <id name="idBandeaupubsiteemploi" type="integer" column="Id_BandeauPubSiteEmploi">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="idBandeaupub" type="integer" column="Id_BandeauPub" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="idSiteemploi" type="integer" column="Id_SiteEmploi" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="lienexterne" type="string" column="LienExterne" length="1000" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

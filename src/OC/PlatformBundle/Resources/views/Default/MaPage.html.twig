@@ -1,0 +1,83 @@
+{% extends "OCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+	Recrutic
+{% endblock %}
+
+{% block body %}
+	
+
+	{% if app.user.type == "Admin" %}
+		<h1 id="h1Admin">Gestion administrateur</h1>
+		<ul>
+			<li><a href="{{ path('admin_annonce') }}">Gestion des annonces</a></li>
+			<li><a href="{{ path('CVtheque') }}">Gestion des candidats</a></li> 
+		</ul>
+	{% endif %}
+	
+	
+	{% if app.user.type == "Candidat" %}
+		<h1>Mes informations personnelles</h1>
+		<table id="InfoPerso">
+			<tr><td><b>Nom : </b>{{ utilisateur.nomCandidat }}</br></td><td><b>Date de création : </b>{{ utilisateur.DateCreation|date('d/m/Y') }}</br></td>
+			<tr><td><b>Prenom : </b>{{ utilisateur.prenomCandidat }}</br></td><td><b>Ville : </b>{{utilisateur.VilleCandidat}}</br></td></tr>
+			<tr><td><b>Code Postal : </b>{{ utilisateur.CP }}</br></td><td><b>Téléphone : </b>{{ utilisateur.TelPortCandidat }}</br></td></tr>
+			<tr><td><b>E-mail :</b> {{ app.user.email }}</br></td><td><b>Domaine préféré :</b> {{ utilisateur.site.domaine }}</br></td></tr>
+		</table>
+		<div class="modifProfile">
+			<a href="{{ path('candidatModif') }}"> Modifier mes informations</a> - 
+			<a href="{{ path('fos_user_change_password') }}"> Modifier mon mot de passe</a>
+		</div>
+		<h1>Candidature</h1>
+		{% for annonce in listeannonce %}
+			<table id="MAPAGEANNONCE">
+				{{ include("OCPlatformBundle:Advert:AffichageAnnonceMaPage.html.twig") }}
+			</table>	
+		{% endfor %}	
+		{% for annonce in listeannonce2 %}
+			<table id="MAPAGEANNONCE">
+				{{ include("OCPlatformBundle:Advert:AffichageAnnonceMaPage.html.twig") }}
+			</table>	
+		{% endfor %}	
+			<div class="modifProfile">
+				<a href="{{ path('CandidatureConsultation')}}">Voir toutes mes candidatures</a>
+			</div>		
+
+		<h1>Mes compétences</h1>
+		<ul>
+		{% for competence in utilisateur.fonction %}
+			<li>{{ competence.intitulefonction }}</li>
+		{% endfor %}
+		</ul>
+		<div class="modifProfile">
+				<!--<a href="{{ path('CandidatCompetence')}}">Gérer mes compétences</a>-->
+		</div>	
+	{% else %}
+	<h1>Mes informations personnelles</h1>
+		<table id="InfoPerso">
+			<tr><th COLSPAN="2">{{ utilisateur.societe }}</br></th></tr>	
+			<tr><td><b>Nom : </b>{{ utilisateur.NomContactComm }}</br></td><td><b>Description : </b>{{ utilisateur.Description }}</br></td></tr>
+			<tr><td><b>Prenom : </b>{{ utilisateur.PrenomContactComm }}</br></td><td><b>E-mail :</b> {{ app.user.email }}</br></td></tr>
+			<tr><td><b>Code Postal : </b>{{utilisateur.Cp}}</br></td><td><b>Téléphone : </b>{{ utilisateur.Tel }}</br></td></tr>
+			<tr><td><b>Ville : </b>{{ utilisateur.Ville }}</br></td><td><b>Date de création : </b>{{ utilisateur.DateCreation|date('d/m/Y') }}</br></td></tr>
+		</table>
+		<div class="modifProfile">
+			<a href="{{ path('recruteurModif') }}"> Modifier mes informations</a> - 
+			<a href="{{ path('fos_user_change_password') }}"> Modifier mon mot de passe</a>
+		</div>
+	<h1>Annonce</h1>
+	{% for annonce in listeannonce %}
+			<table id="MAPAGEANNONCE">
+				{{ include("OCPlatformBundle:Advert:AffichageAnnonceMaPage.html.twig") }}
+			</table>	
+	{% endfor %}
+		<div class="modifProfile">
+			<a href="{{ path('annonceConsultation')}}">Voir toutes mes annonces</a> - 
+			<a href="{{ path('annonceAjout')}}">Ajouter une annonce</a>
+		</div>		
+	{% endif %}
+	
+	
+	
+	
+{% endblock %}

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="WpPosts" table="wp_posts">
+    <indexes>
+      <index name="type_status_date" columns="post_type,post_status,post_date,ID"/>
+      <index name="post_parent" columns="post_parent"/>
+      <index name="post_author" columns="post_author"/>
+      <index name="post_name" columns="post_name"/>
+    </indexes>
+    <id name="id" type="bigint" column="ID">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="postAuthor" type="bigint" column="post_author" nullable="false">
+      <options>
+        <option name="unsigned">1</option>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="postDate" type="datetime" column="post_date" nullable="false">
+      <options>
+        <option name="default">0000-00-00 00:00:00</option>
+      </options>
+    </field>
+    <field name="postDateGmt" type="datetime" column="post_date_gmt" nullable="false">
+      <options>
+        <option name="default">0000-00-00 00:00:00</option>
+      </options>
+    </field>
+    <field name="postContent" type="text" column="post_content" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="postTitle" type="text" column="post_title" length="65535" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="postExcerpt" type="text" column="post_excerpt" length="65535" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="postStatus" type="string" column="post_status" length="20" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="default">publish</option>
+      </options>
+    </field>
+    <field name="commentStatus" type="string" column="comment_status" length="20" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="default">open</option>
+      </options>
+    </field>
+    <field name="pingStatus" type="string" column="ping_status" length="20" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="default">open</option>
+      </options>
+    </field>
+    <field name="postPassword" type="string" column="post_password" length="20" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="default"/>
+      </options>
+    </field>
+    <field name="postName" type="string" column="post_name" length="200" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="default"/>
+      </options>
+    </field>
+    <field name="toPing" type="text" column="to_ping" length="65535" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="pinged" type="text" column="pinged" length="65535" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="postModified" type="datetime" column="post_modified" nullable="false">
+      <options>
+        <option name="default">0000-00-00 00:00:00</option>
+      </options>
+    </field>
+    <field name="postModifiedGmt" type="datetime" column="post_modified_gmt" nullable="false">
+      <options>
+        <option name="default">0000-00-00 00:00:00</option>
+      </options>
+    </field>
+    <field name="postContentFiltered" type="text" column="post_content_filtered" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="postParent" type="bigint" column="post_parent" nullable="false">
+      <options>
+        <option name="unsigned">1</option>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="guid" type="string" column="guid" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="default"/>
+      </options>
+    </field>
+    <field name="menuOrder" type="integer" column="menu_order" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="postType" type="string" column="post_type" length="20" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="default">post</option>
+      </options>
+    </field>
+    <field name="postMimeType" type="string" column="post_mime_type" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="default"/>
+      </options>
+    </field>
+    <field name="commentCount" type="bigint" column="comment_count" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="default">0</option>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

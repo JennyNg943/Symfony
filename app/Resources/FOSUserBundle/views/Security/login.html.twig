@@ -1,0 +1,20 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% block fos_user_content %}
+	<table id="Connexion">
+		<tr>
+			<th COLSPAN="2">Connexion</th>
+		</tr>	
+		<tr>
+			<td COLSPAN="2">
+					{{ include('@FOSUser/Security/login_content.html.twig') }}
+			</td>
+		</tr>
+		<tr>
+			<td id="ResetMDP"><a href="{{path('fos_user_resetting_request')}}">Mot de passe oublié ?</a></td>
+			<td id="Inscript"><a href="{{ path('register') }}">Pas encore inscrit ?</a> </td>
+		</tr>
+		
+	</table>
+
+{% endblock fos_user_content %}

@@ -1,0 +1,44 @@
+{% extends "OCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+	Inscription
+{% endblock %}
+
+{% block body %}
+	<table id="InscriptionT">
+		<tr><th COLSPAN="3">Inscription</th></tr>
+		<tr>
+			<td id = "JeSuisCandidat">
+				<div >
+				<a href="{{ path('user_one_registration') }}" id = "JeSuisRecruteurInf">
+				{% image 'bundles/app/img/Recruteur.png' %}
+					<img src="{{ asset_url }}" />
+				{% endimage %}
+				Je suis candidat</a> </div>
+			</td>	
+			<td id = "JeSuisRecruteur">
+				<div>
+					<a href="{{path('user_two_registration')}}" id = "JeSuisCandidatInf">
+						{% image 'bundles/app/img/Candidat.png' %}
+							<img src="{{ asset_url }}" />
+						{% endimage %}
+						Je suis recruteur</a>
+				</div>
+			</td>
+			<td id = "JeSuisEmployeur">
+				<div >
+					<a href="{{ path('user_three_registration') }}" id = "JeSuisEmployeurInf">
+						{% image 'bundles/app/img/Employeur.png' %}
+							<img src="{{ asset_url }}" />
+						{% endimage %}
+						Je suis employeur</a> 
+
+
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td COLSPAN="2"><a href="{{ path('fos_user_security_login') }}">Déjà inscrit ?</a> </td>
+		</tr>
+	</table>		
+{% endblock %}

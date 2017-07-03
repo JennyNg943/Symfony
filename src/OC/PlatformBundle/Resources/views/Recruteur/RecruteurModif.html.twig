@@ -1,0 +1,15 @@
+{% extends "OCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+	Recrutic
+{% endblock %}
+
+{% block body %}
+
+	<h1>Modification des informations personnelles</h1>
+				{{ form_start(form)}}
+					{{ form(form)}}
+				{{ form_end (form)}}		 
+
+
+{% endblock %}

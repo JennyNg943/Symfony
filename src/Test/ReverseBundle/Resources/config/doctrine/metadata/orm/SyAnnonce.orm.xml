@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="SyAnnonce" table="sy_annonce">
+    <indexes>
+      <index name="IDX_45CB8E9268A2238C" columns="id_niveau_souhaite_id"/>
+      <index name="IDX_45CB8E92F19F5D18" columns="id_departement_id"/>
+      <index name="IDX_45CB8E9298C92C83" columns="id_recruteur_id"/>
+      <index name="IDX_45CB8E927EBD269E" columns="id_employeur_id"/>
+      <index name="IDX_45CB8E92DC1F5B14" columns="id_typecontrat_id"/>
+      <index name="IDX_45CB8E92FD4FC5C2" columns="id_horaire_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="titreannonce" type="string" column="TitreAnnonce" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="descriptifannonce" type="text" column="DescriptifAnnonce" length="65535" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="profilrecherche" type="text" column="ProfilRecherche" length="65535" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="datedebut" type="date" column="DateDebut" nullable="true"/>
+    <field name="remuneration" type="string" column="Remuneration" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="dureecontrat" type="text" column="DureeContrat" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="datecreation" type="datetime" column="DateCreation" nullable="false"/>
+    <field name="datepublication" type="date" column="DatePublication" nullable="true"/>
+    <field name="datefinpublication" type="date" column="DateFinPublication" nullable="true"/>
+    <field name="suspension" type="integer" column="Suspension" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="$datesuspension" type="date" column="$dateSuspension" nullable="true"/>
+    <field name="$datemaj" type="date" column="$dateMAJ" nullable="true"/>
+    <field name="grandevilleproche" type="string" column="GrandeVilleProche" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="avantage" type="text" column="Avantage" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nbheure" type="string" column="NbHeure" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nbvues" type="integer" column="NbVues" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="datepublicationrss" type="datetime" column="DatePublicationRss" nullable="true"/>
+    <field name="referencerecruteur" type="string" column="ReferenceRecruteur" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="reference" type="string" column="Reference" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="descriptionemployeur" type="text" column="DescriptionEmployeur" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="idFormule" type="integer" column="Id_Formule" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="flagindeed" type="integer" column="FlagIndeed" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="descriptionrecruteurprofil" type="text" column="DescriptionRecruteurProfil" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="adressereponse" type="string" column="AdresseReponse" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="deptlimitrophe" type="string" column="DeptLimitrophe" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="flagpmejob" type="boolean" column="FlagPmeJob" nullable="true"/>
+    <field name="texteindeed" type="text" column="TexteIndeed" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="referencepoleemploi" type="string" column="ReferencePoleEmploi" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="idRejetannonce" type="integer" column="Id_RejetAnnonce" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="premium" type="integer" column="Premium" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="codepostal" type="integer" column="CodePostal" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="new" type="integer" column="New" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="idDepartement" target-entity="Departement" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_departement_id" referenced-column-name="Id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idHoraire" target-entity="Horaire" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_horaire_id" referenced-column-name="Id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idNiveauSouhaite" target-entity="Niveausouhaite" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_niveau_souhaite_id" referenced-column-name="Id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idTypecontrat" target-entity="Typecontrat" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_typecontrat_id" referenced-column-name="Id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idRecruteur" target-entity="SyRecruteur" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_recruteur_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idEmployeur" target-entity="SyEmployeur" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_employeur_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-many field="syCandidature" target-entity="SyCandidature" mapped-by="syAnnonce" fetch="LAZY"/>
+  </entity>
+</doctrine-mapping>

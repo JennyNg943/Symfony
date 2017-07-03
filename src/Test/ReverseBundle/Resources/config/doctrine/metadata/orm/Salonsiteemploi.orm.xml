@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Salonsiteemploi" table="salonsiteemploi">
+    <id name="idSalonsiteemploi" type="integer" column="Id_SalonSiteEmploi">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="idSalon" type="integer" column="Id_Salon" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="idSiteemploi" type="integer" column="Id_SiteEmploi" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

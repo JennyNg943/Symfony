@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Typecontratcandidat" table="typecontratcandidat">
+    <id name="idTypecontratcandidat" type="integer" column="Id_TypeContratCandidat">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="idTypecontrat" type="integer" column="Id_TypeContrat" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="idCandidat" type="integer" column="Id_Candidat" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

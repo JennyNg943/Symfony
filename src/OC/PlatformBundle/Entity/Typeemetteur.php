@@ -1,0 +1,80 @@
+<?php
+
+namespace OC\PlatformBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Typeemetteur
+ *
+ * @ORM\Table(name="typeemetteur")
+ * @ORM\Entity
+ */
+class Typeemetteur
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="Id_TypeEmetteur", type="integer", nullable=false)
+     * @ORM\Id
+     * 
+     */
+    private $idTypeemetteur;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="IntituleTypeEmetteur", type="string", length=255, nullable=false)
+     */
+    private $intituletypeemetteur;
+
+
+
+    /**
+     * Get idTypeemetteur
+     *
+     * @return integer
+     */
+    public function getIdTypeemetteur()
+    {
+        return $this->idTypeemetteur;
+    }
+
+    /**
+     * Set intituletypeemetteur
+     *
+     * @param string $intituletypeemetteur
+     *
+     * @return Typeemetteur
+     */
+    public function setIntituletypeemetteur($intituletypeemetteur)
+    {
+        $this->intituletypeemetteur = $intituletypeemetteur;
+
+        return $this;
+    }
+
+    /**
+     * Get intituletypeemetteur
+     *
+     * @return string
+     */
+    public function getIntituletypeemetteur()
+    {
+        return $this->intituletypeemetteur;
+    }
+
+    /**
+     * Set idTypeemetteur
+     *
+     * @param integer $idTypeemetteur
+     *
+     * @return Typeemetteur
+     */
+    public function setIdTypeemetteur($idTypeemetteur)
+    {
+        $this->idTypeemetteur = $idTypeemetteur;
+
+        return $this;
+    }
+}

@@ -1,0 +1,57 @@
+<tr>
+	{% if annonce.suspension == -1 %}
+		<th style="background-color: rgb(242,128,179)" COLSPAN=2>
+	{% elseif annonce.suspension == 10 %}
+		<th style="background-color: rgb(224,234,137)" COLSPAN=2 >
+	{% else %}
+		<th style="background-color: rgb(195,195,195)" COLSPAN=2>
+	{% endif %}
+			<p id="Titre">{{ annonce.datepublication|date('d/m/Y') }}</p></br>
+			<p id="TitreAnnonceAdmin">{{ annonce.TitreAnnonce|upper}}</br>
+			{{ annonce.GrandeVilleProche }} ({{ annonce.idDepartement }})</p>
+			{% if annonce.premium == 1 %}
+				{% image 'bundles/app/img/Premium.png' %}
+					<img src="{{ asset_url }}" style="width: 10%"/>
+				{% endimage %}
+			{% endif %}
+	</th>
+	<th>
+	{% for site in annonce.site %} 
+		{{ include("OCPlatformBundle:Advert:ImageSite.html.twig") }}
+	{% endfor %}
+		
+		
+	{% if app.user.type == "Admin" %}	
+		
+			<a href="{{ path('admin_modif_syannonce',{'idAnnonce':annonce.id}) }}">
+			<input type="submit" value="Modifier" id="BoutonAnnonce"></a>
+		{{ include("OCPlatformBundle:AdvertNew:FonctionAnnonce.html.twig") }}
+	{% endif %}
+
+	</th>
+</tr>
+<tr>
+	<td COLSPAN=3><b><p id="TitrePetit">Le poste (ref: {{annonce.id}}) :  </p></b>{{ annonce.DescriptifAnnonce }}</td>
+</tr>
+<tr>
+	<td COLSPAN=3><b><p id="TitrePetit">Profil recherché :  </p></b>{{ annonce.ProfilRecherche }}</td>
+</tr>
+<tr>
+	<td><b><p id="TitrePetit">Niveau :  </p></b>{{ annonce.idNiveauSouhaite }}</td>
+	<td COLSPAN=2><b><p id="TitrePetit">Recruteur :  </p></b>{{ annonce.idRecruteur }}</td>
+</tr>
+<tr>
+	<td><b><p id="TitrePetit">Rémunération :   </p></b>{{ annonce.Remuneration }}</td>
+	<td COLSPAN=2><b><p id="TitrePetit">Avantage :   </p></b>{{ annonce.avantage }}</td>
+</tr>
+<tr>
+	<td><b><p id="TitrePetit">Horaire :   </p></b>{{ annonce.idHoraire }}</td>
+	<td><b><p id="TitrePetit">Contrat :   </p></b>{{ annonce.idTypecontrat }}</td>
+	<td><b><p id="TitrePetit">NbHeure :   </p></b>{{ annonce.nbHeure }}</td>
+</tr>
+<tr>
+	<td colspan = 3><b><p id="TitrePetit">Fonction :   </p></b>
+			{% for fonction in annonce.site %}
+				{{ fonction.idFonction }}
+			{% endfor %}</td>
+</tr>

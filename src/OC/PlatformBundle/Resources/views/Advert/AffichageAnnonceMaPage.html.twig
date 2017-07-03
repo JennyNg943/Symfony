@@ -1,0 +1,13 @@
+<tr>
+	{% if annonce.suspension == -1 %}
+		<th style="background-color: rgb(242,128,179)">
+	{% elseif annonce.suspension == 10 %}
+		<th style="background-color: rgb(224,234,137)">
+	{% else %}
+		<th style="background-color: rgb(195,195,195)">
+	{% endif %}
+			<p id="Titre">{{ annonce.datepublication|date('d/m/Y') }}</p></br>
+			<p id="TitreAnnonceAdmin">{{ annonce.TitreAnnonce|upper}}</br>
+			{{ annonce.GrandeVilleProche }} ({{ annonce.idDepartement }})</p>
+	</th>
+</tr>

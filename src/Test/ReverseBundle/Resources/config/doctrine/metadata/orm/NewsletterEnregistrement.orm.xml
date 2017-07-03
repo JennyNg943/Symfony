@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="NewsletterEnregistrement" table="newsletter_enregistrement">
+    <id name="idNewsletterEnregistrement" type="integer" column="Id_Newsletter_Enregistrement">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="signature" type="integer" column="Signature" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="nommail" type="string" column="NomMail" length="500" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="objetmail" type="string" column="ObjetMail" length="500" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="corpsmail" type="text" column="CorpsMail" length="65535" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="datecreationmail" type="date" column="DateCreationMail" nullable="false"/>
+    <field name="idNewsletterTypecontact" type="integer" column="Id_Newsletter_TypeContact" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

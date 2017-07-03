@@ -1,0 +1,18 @@
+{# src/OC/PlatformBundle/Resources/views/Advert/index.html.twig #}
+
+
+{% extends "OCPlatformBundle::layout.html.twig" %}
+
+{% block body %}
+	
+	<p><b>Recrutic est un portail d’emploi français dédié aux recrutements dans les domaines de l’industrie et des technologies innovantes : transformation des métaux, plasturgie, chimie, agro-alimentaire, informatique et énergie.</b></br></br>
+		{% image 'bundles/app/img/recrutic_banniere.gif' %}
+		<img src="{{ asset_url }}" alt="Recrutic" style="margin-bottom:5%;"/>
+	{% endimage %}
+	
+		</br>Son système expert intégré permet aux candidats de recevoir des offres particulièrement ciblées, et garantit aux annonceurs une efficacité maximum.</br>
+		</br>Ce site bénéficie de véritables formules gratuites. Bien entendu, les annonceurs peuvent choisir de mettre leurs annonces en avant afin de performer davantage grâce a plus de visibilité et à des actions ciblées vers les candidats les plus proches des profils recherchés.</p>
+
+<a href="{{ path('register') }}" id='boutonAccueil'>Envie de donner un nouvel élan à votre carrière ? Inscrivez-vous !</a>
+	
+{% endblock %}

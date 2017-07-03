@@ -1,0 +1,40 @@
+{% extends "OCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+	Recrutic
+{% endblock %}
+
+{% block body %}
+	{{ form(form)}}
+	
+	
+	<div class="navigation">
+		{{ knp_pagination_render(pagination) }}
+	</div>
+	Nombre total candidats : {{ pagination.getTotalItemCount }}
+	<table id="TableCandidat">
+		<tr>
+			<th>Nom</th>
+			<th>Prenom</th>
+			<th>Cp</th>
+			<th>Tel</th>
+			<th>Mail</th>
+			<th>Site</th>
+			<th>Modif</th>
+		</tr>
+		{% for candidat in pagination %}
+		<tr>
+			<td>{{ candidat.nomCandidat }} </td>
+			<td> {{ candidat.prenomCandidat}}</td>
+			<td> {{ candidat.Cp}}</td>
+			<td> {{ candidat.TelPortCandidat}}</td>
+			<td> {{ candidat.MailCandidat}}</td>
+			<td> {{ candidat.Site.domaine}}</td>
+			<td> </td>
+		</tr>
+		{% endfor %}
+	</table>
+	<div class="navigation">
+		{{ knp_pagination_render(pagination) }}
+	</div>
+{% endblock %}

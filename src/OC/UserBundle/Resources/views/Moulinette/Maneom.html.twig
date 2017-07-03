@@ -1,0 +1,14 @@
+{% extends "OCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+	Maneom
+{% endblock %}
+
+{% block body %}
+	{{ form(form) }}
+	{% if listecandidat != null %}
+		{% for candidat in listecandidat %}
+			{{ candidat.NomCandidat }}
+		{% endfor %}
+	{% endif %}	
+{% endblock %}

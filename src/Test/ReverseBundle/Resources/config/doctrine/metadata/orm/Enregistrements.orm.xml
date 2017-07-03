@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Enregistrements" table="enregistrements">
+    <id name="idEnregistrement" type="integer" column="Id_Enregistrement">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="dateenregistrement" type="date" column="DateEnregistrement" nullable="false"/>
+    <field name="nbcandidatsinscrit" type="integer" column="NbCandidatsInscrit" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="nbrecruteursinscrit" type="integer" column="NbRecruteursInscrit" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="nbnlleannonces" type="integer" column="NbNlleAnnonces" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="nbvisites" type="integer" column="NbVisites" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="candidatspostuleradmin" type="integer" column="CandidatsPostulerAdmin" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="candidatspostulernormal" type="integer" column="CandidatsPostulerNormal" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="plaquette" type="integer" column="plaquette" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="bondecommande" type="integer" column="bonDeCommande" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="idSiteemploi" type="integer" column="Id_SiteEmploi" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

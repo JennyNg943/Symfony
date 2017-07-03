@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="NewsletterBuffer" table="newsletter_buffer">
+    <id name="idNewsletterBuffer" type="integer" column="Id_Newsletter_Buffer">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="idNewsletterEnregistrement" type="integer" column="Id_Newsletter_Enregistrement" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="max" type="integer" column="Max" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="counter" type="integer" column="Counter" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="state" type="integer" column="State" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="idNewsletterTypecontact" type="integer" column="Id_Newsletter_TypeContact" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

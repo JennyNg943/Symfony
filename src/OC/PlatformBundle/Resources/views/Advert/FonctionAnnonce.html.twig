@@ -1,0 +1,17 @@
+
+		{% if annonce.premium == 1 %}
+			<a href="{{ path('DepremiumOld', {'idAnnonce':annonce.id}) }}"onclick="return confirm('Voulez vous vraiment arreter de sponsoriser cette annonce ? {{ annonce.id }} - {{ annonce.TitreAnnonce|upper }} - {{ annonce.datepublication|date('d/m/Y') }} - {{ annonce.GrandeVilleProche }} ({{ annonce.idDepartement }})' )" ><input type="submit" value="DéSponsoriser" id="BoutonAnnonce" ></a>
+		{% else %}	
+			<a href="{{ path('premiumOld', {'idAnnonce':annonce.id}) }}"onclick="return confirm('Voulez vous vraiment sponsoriser cette annonce? {{ annonce.id }} - {{ annonce.TitreAnnonce|upper }} - {{ annonce.datepublication|date('d/m/Y') }} - {{ annonce.GrandeVilleProche }} ({{ annonce.idDepartement }})' )" ><input type="submit" value="Sponsoriser" id="BoutonAnnonce" ></a>
+		{% endif %}	
+			
+		{% if annonce.suspension != 10 %} 
+			<a href="{{ path('validerAnnonce', {'idAnnonce':annonce.id}) }}" onclick="return confirm('Valider cette annonce? {{ annonce.id }} - {{ annonce.TitreAnnonce|upper }} - {{ annonce.datepublication|date('d/m/Y') }} - {{ annonce.GrandeVilleProche }} ({{ annonce.idDepartement }})' )" >
+				<input type="submit" value="Publier" id="BoutonAnnonce" ></a>
+		{% else %}
+			<a href="{{ path('DevaliderAnnonce', {'idAnnonce':annonce.id}) }}"onclick="return confirm('Devalider cette annonce? {{ annonce.id }} - {{ annonce.TitreAnnonce|upper }} - {{ annonce.datepublication|date('d/m/Y') }} - {{ annonce.GrandeVilleProche }} ({{ annonce.idDepartement }})' )" >
+				<input type="submit" value="Dépublier" id="BoutonAnnonce" ></a>
+		{% endif %}	
+		<a href="{{ path('delete', {'idAnnonce':annonce.id}) }}"onclick="return confirm('Voulez vous vraiment supprimer cette annonce? {{ annonce.id }} - {{ annonce.TitreAnnonce|upper }} - {{ annonce.datepublication|date('d/m/Y') }} - {{ annonce.GrandeVilleProche }} ({{ annonce.idDepartement }})' )" >
+			<input type="submit" value="Supprimer" id="BoutonAnnonce" style="color:red; "></a>
+

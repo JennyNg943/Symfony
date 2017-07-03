@@ -1,0 +1,42 @@
+{% extends "OCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+	Recrutic
+{% endblock %}
+
+{% block body %}
+	
+	<div class="navigation">
+		{{ knp_pagination_render(pagination) }}
+	</div>
+	Nombre total fonction : {{ pagination.getTotalItemCount }}
+	<table id="TableCandidat">
+		<tr>
+			<th>Intitule</th>
+			<th>Site</th>
+			<th>Gestion</th>
+		</tr>
+		{% for fonction in pagination %}
+		<tr>
+			<td>{{ fonction.IntituleFonction }} </td>
+			<td> {{ fonction.idSiteEmploi.intitulesiteemploi}}</td>
+			<td><a href="{{ path('admin_fonction_delete', {'id':fonction.id})}}" onclick="return confirm('Voulez vous vraiment supprimer cette fonction ? {{ fonction.IntituleFonction }} - {{ fonction.idSiteEmploi.intitulesiteemploi }}')">
+											{% image 'bundles/app/img/Supprimer.png' %}
+											<img src="{{ asset_url }}" alt="Supprimer" id="CVThequeImg"/>
+											{% endimage %}</a>
+											<a href="{{ path('modifCv', {'id':candidat.id})}}">
+										{% image 'bundles/app/img/Modifier.jpg' %}
+											<img src="{{ asset_url }}" alt="Modifier" id="CVThequeImg"/>
+										{% endimage %}</a>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+	<div class="navigation">
+		{{ knp_pagination_render(pagination) }}
+	</div>
+	<table>
+		<tr><th>Ajouter une fonction</th></tr>
+		<tr><td>{{ form(form)}}</td></tr>
+	</table>
+{% endblock %}
