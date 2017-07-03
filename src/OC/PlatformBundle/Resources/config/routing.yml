@@ -201,3 +201,7 @@ admin_fonction:
 admin_fonction_delete:
     path:	/Admin/Fonction/Supp/{id}
     defaults: {_controller: OCPlatformBundle:Fonction:delete}
+    
+admin_fonction_modif:
+    path:	/Admin/Fonction/Modif/{id}
+    defaults: {_controller: OCPlatformBundle:Fonction:change}    

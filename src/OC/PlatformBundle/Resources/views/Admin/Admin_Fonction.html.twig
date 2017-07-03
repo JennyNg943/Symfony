@@ -5,7 +5,10 @@
 {% endblock %}
 
 {% block body %}
-	
+	<table id="Fonctiontri">
+		<tr><th>Recherche par site ? </th></tr>
+		<tr><td>{{ form(form2) }}</td></tr>
+	</table>
 	<div class="navigation">
 		{{ knp_pagination_render(pagination) }}
 	</div>
@@ -24,7 +27,7 @@
 											{% image 'bundles/app/img/Supprimer.png' %}
 											<img src="{{ asset_url }}" alt="Supprimer" id="CVThequeImg"/>
 											{% endimage %}</a>
-											<a href="{{ path('modifCv', {'id':fonction.id})}}">
+											<a href="{{ path('admin_fonction_modif', {'id':fonction.id})}}">
 										{% image 'bundles/app/img/Modifier.jpg' %}
 											<img src="{{ asset_url }}" alt="Modifier" id="CVThequeImg"/>
 										{% endimage %}</a>
@@ -35,7 +38,7 @@
 	<div class="navigation">
 		{{ knp_pagination_render(pagination) }}
 	</div>
-	<table>
+	<table id="AjoutFonction">
 		<tr><th>Ajouter une fonction</th></tr>
 		<tr><td>{{ form(form)}}</td></tr>
 	</table>

@@ -31,7 +31,7 @@ class XmlPE {
 			$Bdd->setRequete($Requete);
 			$recruteurInfo = $Bdd->RequeteSelect();
 
-			if ($recruteurInfo == null) {
+			if ($recruteurInfo == "kenini") {
 				$Requete = "
 				SELECT *
 				FROM Sy_Employeur
@@ -49,7 +49,7 @@ class XmlPE {
 			$Bdd->setRequete($requete);
 			$annonceDoublon = $Bdd->RequeteSelect();
 
-			$recruteurLogin = $User[0]["Email"];
+			$recruteurLogin = $User[0]["email"];
 			$Retour = "Je suis pas entrée ici,je crois";
 			if ($recruteurLogin != "kenini") {
 				if ($annonceDoublon == "kenini") {
@@ -136,13 +136,13 @@ class XmlPE {
 														$Bdd->setRequete($Requete);
 														$recruteurInfo2 = $Bdd->RequeteSelect();
 
-														if ($recruteurInfo1 != "") {
+														if ($recruteurInfo1 != "kenini") {
 															$Requete = '
 																INSERT INTO `sy_annonce`(`id_niveau_souhaite_id`, `id_departement_id`, `id_recruteur_id`, `TitreAnnonce`, `DescriptifAnnonce`, `ProfilRecherche`, `Remuneration`, `DureeContrat`, `DateCreation`, `Suspension`, `GrandeVilleProche`, `Avantage`, `NbHeure`,`ReferenceRecruteur`, `DescriptionEmployeur`, `AdresseReponse`, `Premium`,`id_typecontrat_id`, `id_horaire_id`, `New`) VALUES 
 																						(' . $Id_Niveau[0]['id'] . ',' . $Id_Dep[0]['id'] . ',' . $recruteurInfo[0]["id"] . ',"' . utf8_decode($Titre) . '","' . utf8_decode($Description) . '","' . utf8_decode($Profil) . '","' . utf8_decode($salaire) . '","' . utf8_decode($dureecontrat) . '","' . date("Y-m-d H:i:s") . '",-1,"' . utf8_decode($ville) . '","' . utf8_decode($avantages) . '","' . $nombreheure . '","' . utf8_decode($Reference) . '","' . utf8_decode($etablissement) . '","'  . utf8_decode($adressereponse) .'",'.  $Id_Formule . ',' . $Id_Contrat[0]['id'] . ',' . $Id_Horaire[0]['id'] . ',1)';
 														} else {
 															$Requete = '
-																INSERT INTO `sy_annonce`(`id_niveau_souhaite_id`, `id_departement_id`, `id_recruteur_id`, `TitreAnnonce`, `DescriptifAnnonce`, `ProfilRecherche`, `Remuneration`, `DureeContrat`, `DateCreation`, `Suspension`, `GrandeVilleProche`, `Avantage`, `NbHeure`,`ReferenceRecruteur`, `DescriptionEmployeur`, `AdresseReponse`, `Premium`,id_employeur_id,`id_typecontrat_id`, `id_horaire_id`, `New`) VALUES 
+																INSERT INTO `sy_annonce`(`id_niveau_souhaite_id`, `id_departement_id`, `TitreAnnonce`, `DescriptifAnnonce`, `ProfilRecherche`, `Remuneration`, `DureeContrat`, `DateCreation`, `Suspension`, `GrandeVilleProche`, `Avantage`, `NbHeure`,`ReferenceRecruteur`, `DescriptionEmployeur`, `AdresseReponse`, `Premium`,id_employeur_id,`id_typecontrat_id`, `id_horaire_id`, `New`) VALUES 
 																						(' . $Id_Niveau[0]['id'] . ',' . $Id_Dep[0]['id'] .  ',"' . utf8_decode($Titre) . '","' . utf8_decode($Description) . '","' . utf8_decode($Profil) . '","' . utf8_decode($salaire) . '","' . utf8_decode($dureecontrat) . '","' . date("Y-m-d H:i:s") . '",-1,"' . utf8_decode($ville) . '","' . utf8_decode($avantages) . '","' . $nombreheure . '","' . utf8_decode($Reference) . '","' . utf8_decode($etablissement) . '","'  . utf8_decode($adressereponse) .'",'.  $Id_Formule . ',' . $recruteurInfo[0]["id"] .',' . $Id_Contrat[0]['id'] . ',' . $Id_Horaire[0]['id'] . ',1)';
 														}
 														$Bdd->setRequete($Requete);

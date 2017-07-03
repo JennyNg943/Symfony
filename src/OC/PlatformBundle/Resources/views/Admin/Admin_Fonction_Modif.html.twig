@@ -5,9 +5,11 @@
 {% endblock %}
 
 {% block body %}
-	
+	{% if message == "Cette fonction a bien été modifiée" %}
+			<p style="display:block; text-align: center; background-color: green;color:white;padding:1%;">La fonction a bien été modifiée</p>
+		{% endif %}
 	<table id="TableCandidat">
-		<tr><th>Modifier une fonction</th></tr>
+		<tr><th>Modifier une fonction <a href="{{ path('admin_annonce_valide') }}"><input type="submit" value="Retour" id="BoutonAnnonce"></a></th></tr>
 		<tr><td>{{ form(form)}}</td></tr>
 	</table>
 {% endblock %}
