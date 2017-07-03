@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Niveausouhaite
  *
  * @ORM\Table(name="niveausouhaite")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="OC\PlatformBundle\Repository\NiveausouhaiteRepository")
  */
 class Niveausouhaite
 {

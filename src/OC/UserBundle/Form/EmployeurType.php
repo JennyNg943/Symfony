@@ -32,7 +32,7 @@ class EmployeurType extends AbstractType
 			->add('ville',					TextType::class,array('label'=>'Ville :','required'=>false))
 			->add('cp',						EntityType::class,array(
 						'class'			=> 'OCPlatformBundle:Departement',
-						'choice_label'	=> 'dept','label'=>'Departement* :',
+						'label'=>'Departement* :',
 						'placeholder'	=>	'',
 						'query_builder' => function(DepartementRepository $er) {
 										return $er->getDeptTri();}

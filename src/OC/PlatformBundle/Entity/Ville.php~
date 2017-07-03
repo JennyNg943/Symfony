@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Ville
  *
  * @ORM\Table(name="Ville")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="OC\PlatformBundle\Repository\VilleRepository")
  */
 class Ville
 {
@@ -105,4 +105,28 @@ class Ville
 			return '';
 		}
 	}
+
+    /**
+     * Set departement
+     *
+     * @param \OC\PlatformBundle\Entity\Departement $departement
+     *
+     * @return Ville
+     */
+    public function setDepartement(\OC\PlatformBundle\Entity\Departement $departement = null)
+    {
+        $this->departement = $departement;
+
+        return $this;
+    }
+
+    /**
+     * Get departement
+     *
+     * @return \OC\PlatformBundle\Entity\Departement
+     */
+    public function getDepartement()
+    {
+        return $this->departement;
+    }
 }

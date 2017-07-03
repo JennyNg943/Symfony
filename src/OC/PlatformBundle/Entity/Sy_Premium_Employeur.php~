@@ -1,0 +1,44 @@
+<?php
+
+namespace OC\PlatformBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Sy_Premium_Employeur
+ *
+ * @ORM\Table(name="Sy_Premium_Employeur")
+ * @ORM\Entity
+ */
+class Sy_Premium_Employeur
+{
+    /**
+     * @ORM\Id
+     * 
+     * @ORM\ManyToOne(targetEntity="OC\UserBundle\Entity\Sy_Employeur",cascade={"persist"})
+     */
+    private $idEmployeur;
+
+    /**
+     * @ORM\Id
+     *
+     * @ORM\ManyToOne(targetEntity="OC\PlatformBundle\Entity\Sy_Premium_Formule",cascade={"persist"})
+     */
+    private $idFormule;
+
+	/**
+     * @var date
+     *
+     * @ORM\Column(name="DateDebut", type="date", length=255, nullable=false)
+     */
+	private $dateDebut;
+	
+	/**
+     * @var date
+     *
+     * @ORM\Column(name="DateFin", type="date", length=255, nullable=false)
+     */
+	private $dateFin;
+
+   
+}

@@ -52,36 +52,6 @@ class Sy_Employeur extends User
      */
     private $prenomcontactcomm;
 
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="Id_CiviliteContactSourcing", type="integer", nullable=true)
-     */
-    private $idCivilitecontactsourcing;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="NomContactSourcing", type="string", length=255, nullable=true)
-     */
-    private $nomcontactsourcing;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="PrenomContactSourcing", type="string", length=255, nullable=true)
-     */
-    private $prenomcontactsourcing;
-
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Adresse", type="string", length=255, nullable=true)
-     */
-    private $adresse;
-
     /**
      * @var string
      *
@@ -106,23 +76,9 @@ class Sy_Employeur extends User
     /**
      * @var string
      *
-     * @ORM\Column(name="Site", type="string", length=255, nullable=true)
-     */
-    private $site;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="Tel", type="string", length=255, nullable=false)
      */
     private $tel;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="Blacklist", type="integer", nullable=true)
-     */
-    private $blacklist = '0';
 
     /**
      * @var \DateTime
@@ -141,31 +97,9 @@ class Sy_Employeur extends User
     /**
      * @var integer
      *
-     * @ORM\Column(name="Id_TypeRecruteur", type="integer", nullable=true)
-     */
-    private $idTyperecruteur;
-
-    /**
-     * @var integer
-     *
      * @ORM\Column(name="Newsletter", type="integer", nullable=true)
      */
     private $newsletter;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="Id_RecruteurFormule", type="integer", nullable=true)
-     */
-    private $idRecruteurformule;
-
-	/**
-     * @var integer
-     *
-     * @ORM\OneToOne(targetEntity="OC\UserBundle\Entity\User", cascade={"persist", "remove"})
-	 * 
-     */
-	private $user;
 	
 	/**
      * @var integer
@@ -183,6 +117,12 @@ class Sy_Employeur extends User
      */
 	private $candidat;
 	
+	/**
+     * @var integer
+     * 
+     * @ORM\OneToOne(targetEntity="OC\PlatformBundle\Entity\Sy_Premium")
+     */
+	private $premium;
 
 	/**
      * Constructor

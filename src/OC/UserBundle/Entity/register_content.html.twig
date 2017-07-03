@@ -1,0 +1,6 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{{ form_start(form, {'method': 'post', 'action': path('user_one_registration')}) }}
+	{{ form(form)}}
+    
+{{ form_end(form) }}

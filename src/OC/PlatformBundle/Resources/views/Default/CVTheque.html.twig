@@ -58,13 +58,14 @@
 											<td>{{ candidat.prenom }}</td>
 											<td>{{ candidat.codePostal }}</td>
 											<td id="CvThequeInteraction"><a href="{{ path('consultCVTheque', {'id':candidat.id})}}">
-												{% image 'bundles/app/img/voir.png' %}
-													<img src="{{ asset_url }}" alt="Voir" id="CVThequeImg"/>
-													{% endimage %}</a>
-												{% image 'bundles/app/img/Mail.png' %}
-													<img src="{{ asset_url }}" alt="Mail" id="CVThequeImg"/>
-												{% endimage %}
-											</td>
+										{% image 'bundles/app/img/voir.png' %}
+											<img src="{{ asset_url }}" alt="Voir" id="CVThequeImg"/>
+											{% endimage %}</a>
+									<a href="#" onclick="return alert('Il faut déposer une annonce premium pour avoir accès à ce service.')">
+										{% image 'bundles/app/img/Mail.png' %}
+											<img src="{{ asset_url }}" alt="Recrutic" id="CVThequeImg"/>
+											{% endimage %}</a>
+										</td>
 										</tr>	
 							{% endif %}
 						{% else %}

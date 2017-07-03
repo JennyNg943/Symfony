@@ -50,7 +50,13 @@ recruteurModif:
     path:     /User/ModificationRecruteur
     defaults: { _controller: OCPlatformBundle:Recruteur:recruteurModif }
     
-
+admin_recruteur:
+    path:     /Admin/Recruteur
+    defaults: { _controller: OCPlatformBundle:Recruteur:index }
+    
+admin_recruteur_delete:
+    path:     /Admin/Recruteur/Supp/{id}
+    defaults: { _controller: OCPlatformBundle:Recruteur:delete }
 #																	AnnonceAncienne
 
 admin_annonce:
