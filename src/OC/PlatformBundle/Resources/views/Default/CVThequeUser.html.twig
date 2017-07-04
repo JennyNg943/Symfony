@@ -19,11 +19,13 @@
 			<th>Nom</th>
 			<th>Prénom</th>
 			<th>Code Postal / Ville</th>
+			{% if app.user.type != "Candidat" %}
 			<th >Voir / Contacter</th>
+			{% endif %}
 		</tr>
 		{% for candidat in pagination %}
 		<tr>
-			<td>{{ candidat.nom }}</td>
+			<td>{{ candidat.nom| truncate(3) }}</td>
 			<td>{{ candidat.prenom }}</td>
 			<td >{{ candidat.codePostal }}</td>
 		{% if app.user.type == "Admin" %}
