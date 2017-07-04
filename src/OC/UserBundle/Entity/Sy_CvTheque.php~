@@ -285,4 +285,38 @@ class Sy_CvTheque
     {
         return $this->codePostal;
     }
+
+    /**
+     * Add fonction
+     *
+     * @param \OC\UserBundle\Entity\Sy_Fonction $fonction
+     *
+     * @return Sy_CvTheque
+     */
+    public function addFonction(\OC\UserBundle\Entity\Sy_Fonction $fonction)
+    {
+        $this->fonction[] = $fonction;
+
+        return $this;
+    }
+
+    /**
+     * Remove fonction
+     *
+     * @param \OC\UserBundle\Entity\Sy_Fonction $fonction
+     */
+    public function removeFonction(\OC\UserBundle\Entity\Sy_Fonction $fonction)
+    {
+        $this->fonction->removeElement($fonction);
+    }
+
+    /**
+     * Get fonction
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFonction()
+    {
+        return $this->fonction;
+    }
 }

@@ -10,7 +10,7 @@ use OC\UserBundle\Entity\User;
  * Recruteur
  *
  * @ORM\Table(name="recruteur")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="OC\PlatformBundle\Repository\RecruteurRepository")
  */
 class Recruteur 
 {
@@ -210,15 +210,6 @@ class Recruteur
      * @ORM\Column(name="ReceptionMailConfirmation", type="smallint", nullable=true)
      */
     private $receptionmailconfirmation = '1';
-
-
-	/**
-     * @var integer
-     *
-     * @ORM\OneToOne(targetEntity="OC\UserBundle\Entity\User", cascade={"persist", "remove"})
-	 * 
-     */
-	private $user;
 
 	/**
      * Constructor

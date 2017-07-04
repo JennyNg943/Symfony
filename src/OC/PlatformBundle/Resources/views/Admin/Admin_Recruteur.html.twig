@@ -12,12 +12,18 @@
 	<div class="navigation">
 		{{ knp_pagination_render(pagination) }}
 	</div>
-	Nombre total fonction : {{ pagination.getTotalItemCount }}
+	Rappel :</br>
+	Formule 1 : 1 mois</br>
+	Formule 2 : 3 mois</br>
+	Formule 3 : 1 ans</br></br>
+	
+	Nombre total de recruteurs : {{ pagination.getTotalItemCount }}
 	<table id="TableCandidat">
 		<tr>
 			<th>id</th>
 			<th>Societe</th>
 			<th>Nom / Prenom</th>
+			<th>Formule</th>
 			<th>Gestion</th>
 		</tr>
 		{% for recruteur in pagination %}
@@ -25,14 +31,29 @@
 			<td>{{ recruteur.id }} </td>
 			<td> {{ recruteur.Societe}}</td>
 			<td> {{ recruteur.nomContactComm}} {{ recruteur.prenomContactComm}}</td>
-			<td><a href="{{ path('admin_recruteur_delete', {'id':recruteur.id})}}" onclick="return confirm('Voulez vous vraiment supprimer cette fonction ? {{ recruteur.Societe }} - {{ recruteur.nomContactComm }}')">
-											{% image 'bundles/app/img/Supprimer.png' %}
-											<img src="{{ asset_url }}" alt="Supprimer" id="CVThequeImg"/>
-											{% endimage %}</a>
-											<a href="{{ path('admin_fonction_modif', {'id':recruteur.id})}}">
-										{% image 'bundles/app/img/Modifier.jpg' %}
-											<img src="{{ asset_url }}" alt="Modifier" id="CVThequeImg"/>
-										{% endimage %}</a>
+			{% if recruteur.premium is not empty %}
+				<td> Formule {{ recruteur.premium.idFormule.id}} </td>
+			{% else %}
+				<td> Gratuit </td>
+			{% endif %}
+			<td>
+				<a href="{{ path('admin_formule1', {'id':recruteur.id})}}" onclick="return confirm('Voulez vous vraiment attribuer la formule 1 à ce recruteur ? {{ recruteur.Societe }} - {{ recruteur.nomContactComm }}')">
+					{% image 'bundles/app/img/Formule1.png' %}
+						<img src="{{ asset_url }}" alt="Modifier" id="CVThequeImg"/>
+					{% endimage %}</a>
+				<a href="{{ path('admin_formule2', {'id':recruteur.id})}}" onclick="return confirm('Voulez vous vraiment attribuer la formule 2 à ce recruteur ? {{ recruteur.Societe }} - {{ recruteur.nomContactComm }}')">
+					{% image 'bundles/app/img/Formule2.png' %}
+						<img src="{{ asset_url }}" alt="Modifier" id="CVThequeImg"/>
+					{% endimage %}</a>
+				<a href="{{ path('admin_formule3', {'id':recruteur.id})}}" onclick="return confirm('Voulez vous vraiment attribuer la formule 3 à ce recruteur ? {{ recruteur.Societe }} - {{ recruteur.nomContactComm }}')">
+					{% image 'bundles/app/img/Formule3.png' %}
+						<img src="{{ asset_url }}" alt="Modifier" id="CVThequeImg"/>
+					{% endimage %}</a>
+				<a href="{{ path('admin_recruteur_delete', {'id':recruteur.id})}}" onclick="return confirm('Voulez vous vraiment supprimer ce recruteur ? {{ recruteur.Societe }} - {{ recruteur.nomContactComm }}')">
+					{% image 'bundles/app/img/Supprimer.png' %}
+						<img src="{{ asset_url }}" alt="Supprimer" id="CVThequeImg"/>
+					{% endimage %}</a>
+				
 			</td>
 		</tr>
 		{% endfor %}

@@ -11,7 +11,11 @@
 			<a href="{{ path('oc_platform_offreEmploi') }}" style="color:red">Voir toutes nos offres</a>
 		</li>
 		<li>
-			<a href="{{ path('CVtheque') }}">Evaluer notre CVThèque</a> 
+			{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+				<a href="{{ path('CVthequeUser') }}">Evaluer notre CVThèque</a> 
+			{% else %}
+				<a href="{{ path('CVtheque') }}">Evaluer notre CVThèque</a> 
+			{% endif %}
 		</li>
 		{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 			{% if (app.user.type != "Candidat") and (app.user.type != "Employeur") %}

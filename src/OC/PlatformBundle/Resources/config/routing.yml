@@ -8,8 +8,12 @@ mapage:
     defaults: { _controller: OCPlatformBundle:Default:MaPage } 
 
 CVtheque:
-    path:     /CVTheque/
+    path:     /EvaluerCVTheque/
     defaults: { _controller: OCPlatformBundle:Default:CVtheque }
+    
+CVthequeUser:
+    path:     /CVTheque/
+    defaults: { _controller: OCPlatformBundle:Default:CVthequeUser }
     
 oc_platform_offreEmploi:
     path:     /Nos_offres_d_emploi/
@@ -57,6 +61,19 @@ admin_recruteur:
 admin_recruteur_delete:
     path:     /Admin/Recruteur/Supp/{id}
     defaults: { _controller: OCPlatformBundle:Recruteur:delete }
+    
+admin_formule1:
+    path:     /Admin/Recruteur/Formule1/{id}
+    defaults: { _controller: OCPlatformBundle:Recruteur:formule1 }
+    
+admin_formule2:
+    path:     /Admin/Recruteur/Formule2/{id}
+    defaults: { _controller: OCPlatformBundle:Recruteur:formule2 }
+    
+admin_formule3:
+    path:     /Admin/Recruteur/Formule3/{id}
+    defaults: { _controller: OCPlatformBundle:Recruteur:formule3 }
+    
 #																	AnnonceAncienne
 
 admin_annonce:

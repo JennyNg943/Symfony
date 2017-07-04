@@ -93,6 +93,30 @@ class Sy_Premium
     }
 
     /**
+     * Set idEmployeur
+     *
+     * @param \OC\UserBundle\Entity\Sy_Employeur $idEmployeur
+     *
+     * @return Sy_Premium_Employeur
+     */
+    public function setIdEmployeur(\OC\UserBundle\Entity\Sy_Employeur $idEmployeur)
+    {
+        $this->idEmployeur = $idEmployeur;
+
+        return $this;
+    }
+
+    /**
+     * Get idEmployeur
+     *
+     * @return \OC\UserBundle\Entity\Sy_Employeur
+     */
+    public function getIdEmployeur()
+    {
+        return $this->idEmployeur;
+    }
+
+    /**
      * Set idFormule
      *
      * @param \OC\PlatformBundle\Entity\Sy_Premium_Formule $idFormule

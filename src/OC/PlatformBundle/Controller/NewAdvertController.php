@@ -242,12 +242,14 @@ class NewAdvertController extends Controller
 			$session->set('listePublication', null);
 			$session->set('liste', null);
 			$session->set('candidat', null);
+			$session->set('fonction', null);
 		}
 		
 		if($id == 2){
 			$session->set('listeAnnonce', null);
 			$session->set('liste', null);
 			$session->set('candidat', null);
+			$session->set('fonction', null);
 		}
 		
 		if($id == 3){
@@ -255,6 +257,7 @@ class NewAdvertController extends Controller
 			$session->set('candidat', null);
 			$session->set('listeAnnonce', null);
 			$session->set('listePublication', null);
+			$session->set('fonction', null);
 
 		}
 	}

@@ -70,7 +70,7 @@ class Sy_Candidature extends User
     /**
      * @var string
      *
-     * @ORM\Column(name="VilleCandidat", type="string", length=255, nullable=false)
+     * @ORM\Column(name="VilleCandidat", type="string", length=255, nullable=true)
      */
     private $villecandidat;
 

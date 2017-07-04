@@ -19,6 +19,16 @@ class DefaultController extends Controller
 	//Page d'accueil
     public function indexAction(Request $request)
     {
+		$repository = $this->getDoctrine()->getManager()->getRepository('OCPlatformBundle:Sy_Premium');
+		$premium = $repository->findAll();
+		$date = new \DateTime('now');
+		$em = $this->getDoctrine()->getManager();
+		foreach ($p as $premium){
+			if($p->getDateFin()==$date){
+				$em->remove($p);
+			}
+		}
+		$em->flush();
 		$session = $request->getSession();
 		$this->sessionStop($session,3);
         $content = $this
@@ -38,8 +48,6 @@ class DefaultController extends Controller
 			$candidat = $repository->getCVThequeTrie(null,null);
 			$session->set('candidat', $candidat);
 		}
-		
-		
 		$form->handleRequest($request);
 			if ($form->isSubmitted() && $form->isValid()) {
 				$site = $form->get('Domaine')->getData();
@@ -49,18 +57,57 @@ class DefaultController extends Controller
 				
 				$session->set('candidat', $candidat);
 			}	
-		
 		$liste = $session->get('candidat');
 		
 		$paginator = $this->get('knp_paginator');
 		$pagination = $paginator->paginate(
 		$liste,
-		$request->query->get('page',1),10
+		$request->query->get('page',1),50
 		);
 		
         return $this->render('OCPlatformBundle:Default:CVTheque.html.twig',array(
 			'pagination' => $pagination,
 			'form' => $form->createView()));
+    }
+	
+	public function CVthequeUserAction(Request $request)
+    {
+		$user = $this->getUser();
+		$repository = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_CvTheque');
+		$repository2 = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Recruteur');
+		$recruteur = $repository2->find($user->getId());
+		if($recruteur == null){
+			$repository3 = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Employeur');
+			$recruteur = $repository3->find($user->getId());
+		}
+		$form = $this->createForm(TriSiteType::class);
+		$session = $request->getSession();
+		$this->sessionStop($session,1);
+		if ($session->get('candidat') == null) {
+			$candidat = $repository->getCVThequeTrie(null,null);
+			$session->set('candidat', $candidat);
+		}
+		$form->handleRequest($request);
+			if ($form->isSubmitted() && $form->isValid()) {
+				$site = $form->get('Domaine')->getData();
+				$dept = $form->get('Departement')->getData();
+				
+				$candidat = $repository->getCVThequeTrie($site,$dept);
+				
+				$session->set('candidat', $candidat);
+			}	
+		$liste = $session->get('candidat');
+		
+		$paginator = $this->get('knp_paginator');
+		$pagination = $paginator->paginate(
+		$liste,
+		$request->query->get('page',1),50
+		);
+		
+        return $this->render('OCPlatformBundle:Default:CVThequeUser.html.twig',array(
+			'pagination' => $pagination,
+			'form' => $form->createView(),
+			'utilisateur'	=> $recruteur));
     }
 	
 	//Route pour la page Nos Offre d'emploi
@@ -201,12 +248,14 @@ class DefaultController extends Controller
 			$session->set('liste', null);
 			$session->set('listePublication', null);
 			$session->set('listeAnnonce', null);
+			$session->set('fonction', null);
 		}
 		
 		if($id == 2){
 			$session->set('candidat', null);
 			$session->set('listePublication', null);
 			$session->set('listeAnnonce', null);
+			$session->set('fonction', null);
 		}
 		
 		if($id == 3){
@@ -214,6 +263,7 @@ class DefaultController extends Controller
 			$session->set('candidat', null);
 			$session->set('listePublication', null);
 			$session->set('listeAnnonce', null);
+			$session->set('fonction', null);
 		}
 	}
 }

@@ -60,6 +60,7 @@
 			<tr><td><b>Prenom : </b>{{ utilisateur.PrenomContactComm }}</br></td><td><b>E-mail :</b> {{ app.user.email }}</br></td></tr>
 			<tr><td><b>Code Postal : </b>{{utilisateur.Cp}}</br></td><td><b>Téléphone : </b>{{ utilisateur.Tel }}</br></td></tr>
 			<tr><td><b>Ville : </b>{{ utilisateur.Ville }}</br></td><td><b>Date de création : </b>{{ utilisateur.DateCreation|date('d/m/Y') }}</br></td></tr>
+			<tr><td><b>Formule : </b>{% if utilisateur.premium is not empty %}{{ utilisateur.premium.idFormule.intitule }}{% else %}Gratuite{% endif %}</td></tr>
 		</table>
 		<div class="modifProfile">
 			<a href="{{ path('recruteurModif') }}"> Modifier mes informations</a> - 

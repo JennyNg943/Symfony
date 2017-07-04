@@ -22,7 +22,9 @@ class FonctionController extends Controller
 	//Page d'accueil
     public function indexAction(Request $request)
     {
+		
 		$repository = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Fonction');
+		
 		$listeFonction = $repository->findAll();
 		$fonction = new \OC\UserBundle\Entity\Sy_Fonction;
 		$form = $this->createForm(FonctionType::class,$fonction);
@@ -36,7 +38,7 @@ class FonctionController extends Controller
 			->add('Rechercher', \Symfony\Component\Form\Extension\Core\Type\SubmitType::class);
 		$form2 = $formBuilder->getForm();
 		$session = $request->getSession();
-		$this->sessionStop($session,1);
+		$this->sessionStop($session, 2);
 		if ($session->get('fonction') == null) {
 			$listeFonction = $repository->findAll();
 			$session->set('fonction', $listeFonction);
@@ -62,7 +64,13 @@ class FonctionController extends Controller
 		$paginator = $this->get('knp_paginator');
 		$pagination = $paginator->paginate($liste,$request->query->get('page', 1),20);
 		
-		return $this->render('OCPlatformBundle:Admin:Admin_Fonction.html.twig',array('form'=>$form->createView(),'pagination'=>$pagination,'form2'=>$form2->createView()));
+		$repository2 = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Annonce_Sy_Siteemploi');
+		$repository3 = $this->getDoctrine()->getManager()->getRepository('OCPlatformBundle:Annonce_Sy_Siteemploi');
+		$liste1 = $repository2->findAll();
+		$liste2 = $repository3->findAll();
+		$liste3 = new ArrayCollection(array_merge($liste1,$liste2));
+		
+		return $this->render('OCPlatformBundle:Admin:Admin_Fonction.html.twig',array('form'=>$form->createView(),'pagination'=>$pagination,'form2'=>$form2->createView(),'annonce'=>$liste3));
     }
 	
 	public function deleteAction($id,Request $request){
@@ -80,13 +88,14 @@ class FonctionController extends Controller
 		$fonction = $repository->find($id);
 		$form = $this->createForm(FonctionType::class,$fonction);
 		$msg = "";
-		
+		$session = $request->getSession();
 		if ($request->isMethod('POST')) {
 			if ($form->handleRequest($request)->isValid()) {
 				$em = $this->getDoctrine()->getManager();
 				$em->persist($fonction);
 				$em->flush();
 				$msg = "Cette fonction a bien été modifiée";
+				$this->sessionStop($session, 3);
 				return $this->render('OCPlatformBundle:Admin:Admin_Fonction_Modif.html.twig',array('form'=>$form->createView(),'msg'=>$msg));
 			}
 		}
@@ -95,13 +104,9 @@ class FonctionController extends Controller
 	}
 	
 	function sessionStop($session,$id){
-		if($id == 1){
-			$session->set('liste', null);
-			$session->set('listePublication', null);
-			$session->set('listeAnnonce', null);
-		}
 		
 		if($id == 2){
+			$session->set('liste', null);
 			$session->set('candidat', null);
 			$session->set('listePublication', null);
 			$session->set('listeAnnonce', null);
@@ -112,6 +117,7 @@ class FonctionController extends Controller
 			$session->set('candidat', null);
 			$session->set('listePublication', null);
 			$session->set('listeAnnonce', null);
+			$session->set('fonction', null);
 		}
 	}
 }

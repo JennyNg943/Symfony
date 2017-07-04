@@ -24,7 +24,7 @@ class FonctionType extends AbstractType
 				'choice_label'	=> 'intitulesiteemploi',
 				'placeholder' => '',
 				))
-			->add('Ajouter', SubmitType::class);
+			->add('Confirmer', SubmitType::class);
 				
 
 	}				

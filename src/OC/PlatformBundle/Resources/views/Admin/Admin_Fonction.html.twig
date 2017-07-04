@@ -20,8 +20,17 @@
 			<th>Gestion</th>
 		</tr>
 		{% for fonction in pagination %}
+			{% set i = 0%}
 		<tr>
-			<td>{{ fonction.IntituleFonction }} </td>
+			<td>
+				{{ fonction.IntituleFonction }} 
+				{% for a in annonce %}
+					{% if a.idFonction.intituleFonction == fonction.IntituleFonction %}
+						{% set i = i+1%}
+					{% endif %}
+				{% endfor %}
+				( {{ i }} )
+			</td>
 			<td> {{ fonction.idSiteEmploi.intitulesiteemploi}}</td>
 			<td><a href="{{ path('admin_fonction_delete', {'id':fonction.id})}}" onclick="return confirm('Voulez vous vraiment supprimer cette fonction ? {{ fonction.IntituleFonction }} - {{ fonction.idSiteEmploi.intitulesiteemploi }}')">
 											{% image 'bundles/app/img/Supprimer.png' %}

@@ -120,7 +120,7 @@ class Sy_Employeur extends User
 	/**
      * @var integer
      * 
-     * @ORM\OneToOne(targetEntity="OC\PlatformBundle\Entity\Sy_Premium")
+     * @ORM\OneToOne(targetEntity="OC\PlatformBundle\Entity\Sy_Premium",cascade={"persist"})
      */
 	private $premium;
 
@@ -135,12 +135,14 @@ class Sy_Employeur extends User
 	
     
 
+    
+
     /**
      * Set societe
      *
      * @param string $societe
      *
-     * @return Recruteur
+     * @return Sy_Employeur
      */
     public function setSociete($societe)
     {
@@ -164,7 +166,7 @@ class Sy_Employeur extends User
      *
      * @param integer $idCivilitecontactcomm
      *
-     * @return Recruteur
+     * @return Sy_Employeur
      */
     public function setIdCivilitecontactcomm($idCivilitecontactcomm)
     {
@@ -188,7 +190,7 @@ class Sy_Employeur extends User
      *
      * @param string $nomcontactcomm
      *
-     * @return Recruteur
+     * @return Sy_Employeur
      */
     public function setNomcontactcomm($nomcontactcomm)
     {
@@ -212,7 +214,7 @@ class Sy_Employeur extends User
      *
      * @param string $prenomcontactcomm
      *
-     * @return Recruteur
+     * @return Sy_Employeur
      */
     public function setPrenomcontactcomm($prenomcontactcomm)
     {
@@ -232,155 +234,11 @@ class Sy_Employeur extends User
     }
 
     /**
-     * Set mailcommLogin
-     *
-     * @param string $mailcommLogin
-     *
-     * @return Recruteur
-     */
-    public function setMailcommLogin($mailcommLogin)
-    {
-        $this->mailcommLogin = $mailcommLogin;
-
-        return $this;
-    }
-
-    /**
-     * Get mailcommLogin
-     *
-     * @return string
-     */
-    public function getMailcommLogin()
-    {
-        return $this->mailcommLogin;
-    }
-
-    /**
-     * Set idCivilitecontactsourcing
-     *
-     * @param integer $idCivilitecontactsourcing
-     *
-     * @return Recruteur
-     */
-    public function setIdCivilitecontactsourcing($idCivilitecontactsourcing)
-    {
-        $this->idCivilitecontactsourcing = $idCivilitecontactsourcing;
-
-        return $this;
-    }
-
-    /**
-     * Get idCivilitecontactsourcing
-     *
-     * @return integer
-     */
-    public function getIdCivilitecontactsourcing()
-    {
-        return $this->idCivilitecontactsourcing;
-    }
-
-    /**
-     * Set nomcontactsourcing
-     *
-     * @param string $nomcontactsourcing
-     *
-     * @return Recruteur
-     */
-    public function setNomcontactsourcing($nomcontactsourcing)
-    {
-        $this->nomcontactsourcing = $nomcontactsourcing;
-
-        return $this;
-    }
-
-    /**
-     * Get nomcontactsourcing
-     *
-     * @return string
-     */
-    public function getNomcontactsourcing()
-    {
-        return $this->nomcontactsourcing;
-    }
-
-    /**
-     * Set prenomcontactsourcing
-     *
-     * @param string $prenomcontactsourcing
-     *
-     * @return Recruteur
-     */
-    public function setPrenomcontactsourcing($prenomcontactsourcing)
-    {
-        $this->prenomcontactsourcing = $prenomcontactsourcing;
-
-        return $this;
-    }
-
-    /**
-     * Get prenomcontactsourcing
-     *
-     * @return string
-     */
-    public function getPrenomcontactsourcing()
-    {
-        return $this->prenomcontactsourcing;
-    }
-
-    /**
-     * Set mailsourcing
-     *
-     * @param string $mailsourcing
-     *
-     * @return Recruteur
-     */
-    public function setMailsourcing($mailsourcing)
-    {
-        $this->mailsourcing = $mailsourcing;
-
-        return $this;
-    }
-
-    /**
-     * Get mailsourcing
-     *
-     * @return string
-     */
-    public function getMailsourcing()
-    {
-        return $this->mailsourcing;
-    }
-
-    /**
-     * Set adresse
-     *
-     * @param string $adresse
-     *
-     * @return Recruteur
-     */
-    public function setAdresse($adresse)
-    {
-        $this->adresse = $adresse;
-
-        return $this;
-    }
-
-    /**
-     * Get adresse
-     *
-     * @return string
-     */
-    public function getAdresse()
-    {
-        return $this->adresse;
-    }
-
-    /**
      * Set cp
      *
      * @param string $cp
      *
-     * @return Recruteur
+     * @return Sy_Employeur
      */
     public function setCp($cp)
     {
@@ -404,7 +262,7 @@ class Sy_Employeur extends User
      *
      * @param string $ville
      *
-     * @return Recruteur
+     * @return Sy_Employeur
      */
     public function setVille($ville)
     {
@@ -428,7 +286,7 @@ class Sy_Employeur extends User
      *
      * @param string $description
      *
-     * @return Recruteur
+     * @return Sy_Employeur
      */
     public function setDescription($description)
     {
@@ -448,35 +306,11 @@ class Sy_Employeur extends User
     }
 
     /**
-     * Set site
-     *
-     * @param string $site
-     *
-     * @return Recruteur
-     */
-    public function setSite($site)
-    {
-        $this->site = $site;
-
-        return $this;
-    }
-
-    /**
-     * Get site
-     *
-     * @return string
-     */
-    public function getSite()
-    {
-        return $this->site;
-    }
-
-    /**
      * Set tel
      *
      * @param string $tel
      *
-     * @return Recruteur
+     * @return Sy_Employeur
      */
     public function setTel($tel)
     {
@@ -496,60 +330,11 @@ class Sy_Employeur extends User
     }
 
     /**
-     * Set fax
-     *
-     * @param string $fax
-     *
-     * @return Recruteur
-     */
-    public function setFax($fax)
-    {
-        $this->fax = $fax;
-
-        return $this;
-    }
-
-    /**
-     * Get fax
-     *
-     * @return string
-     */
-    public function getFax()
-    {
-        return $this->fax;
-    }
-
-   
-    /**
-     * Set blacklist
-     *
-     * @param integer $blacklist
-     *
-     * @return Recruteur
-     */
-    public function setBlacklist($blacklist)
-    {
-        $this->blacklist = $blacklist;
-
-        return $this;
-	}
-
-    /**
-     * Get blacklist
-     *
-     * @return integer
-     */
-    public function getBlacklist()
-    {
-        return $this->blacklist;
-    }
-
-    /**
      * Set datecreation
      *
      * @param \DateTime $datecreation
      *
-     * @return Recruteur
+     * @return Sy_Employeur
      */
     public function setDatecreation($datecreation)
     {
@@ -573,7 +358,7 @@ class Sy_Employeur extends User
      *
      * @param \DateTime $datemaj
      *
-     * @return Recruteur
+     * @return Sy_Employeur
      */
     public function setDatemaj($datemaj)
     {
@@ -593,59 +378,11 @@ class Sy_Employeur extends User
     }
 
     /**
-     * Set logo
-     *
-     * @param string $logo
-     *
-     * @return Recruteur
-     */
-    public function setLogo($logo)
-    {
-        $this->logo = $logo;
-
-        return $this;
-    }
-
-    /**
-     * Get logo
-     *
-     * @return string
-     */
-    public function getLogo()
-    {
-        return $this->logo;
-    }
-
-    /**
-     * Set idTyperecruteur
-     *
-     * @param integer $idTyperecruteur
-     *
-     * @return Recruteur
-     */
-    public function setIdTyperecruteur($idTyperecruteur)
-    {
-        $this->idTyperecruteur = $idTyperecruteur;
-
-        return $this;
-    }
-
-    /**
-     * Get idTyperecruteur
-     *
-     * @return integer
-     */
-    public function getIdTyperecruteur()
-    {
-        return $this->idTyperecruteur;
-    }
-
-    /**
      * Set newsletter
      *
      * @param integer $newsletter
      *
-     * @return Recruteur
+     * @return Sy_Employeur
      */
     public function setNewsletter($newsletter)
     {
@@ -662,126 +399,6 @@ class Sy_Employeur extends User
     public function getNewsletter()
     {
         return $this->newsletter;
-    }
-
-    /**
-     * Set flagenhaut
-     *
-     * @param integer $flagenhaut
-     *
-     * @return Recruteur
-     */
-    public function setFlagenhaut($flagenhaut)
-    {
-        $this->flagenhaut = $flagenhaut;
-
-        return $this;
-    }
-
-    /**
-     * Get flagenhaut
-     *
-     * @return integer
-     */
-    public function getFlagenhaut()
-    {
-        return $this->flagenhaut;
-    }
-
-    /**
-     * Set etat
-     *
-     * @param integer $etat
-     *
-     * @return Recruteur
-     */
-    public function setEtat($etat)
-    {
-        $this->etat = $etat;
-
-        return $this;
-    }
-
-    /**
-     * Get etat
-     *
-     * @return integer
-     */
-    public function getEtat()
-    {
-        return $this->etat;
-    }
-
-    /**
-     * Set idRecruteurformule
-     *
-     * @param integer $idRecruteurformule
-     *
-     * @return Recruteur
-     */
-    public function setIdRecruteurformule($idRecruteurformule)
-    {
-        $this->idRecruteurformule = $idRecruteurformule;
-
-        return $this;
-    }
-
-    /**
-     * Get idRecruteurformule
-     *
-     * @return integer
-     */
-    public function getIdRecruteurformule()
-    {
-        return $this->idRecruteurformule;
-    }
-
-    /**
-     * Set receptionmailconfirmation
-     *
-     * @param integer $receptionmailconfirmation
-     *
-     * @return Recruteur
-     */
-    public function setReceptionmailconfirmation($receptionmailconfirmation)
-    {
-        $this->receptionmailconfirmation = $receptionmailconfirmation;
-
-        return $this;
-    }
-
-    /**
-     * Get receptionmailconfirmation
-     *
-     * @return integer
-     */
-    public function getReceptionmailconfirmation()
-    {
-        return $this->receptionmailconfirmation;
-    }
-
-    /**
-     * Set user
-     *
-     * @param \OC\UserBundle\Entity\User $user
-     *
-     * @return Recruteur
-     */
-    public function setUser(\OC\UserBundle\Entity\User $user = null)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \OC\UserBundle\Entity\User
-     */
-    public function getUser()
-    {
-        return $this->user;
     }
 
     /**
@@ -850,5 +467,29 @@ class Sy_Employeur extends User
     public function getCandidat()
     {
         return $this->candidat;
+    }
+
+    /**
+     * Set premium
+     *
+     * @param \OC\PlatformBundle\Entity\Sy_Premium $premium
+     *
+     * @return Sy_Employeur
+     */
+    public function setPremium(\OC\PlatformBundle\Entity\Sy_Premium $premium = null)
+    {
+        $this->premium = $premium;
+
+        return $this;
+    }
+
+    /**
+     * Get premium
+     *
+     * @return \OC\PlatformBundle\Entity\Sy_Premium
+     */
+    public function getPremium()
+    {
+        return $this->premium;
     }
 }

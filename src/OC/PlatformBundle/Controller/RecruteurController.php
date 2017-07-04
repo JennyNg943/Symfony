@@ -68,7 +68,7 @@ class RecruteurController extends Controller
 		
 	}
 	
-	private function deleteAction($id,Request $request){
+	public function deleteAction($id,Request $request){
 		$repository = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Recruteur');
 		$recruteur = $repository->find($id);
 		
@@ -79,6 +79,69 @@ class RecruteurController extends Controller
 		
 		$em = $this->getDoctrine()->getManager();
 		$em->remove($recruteur);
+		$em->flush();
+		$referer = $request->headers->get('referer');
+		return $this->redirect($referer);
+	}
+	
+	public function formule1Action($id,Request $request){
+		$repository = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Recruteur');
+		$repository2 = $this->getDoctrine()->getManager()->getRepository('OCPlatformBundle:Sy_Premium_Formule');
+		$recruteur = $repository->find($id);
+		$formule = $repository2->find(1);
+		
+		if($recruteur == null){
+			$repository = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Employeur');
+			$recruteur = $repository->find($id);
+		}
+		
+		$premium = new \OC\PlatformBundle\Entity\Sy_Premium();
+		$premium->setIdFormule($formule)->setDateDebut(new \DateTime('now'))->setDateFin(new \DateTime('+1 month'));
+		$recruteur->setPremium($premium);
+		$em = $this->getDoctrine()->getManager();
+		$em->persist($recruteur);
+		$em->flush();
+		$referer = $request->headers->get('referer');
+		return $this->redirect($referer);
+	}
+	
+	public function formule2Action($id,Request $request){
+		$repository = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Recruteur');
+		$repository2 = $this->getDoctrine()->getManager()->getRepository('OCPlatformBundle:Sy_Premium_Formule');
+		$recruteur = $repository->find($id);
+		$formule = $repository2->find(2);
+		
+		if($recruteur == null){
+			$repository = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Employeur');
+			$recruteur = $repository->find($id);
+		}
+		
+		$premium = new \OC\PlatformBundle\Entity\Sy_Premium();
+		$premium->setIdFormule($formule)->setDateDebut(new \DateTime('now'))->setDateFin(new \DateTime('+3 month'));
+		$recruteur->setPremium($premium);
+		$em = $this->getDoctrine()->getManager();
+		$em->persist($recruteur);
+		$em->flush();
+		$referer = $request->headers->get('referer');
+		return $this->redirect($referer);
+	}
+	
+	public function formule3Action($id,Request $request){
+		$repository = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Recruteur');
+		$repository2 = $this->getDoctrine()->getManager()->getRepository('OCPlatformBundle:Sy_Premium_Formule');
+		$recruteur = $repository->find($id);
+		$formule = $repository2->find(3);
+		
+		if($recruteur == null){
+			$repository = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Employeur');
+			$recruteur = $repository->find($id);
+		}
+		
+		$premium = new \OC\PlatformBundle\Entity\Sy_Premium();
+		$premium->setIdFormule($formule)->setDateDebut(new \DateTime('now'))->setDateFin(new \DateTime('+1 year'));
+		$recruteur->setPremium($premium);
+		$em = $this->getDoctrine()->getManager();
+		$em->persist($recruteur);
 		$em->flush();
 		$referer = $request->headers->get('referer');
 		return $this->redirect($referer);
