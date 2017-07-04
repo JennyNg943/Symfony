@@ -63,7 +63,7 @@ class InscriptionController extends Controller
 					$em->flush();
 
 					$titre = $annonce->getTitreAnnonce();
-					$reference = $annonce->getReferenceRecruteur();
+					$reference = $annonce->getReference();
 					$nom = $candidat->getNomcandidat();
 					$body = "Candidature de ".$candidat->getIdcivilite()." ".$candidat->getNomCandidat()." ".$candidat->getPrenomCandidat()." pour le poste de ".$titre." ref : ".$reference.".\n"
 							. $candidat->getIdcivilite()." ".$candidat->getNomCandidat()." habite à ".$candidat->getVilleCandidat()." (".$candidat->getCP().").\n"
