@@ -277,4 +277,17 @@ class AnnonceRepository extends \Doctrine\ORM\EntityRepository
 				->getResult();
 	}
 	
+	function getFonctionAdmin($id){
+		
+		$qb = $this->createQueryBuilder('a');
+		$qb
+			->join('a.fonction','f')
+			->where('f.idFonction = :id')
+			->setParameter('id', $id)
+			;
+		
+		return $qb->getQuery()
+				->getResult();;
+	}
+	
 }

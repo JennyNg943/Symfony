@@ -1,0 +1,30 @@
+{% extends "OCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+	Recrutic
+{% endblock %}
+
+{% block body %}
+		
+	<a href="{{ path('admin_fonction') }}"><input type="submit" value="Retour" id="BoutonAnnonce"></a>
+	<div class="navigation">
+		{{ knp_pagination_render(pagination) }}
+	</div>
+	Nombre total annonces : {{ pagination.getTotalItemCount }}
+	<table>
+	{% for annonce in pagination %}
+		<table id="Admin" >
+			{% if annonce.new == 1 %}
+				{{ include("OCPlatformBundle:AdvertNew:AffichageAnnonce.html.twig") }}
+			{% else %}
+				{{ include("OCPlatformBundle:Advert:AffichageAnnonce.html.twig") }}
+			{% endif %}
+		</table>
+		<div class="hr"><hr /></div>
+		{% endfor %}
+	</table>
+	<div class="navigation">
+		{{ knp_pagination_render(pagination) }}
+	</div>
+{% endblock %}
+

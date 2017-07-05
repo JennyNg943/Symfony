@@ -103,6 +103,18 @@ class FonctionController extends Controller
 		return $this->render('OCPlatformBundle:Admin:Admin_Fonction_Modif.html.twig',array('form'=>$form->createView(),'msg'=>$msg));
 	}
 	
+	public function annonceAction($id,Request $request){
+		$repository = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Annonce');
+		$repository2 = $this->getDoctrine()->getManager()->getRepository('OCPlatformBundle:Annonce');
+		$listeannonce = $repository->getFonctionAdmin($id);
+		$listeannonce2 = $repository2->getFonctionAdmin($id);
+		$listeannonce3 = new ArrayCollection(array_merge($listeannonce,$listeannonce2));
+		$paginator = $this->get('knp_paginator');
+		$msg='';
+		$pagination = $paginator->paginate($listeannonce3,$request->query->get('page', 1),20);
+		return $this->render('OCPlatformBundle:Admin:Admin_Fonction_Annonce.html.twig',array('pagination'=>$pagination));
+	}
+	
 	function sessionStop($session,$id){
 		
 		if($id == 2){
