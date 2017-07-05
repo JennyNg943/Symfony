@@ -29,7 +29,7 @@
 						{% set i = i+1%}
 					{% endif %}
 				{% endfor %}
-				( {{ i }} )
+				<a href="#">( {{ i }} )</a>
 			</td>
 			<td> {{ fonction.idSiteEmploi.intitulesiteemploi}}</td>
 			<td><a href="{{ path('admin_fonction_delete', {'id':fonction.id})}}" onclick="return confirm('Voulez vous vraiment supprimer cette fonction ? {{ fonction.IntituleFonction }} - {{ fonction.idSiteEmploi.intitulesiteemploi }}')">
