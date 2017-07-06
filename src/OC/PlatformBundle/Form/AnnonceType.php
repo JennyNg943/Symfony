@@ -59,7 +59,7 @@ class AnnonceType extends AbstractType
 						'label'			=>	'Horaire'
 				))
 				->add('nbHeure',		TextType::class,array('label' => 'Nombre d\' heure'))
-				->add('referenceRecruteur', TextType::class,array(
+				->add('reference', TextType::class,array(
 						'label'			=>	'Référence du recruteur',
 					'required'			=> false	
 				))
