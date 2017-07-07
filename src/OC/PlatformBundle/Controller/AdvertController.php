@@ -6,29 +6,12 @@
 
 namespace OC\PlatformBundle\Controller;
 
-use OC\PlatformBundle\Entity\Candidat;
-use OC\PlatformBundle\Entity\Recruteur;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
-use OC\PlatformBundle\Form\ParticulierType;
-use OC\PlatformBundle\Form\SocieteType;
-use Doctrine\ORM\Tools\Pagination\Paginator;
-use OC\UserBundle\Repository\AnnonceRepository;
-use Symfony\Component\DomCrawler\Crawler;
-use Eko\FeedBundle\Hydrator\DefaultHydrator;
-use OC\PlatformBundle\Entity\Annonce;
-use Debril\RssAtomBundle\Protocol\FeedReader;
 use OC\PlatformBundle\Form\AnnonceType;
 use Doctrine\Common\Collections\ArrayCollection;
 use OC\PlatformBundle\Form\TriAnnonceType;
-use OC\PlatformBundle\Form\AjouterAnnonceType;
-use OC\PlatformBundle\Form\SiteTestType;
 use OC\PlatformBundle\Form\RechercheType;
-
-
-
 
 class AdvertController extends Controller
 {
@@ -167,36 +150,29 @@ class AdvertController extends Controller
 		$repository2 = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Annonce');
 		$form = $this->createForm(TriAnnonceType::class);
 		$form2 = $this->createForm(RechercheType::class);
-		
-		$session = $request->getSession();
-		$this->sessionStop($session, 2);
-		
-		if ($session->get('listePublication') == null) {
-			$listeannonce = $repository->getSuspension(-1,null,null,null,null);
-			$listeannonce2 = $repository2->getSuspension(-1,null,null,null,null);
-			$listeannonce3 = new ArrayCollection(array_merge($listeannonce, $listeannonce2));
-			$listeannonceF = $this->trieListe($listeannonce3);
-			$session->set('listePublication', $listeannonceF);
-		}
-		
-		if ($request->isMethod('POST')) {
-			if ($form->handleRequest($request)->isValid()) {
+
+		$listeannonce = $repository->getSuspension(-1,null,null,null,null);
+		$listeannonce2 = $repository2->getSuspension(-1,null,null,null,null);
+		$listeannonce3 = new ArrayCollection(array_merge($listeannonce, $listeannonce2));
+		$listeannonceF = $this->trieListe($listeannonce3);
+			
+		$form->handleRequest($request);
+			if ($form->isSubmitted() && $form->isValid()) {
 				$listeannonce3 = $this->ListeAnnonce($form);
-				$listeannonceF = $this->trieListe($listeannonce3);
-				$session->set('listePublication', $listeannonceF);
+				$listeannonceF = $this->trieListe($listeannonce3);	
 			}
-			if ($form2->handleRequest($request)->isValid()) {
+			
+		$form2->handleRequest($request);
+			if ($form2->isSubmitted() && $form2->isValid()) {
 				$recherche = $form2->get('Recherche')->getData();
 				$listeannonce = $repository->getRecherche($recherche);
 				$listeannonce2 = $repository2->getRecherche($recherche);
 				$listeannonce3 = new ArrayCollection(array_merge($listeannonce, $listeannonce2));
 				$listeannonceF = $this->trieListe($listeannonce3);
-				$session->set('listePublication', $listeannonceF);
 			}
-		}
-		$liste = $session->get('listePublication');
+		
 		$paginator = $this->get('knp_paginator');
-		$pagination = $paginator->paginate($liste,$request->query->get('page', 1),20);
+		$pagination = $paginator->paginate($listeannonceF,$request->query->get('page', 1),20);
 		return $this->render('OCPlatformBundle:Admin:Admin_Annonce.html.twig',array(
 			'pagination' => $pagination,
 			'form' => $form->createView(),

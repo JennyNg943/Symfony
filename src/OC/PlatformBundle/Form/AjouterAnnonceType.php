@@ -33,6 +33,7 @@ class AjouterAnnonceType extends AbstractType
 				->add('idDepartement',		EntityType::class,array(
 						'class'			=> 'OCPlatformBundle:Departement',
 						'label'			=> 'Departement*',
+						'placeholder'	=> '',
 						'query_builder'	=> function (DepartementRepository $er) {
 											return $er->getDepartementAnnonce();}))
 				->add('CodePostal',			NumberType::class,array(

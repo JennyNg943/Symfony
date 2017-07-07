@@ -15,8 +15,8 @@ class AnnonceRepository extends \Doctrine\ORM\EntityRepository
 		
 		$qb = $this->createQueryBuilder('a');
 		$qb 
-			->orderBy('a.datepublication','DESC')
-			->where ('a.datepublication >= :date')
+			->orderBy('a.datecreation','DESC')
+			->where ('a.datecreation >= :date')
 			->setParameter('date', new \DateTime('-2 month'))
 			;
 		
@@ -129,7 +129,7 @@ class AnnonceRepository extends \Doctrine\ORM\EntityRepository
 		
 		$qb = $this->createQueryBuilder('a');
 		$qb
-				->where ('a.datepublication >= :date')
+				->where ('a.datecreation >= :date')
 				->setParameter('date', new \DateTime('-2 month'));
 		
 		if($nb != null && $date != null && $premium != null && $site != null && $departement != null)
@@ -150,7 +150,7 @@ class AnnonceRepository extends \Doctrine\ORM\EntityRepository
 					->setParameter('id', $nb);
 			}
 			if($date != null){
-				$qb->orderBy('a.datepublication',$date);
+				$qb->orderBy('a.datecreation',$date);
 			}
 			if($premium != null){
 				$qb->andWhere('a.premium = :premium')

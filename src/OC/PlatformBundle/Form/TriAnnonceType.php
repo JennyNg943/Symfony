@@ -20,7 +20,7 @@ class TriAnnonceType extends AbstractType
 {
     function buildForm(FormBuilderInterface $builder, array $options){
 		
-		$builder
+		$builder->setMethod('GET')
 				->add('Suspension',			ChoiceType::class,array(
 					'choices'		=> array(
 						'Publiées'	=> 10,
