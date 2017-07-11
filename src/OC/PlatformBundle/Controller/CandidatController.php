@@ -116,8 +116,6 @@ class CandidatController extends Controller
 			$em->remove($candidat);
 			$em->flush();
 		}
-		$session = $request->getSession();
-		$this->sessionStop($session, 3);
 		$referer = $request->headers->get('referer');
 		return $this->redirect($referer);
 	}
@@ -135,8 +133,6 @@ class CandidatController extends Controller
 				$em = $this->getDoctrine()->getManager();
 				$em->persist($candidat);
 				$em->flush();
-				$session = $request->getSession();
-				$this->sessionStop($session, 3);
 				$erreur = "Le candidat a été modifié";
 				return $this->render('OCPlatformBundle:Candidat:ModificationCVTheque.html.twig',array('form' => $form->createView(),'message' => $erreur));
 			}
@@ -175,28 +171,6 @@ class CandidatController extends Controller
 	}
 	
 	
-	function sessionStop($session,$id){
-		if($id == 1){
-			$session->set('listePublication', null);
-			$session->set('liste', null);
-			$session->set('candidat', null);
-			$session->set('fonction', null);
-		}
-		
-		if($id == 2){
-			$session->set('listeAnnonce', null);
-			$session->set('liste', null);
-			$session->set('candidat', null);
-			$session->set('fonction', null);
-		}
-		
-		if($id == 3){
-			$session->set('liste', null);
-			$session->set('candidat', null);
-			$session->set('listeAnnonce', null);
-			$session->set('listePublication', null);
-			$session->set('fonction', null);
-
-		}
-	}
+	
+	
 }

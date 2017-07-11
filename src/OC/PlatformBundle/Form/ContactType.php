@@ -14,7 +14,7 @@ class ContactType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-			->add('Mail',	TextType::class)
+			->add('Mail', \Symfony\Component\Form\Extension\Core\Type\EmailType::class)
 			->add('Sujet',	TextType::class)
 			->add('Message',TextareaType::class)
 			->add('Envoyer', SubmitType::class);

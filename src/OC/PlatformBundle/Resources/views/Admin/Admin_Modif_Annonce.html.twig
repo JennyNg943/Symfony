@@ -17,13 +17,13 @@
 				{% endimage %}
 		{% endif %}
 				Modification de l'offre - {{ annonce.id }}
-		
+		{% if message == "L'annonce a été validée" %}
+			<a href=javascript:history.go(-2)><input type="submit" value="Retour" id="BoutonAnnonce"></a>
+		{% else %}	
+			<a href=javascript:history.go(-1)><input type="submit" value="Retour" id="BoutonAnnonce"></a>
+		{% endif %}
 	{% if app.user.type == "Admin" %}	 
-		{% if retour == 1 %}
-			<a href="{{ path('admin_annonce_valide') }}"><input type="submit" value="Retour" id="BoutonAnnonce"></a>
-		{% else %}
-			<a href="{{ path('admin_annonce') }}"><input type="submit" value="Retour" id="BoutonAnnonce"></a>
-		{% endif %}	
+		
 			{{ include("OCPlatformBundle:Advert:FonctionAnnonce.html.twig") }}
 	{% endif %}
 	</h1>

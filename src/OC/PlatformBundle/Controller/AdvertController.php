@@ -20,33 +20,33 @@ class AdvertController extends Controller
 		$repository2 = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Annonce');
 		$form = $this->createForm(TriAnnonceType::class); // formulaire de tri
 		$form2 = $this->createForm(RechercheType::class); // Formulaire de recherche
-		$session = $request->getSession();
-		$this->sessionStop($session, 1);
-		if ($session->get('listeAnnonce') == null) {
-			$listeannonce = $repository->getAnnonce();
-			$listeannonce2 = $repository2->getAnnonce();
-			$listeannonce3 = new ArrayCollection(array_merge($listeannonce, $listeannonce2));
-			$listeannonceF = $this->trieListe($listeannonce3);
-			$session->set('listeAnnonce', $listeannonceF);
-		}
-		if ($request->isMethod('POST')) {
-			if ($form->handleRequest($request)->isValid()) {
-				$listeannonce3 = $this->ListeAnnonce($form);
-				$listeannonceF = $this->trieListe($listeannonce3);
-				$session->set('listeAnnonce', $listeannonceF);
+		$listeannonce = $repository->getAnnonce();
+		$listeannonce2 = $repository2->getAnnonce();
+		
+
+		$form->handleRequest($request);
+			if ($form->isSubmitted() && $form->isValid()) {
+				$date = $form->get('Date')->getData();		
+				$premium = $form->get('Premium')->getData();
+				$site = $form->get('Site')->getData();
+				$departement = $form->get('Departement')->getData();
+				$suspension = $form->get('Suspension')->getData();
+				$listeannonce = $repository->getSuspension($suspension,$date,$premium,$site,$departement);
+				$listeannonce2 = $repository2->getSuspension($suspension,$date,$premium,$site,$departement);
 			}
-			if ($form2->handleRequest($request)->isValid()) {
+			
+		$form2->handleRequest($request);
+			if ($form2->isSubmitted() && $form2->isValid()) {	
 				$recherche = $form2->get('Recherche')->getData();
 				$listeannonce = $repository->getRecherche($recherche);
 				$listeannonce2 = $repository2->getRecherche($recherche);
-				$listeannonce3 = new ArrayCollection(array_merge($listeannonce, $listeannonce2));
-				$listeannonceF = $this->trieListe($listeannonce3);
-				$session->set('listeAnnonce', $listeannonceF);
+				
 			}
-		}
-		$liste = $session->get('listeAnnonce');
+		
+		$listeannonce3 = new ArrayCollection(array_merge($listeannonce, $listeannonce2));
+		$listeannonceF = $this->trieListe($listeannonce3);
 		$paginator = $this->get('knp_paginator');
-		$pagination = $paginator->paginate($liste,$request->query->get('page', 1),20);
+		$pagination = $paginator->paginate($listeannonceF,$request->query->get('page', 1),20);
 		return $this->render('OCPlatformBundle:Admin:Admin_Annonce.html.twig',array(
 			'pagination' => $pagination,
 			'form' => $form->createView(),
@@ -58,7 +58,6 @@ class AdvertController extends Controller
 		$repository = $this->getDoctrine()->getManager()->getRepository('OCPlatformBundle:Annonce');
 		$annonce = $repository->getUneAnnonce($idAnnonce);
 		$erreur="";
-		$session = $request->getSession();
 		$annonce2 = $repository->find($idAnnonce);
 		$listeSite = new ArrayCollection();
 		foreach ($annonce2->getSite() as $site) {	//Récupération des sites
@@ -80,34 +79,26 @@ class AdvertController extends Controller
 				$erreur = "L'annonce a été validée";
 			}
 		}
-		if ($session->get('listeAnnonce') == null){
-			$retour = 1;
-		}else{
-			$retour = 2;
-		}
+		
 		return $this->render('OCPlatformBundle:Admin:Admin_Modif_Annonce.html.twig',array(
 			'form' => $form->createView(),
 			'id' => $idAnnonce,
 			'annonce'=>$annonce,
 			'message' => $erreur,
-			'retour'	=> $retour));
+			));
 	}
 	
 	//Suppresion d'une annonce
 	public function deleteAction(Request $request,$idAnnonce) {
-		if($idAnnonce != 0){
-			$repository = $this->getDoctrine()->getManager();
-			$annonce = $repository->getRepository('OCPlatformBundle:Annonce')->find($idAnnonce);
-			$listeSite = $repository->getRepository('OCPlatformBundle:Annonce_Sy_Siteemploi')->getListeSite($idAnnonce);
-			$em = $this->getDoctrine()->getManager();
-			foreach ($listeSite as $site){
-				$em->remove($site);
-			}
-			$em->remove($annonce);
-			$em->flush();
+		$repository = $this->getDoctrine()->getManager();
+		$annonce = $repository->getRepository('OCPlatformBundle:Annonce')->find($idAnnonce);
+		$listeSite = $repository->getRepository('OCPlatformBundle:Annonce_Sy_Siteemploi')->getListeSite($idAnnonce);
+		$em = $this->getDoctrine()->getManager();
+		foreach ($listeSite as $site){
+			$em->remove($site);
 		}
-		$session = $request->getSession();
-		$this->sessionStop($session, 3);
+		$em->remove($annonce);
+		$em->flush();
 		$referer = $request->headers->get('referer');
 		return $this->redirect($referer);
 	}
@@ -122,8 +113,6 @@ class AdvertController extends Controller
 			$em->persist($annonce);
 			$em->flush();
 		}		
-		$session = $request->getSession();
-		$this->sessionStop($session, 3);
 		$referer = $request->headers->get('referer');
 		return $this->redirect($referer);
 	}
@@ -138,8 +127,6 @@ class AdvertController extends Controller
 			$em->persist($annonce);
 			$em->flush();	
 		}
-		$session = $request->getSession();
-		$this->sessionStop($session, 3);
 		$referer = $request->headers->get('referer');
 		return $this->redirect($referer);
 	}
@@ -153,13 +140,17 @@ class AdvertController extends Controller
 
 		$listeannonce = $repository->getSuspension(-1,null,null,null,null);
 		$listeannonce2 = $repository2->getSuspension(-1,null,null,null,null);
-		$listeannonce3 = new ArrayCollection(array_merge($listeannonce, $listeannonce2));
-		$listeannonceF = $this->trieListe($listeannonce3);
+		
 			
 		$form->handleRequest($request);
 			if ($form->isSubmitted() && $form->isValid()) {
-				$listeannonce3 = $this->ListeAnnonce($form);
-				$listeannonceF = $this->trieListe($listeannonce3);	
+				$date = $form->get('Date')->getData();		
+				$premium = $form->get('Premium')->getData();
+				$site = $form->get('Site')->getData();
+				$departement = $form->get('Departement')->getData();
+				$suspension = $form->get('Suspension')->getData();
+				$listeannonce = $repository->getSuspension($suspension,$date,$premium,$site,$departement);
+				$listeannonce2 = $repository2->getSuspension($suspension,$date,$premium,$site,$departement);
 			}
 			
 		$form2->handleRequest($request);
@@ -167,10 +158,9 @@ class AdvertController extends Controller
 				$recherche = $form2->get('Recherche')->getData();
 				$listeannonce = $repository->getRecherche($recherche);
 				$listeannonce2 = $repository2->getRecherche($recherche);
-				$listeannonce3 = new ArrayCollection(array_merge($listeannonce, $listeannonce2));
-				$listeannonceF = $this->trieListe($listeannonce3);
 			}
-		
+		$listeannonce3 = new ArrayCollection(array_merge($listeannonce, $listeannonce2));
+		$listeannonceF = $this->trieListe($listeannonce3);
 		$paginator = $this->get('knp_paginator');
 		$pagination = $paginator->paginate($listeannonceF,$request->query->get('page', 1),20);
 		return $this->render('OCPlatformBundle:Admin:Admin_Annonce.html.twig',array(
@@ -188,8 +178,7 @@ class AdvertController extends Controller
 			$em->persist($annonce);
 			$em->flush();	
 		}
-		$session = $request->getSession();
-		$this->sessionStop($session, 3);
+		
 		$referer = $request->headers->get('referer');
 		return $this->redirect($referer);
 	}
@@ -203,8 +192,7 @@ class AdvertController extends Controller
 			$em->persist($annonce);
 			$em->flush();	
 		}
-		$session = $request->getSession();
-		$this->sessionStop($session, 3);
+		
 		$referer = $request->headers->get('referer');
 		return $this->redirect($referer);
 	}
@@ -227,45 +215,5 @@ class AdvertController extends Controller
 				$listeannonce->add($annonce);
 			}
 		return $listeannonce;
-	}
-	
-	function ListeAnnonce($form){
-		$repository = $this->getDoctrine()->getManager()->getRepository('OCPlatformBundle:Annonce');
-		$repository2 = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Annonce');
-		$date = $form->get('Date')->getData();		
-		$premium = $form->get('Premium')->getData();
-		$site = $form->get('Site')->getData();
-		$departement = $form->get('Departement')->getData();
-		$suspension = $form->get('Suspension')->getData();
-		$listeannonce = $repository->getSuspension($suspension,$date,$premium,$site,$departement);
-		$listeannonce2 = $repository2->getSuspension($suspension,$date,$premium,$site,$departement);
-		$listeannonce3 = new ArrayCollection(array_merge($listeannonce, $listeannonce2));
-		
-		return $listeannonce3;
-	}
-	
-	function sessionStop($session,$id){
-		if($id == 1){
-			$session->set('listePublication', null);
-			$session->set('liste', null);
-			$session->set('candidat', null);
-			$session->set('fonction', null);
-		}
-		
-		if($id == 2){
-			$session->set('listeAnnonce', null);
-			$session->set('liste', null);
-			$session->set('candidat', null);
-			$session->set('fonction', null);
-		}
-		
-		if($id == 3){
-			$session->set('liste', null);
-			$session->set('candidat', null);
-			$session->set('listeAnnonce', null);
-			$session->set('listePublication', null);
-			$session->set('fonction', null);
-
-		}
 	}
 }

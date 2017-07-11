@@ -7,7 +7,7 @@
 {% block body %}
 	{% if message == "L'annonce n'a pas été validée" %}
 			<p style = 'display:block; background-color:green; color:white; text-align: center; padding:2%; '>Des fonctions sont maintenant disponibles</p>
-		{% elseif message == "L'annonce a été validée" %}
+	{% elseif message == "L'annonce a été validée" %}
 			<p style = 'display:block; background-color:green; color:white; text-align: center; padding:2%; '>{{ message }}</p>
 	{% endif%}
 	<h1>Ajouter une annonce</h1>

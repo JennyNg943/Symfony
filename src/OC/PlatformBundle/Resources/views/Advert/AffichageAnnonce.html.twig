@@ -19,12 +19,14 @@
 	{% for site in annonce.site %} 
 		{{ include("OCPlatformBundle:Advert:ImageSite.html.twig") }}
 	{% endfor %}
-	
-	{% if app.user.type == "Admin" %}	
+	{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+		{% if app.user.type == "Admin" %}	
 			<a href="{{ path('admin_modif_annonce',{'idAnnonce':annonce.id}) }}">
 			<input type="submit" value="Modifier" id="BoutonAnnonce"></a>
-		{{ include("OCPlatformBundle:Advert:FonctionAnnonce.html.twig") }}
+			{{ include("OCPlatformBundle:Advert:FonctionAnnonce.html.twig") }}
+		{% endif %}
 	{% endif %}
+	
 
 	</th>
 </tr>

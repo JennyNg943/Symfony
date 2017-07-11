@@ -150,6 +150,14 @@ admin_Syannonce_valide:
     path:	/Admin/PublierSyAnnonce
     defaults: {_controller: OCPlatformBundle:NewAdvert:PublicationSyAnnonce}
     
+annonce_sus_user:
+    path:	/Annonce/Suspension/{id}
+    defaults: {_controller: OCPlatformBundle:NewAdvert:suspendre}
+    
+annonce_desus_user:
+    path:	/Annonce/DeSuspension/{id}
+    defaults: {_controller: OCPlatformBundle:NewAdvert:desuspendre}    
+    
 #																		Candidat
 
 admin_candidat:

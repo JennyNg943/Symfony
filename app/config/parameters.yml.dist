@@ -4,9 +4,9 @@
 parameters:
     database_driver : pdo_mysql
     database_host: localhost
-    database_name: maneom
-    database_user: maneom
-    database_password: 6s6PNswFfD4CSqZK
+    database_name: 
+    database_user: 
+    database_password: 
     # You should uncomment this if you want to use pdo_sqlite
     #database_path: '%kernel.root_dir%/../var/data/data.sqlite'
 

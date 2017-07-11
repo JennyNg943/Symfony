@@ -27,7 +27,8 @@ class Sy_SiteType extends AbstractType
 				'placeholder' => '',
 				'label'			=> false
 			))
-			->add('Valider le site',	SubmitType::class)
+			->add('Valider le site',	SubmitType::class)	
+			
 			;
 		
 		$formModifier = function (FormInterface $form, \OC\UserBundle\Entity\Sy_Siteemploi $site = null) {
@@ -39,6 +40,7 @@ class Sy_SiteType extends AbstractType
 						'placeholder' => '',
 						'choices'     => $fonction,
 						'invalid_message'=>false))
+					
 				
             ;
         };
@@ -72,9 +74,11 @@ class Sy_SiteType extends AbstractType
 				}else{
 					$form = $event->getForm();
 				
-					$form->add('idFonction', HiddenType::class, array(
+					$form
+							->add('idFonction', HiddenType::class, array(
 						'data'	=> 0
 						))
+						
 						;
 				}
 			 

@@ -15,6 +15,7 @@
 	Nombre total fonction : {{ pagination.getTotalItemCount }}
 	<table id="TableCandidat">
 		<tr>
+			<th>Id</th>
 			<th>Intitule</th>
 			<th>Site</th>
 			<th>Gestion</th>
@@ -22,6 +23,7 @@
 		{% for fonction in pagination %}
 			{% set i = 0%}
 		<tr>
+			<td>{{ fonction.id }}</td>
 			<td>
 				{{ fonction.IntituleFonction }} 
 				{% for a in annonce %}

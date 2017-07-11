@@ -37,12 +37,8 @@ class FonctionController extends Controller
 			))
 			->add('Rechercher', \Symfony\Component\Form\Extension\Core\Type\SubmitType::class);
 		$form2 = $formBuilder->getForm();
-		$session = $request->getSession();
-		$this->sessionStop($session, 2);
-		if ($session->get('fonction') == null) {
-			$listeFonction = $repository->findAll();
-			$session->set('fonction', $listeFonction);
-		}
+		
+		$listeFonction = $repository->findAll();
 		
 		if ($request->isMethod('POST')) {
 			if ($form->handleRequest($request)->isValid()) {
@@ -58,11 +54,10 @@ class FonctionController extends Controller
 		if ($form2->isSubmitted() && $form2->isValid()) {
 			$site = $form2->get('Site')->getData();
 			$listeFonction = $repository->findByIdSiteEmploi($site);
-			$session->set('fonction', $listeFonction);
+			
 		}
-		$liste = $session->get('fonction');
 		$paginator = $this->get('knp_paginator');
-		$pagination = $paginator->paginate($liste,$request->query->get('page', 1),20);
+		$pagination = $paginator->paginate($listeFonction,$request->query->get('page', 1),20);
 		
 		$repository2 = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Annonce_Sy_Siteemploi');
 		$repository3 = $this->getDoctrine()->getManager()->getRepository('OCPlatformBundle:Annonce_Sy_Siteemploi');
@@ -88,14 +83,12 @@ class FonctionController extends Controller
 		$fonction = $repository->find($id);
 		$form = $this->createForm(FonctionType::class,$fonction);
 		$msg = "";
-		$session = $request->getSession();
 		if ($request->isMethod('POST')) {
 			if ($form->handleRequest($request)->isValid()) {
 				$em = $this->getDoctrine()->getManager();
 				$em->persist($fonction);
 				$em->flush();
 				$msg = "Cette fonction a bien été modifiée";
-				$this->sessionStop($session, 3);
 				return $this->render('OCPlatformBundle:Admin:Admin_Fonction_Modif.html.twig',array('form'=>$form->createView(),'msg'=>$msg));
 			}
 		}
@@ -115,21 +108,5 @@ class FonctionController extends Controller
 		return $this->render('OCPlatformBundle:Admin:Admin_Fonction_Annonce.html.twig',array('pagination'=>$pagination));
 	}
 	
-	function sessionStop($session,$id){
-		
-		if($id == 2){
-			$session->set('liste', null);
-			$session->set('candidat', null);
-			$session->set('listePublication', null);
-			$session->set('listeAnnonce', null);
-		}
-		
-		if($id == 3){
-			$session->set('liste', null);
-			$session->set('candidat', null);
-			$session->set('listePublication', null);
-			$session->set('listeAnnonce', null);
-			$session->set('fonction', null);
-		}
-	}
+	
 }

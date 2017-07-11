@@ -29,8 +29,6 @@ class DefaultController extends Controller
 			}
 		}
 		$em->flush();
-		$session = $request->getSession();
-		$this->sessionStop($session,3);
         $content = $this
 			->get('templating')
 			->render('OCPlatformBundle:Default:index.html.twig');
@@ -42,12 +40,8 @@ class DefaultController extends Controller
     {
 		$repository = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_CvTheque');
 		$form = $this->createForm(TriSiteType::class);
-		$session = $request->getSession();
-		$this->sessionStop($session,1);
-		if ($session->get('candidat') == null) {
-			$candidat = $repository->getCVThequeTrie(null,null);
-			$session->set('candidat', $candidat);
-		}
+		$candidat = $repository->getCVThequeTrie(null,null);
+
 		$form->handleRequest($request);
 			if ($form->isSubmitted() && $form->isValid()) {
 				$site = $form->get('Domaine')->getData();
@@ -55,13 +49,11 @@ class DefaultController extends Controller
 				
 				$candidat = $repository->getCVThequeTrie($site,$dept);
 				
-				$session->set('candidat', $candidat);
 			}	
-		$liste = $session->get('candidat');
 		
 		$paginator = $this->get('knp_paginator');
 		$pagination = $paginator->paginate(
-		$liste,
+		$candidat,
 		$request->query->get('page',1),50
 		);
 		
@@ -81,29 +73,19 @@ class DefaultController extends Controller
 			$recruteur = $repository3->find($user->getId());
 		}
 		$form = $this->createForm(TriSiteType::class);
-		$session = $request->getSession();
-		$this->sessionStop($session,1);
-		if ($session->get('candidat') == null) {
-			$candidat = $repository->getCVThequeTrie(null,null);
-			$session->set('candidat', $candidat);
-		}
+		$candidat = $repository->getCVThequeTrie(null,null);
+
 		$form->handleRequest($request);
 			if ($form->isSubmitted() && $form->isValid()) {
 				$site = $form->get('Domaine')->getData();
-				$dept = $form->get('Departement')->getData();
-				
-				$candidat = $repository->getCVThequeTrie($site,$dept);
-				
-				$session->set('candidat', $candidat);
+				$dept = $form->get('Departement')->getData();	
+				$candidat = $repository->getCVThequeTrie($site,$dept);	
 			}	
-		$liste = $session->get('candidat');
-		
 		$paginator = $this->get('knp_paginator');
 		$pagination = $paginator->paginate(
-		$liste,
+		$candidat,
 		$request->query->get('page',1),50
 		);
-		
         return $this->render('OCPlatformBundle:Default:CVThequeUser.html.twig',array(
 			'pagination' => $pagination,
 			'form' => $form->createView(),
@@ -116,34 +98,24 @@ class DefaultController extends Controller
 		$repository = $this->getDoctrine()->getManager()->getRepository('OCPlatformBundle:Annonce');//Recup annonce old
 		$repository2 = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Annonce');//Recup annonce new
 		$form = $this->createForm(TriSiteType::class);
-		
-		$session = $request->getSession();
-		$this->sessionStop($session,2);
-		if ($session->get('liste') == null) {
-			$listeannonce = $repository->getSite(null,null);
-			$listeannonce2 = $repository2->getSite(null,null);
-			$listeannonce3 = new ArrayCollection(array_merge($listeannonce, $listeannonce2));
-			$listeannonceF = $this->trieListe($listeannonce3);
-			$session->set('liste', $listeannonceF);
+		$listeannonce = $repository->getSite(null,null);
+		$listeannonce2 = $repository2->getSite(null,null);
 			
-		}
 		$form->handleRequest($request);
 			if ($form->isSubmitted() && $form->isValid()) {
 				$site = $form->get('Domaine')->getData();
 				$dept = $form->get('Departement')->getData();
-				
 				$listeannonce = $repository->getSite($site,$dept);
 				$listeannonce2 = $repository2->getSite($site,$dept);
-				$listeannonce3 = new ArrayCollection(array_merge($listeannonce, $listeannonce2)); //Combination des deux listes
-				$listeannonceF = $this->trieListe($listeannonce3);
-				$session->set('liste', $listeannonceF);
+				
 			}
 		
-		$liste = $session->get('liste');
+		$listeannonce3 = new ArrayCollection(array_merge($listeannonce, $listeannonce2));
+		$listeannonceF = $this->trieListe($listeannonce3);
 		
 		$paginator = $this->get('knp_paginator');
 		$pagination = $paginator->paginate(
-		$liste,
+		$listeannonceF,
 		$request->query->get('page',1),10
 		);
 		return $this->render('OCPlatformBundle:Default:NosOffresDEmploi.html.twig',array(
@@ -155,8 +127,6 @@ class DefaultController extends Controller
 	//Ma page + Verification de l'identité de l'utilisateur
 	public function MaPageAction(Request $request)
     {
-		$session = $request->getSession();
-		$this->sessionStop($session,3);
 		$user = $this->getUser();
 		$repositoryAnnonce = $this->getDoctrine()->getManager()->getRepository('OCPlatformBundle:Annonce');
 		$repositorySyAnnonce = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Annonce');
@@ -185,8 +155,6 @@ class DefaultController extends Controller
     }
 	
 	public function AProposAction(Request $request){
-		$session = $request->getSession();
-		$this->sessionStop($session,3);
 		$content = $this
 			->get('templating')
 			->render('OCPlatformBundle:Default:APropos.html.twig');
@@ -243,27 +211,5 @@ class DefaultController extends Controller
 	}
 	
 	
-	function sessionStop($session,$id){
-		if($id == 1){
-			$session->set('liste', null);
-			$session->set('listePublication', null);
-			$session->set('listeAnnonce', null);
-			$session->set('fonction', null);
-		}
-		
-		if($id == 2){
-			$session->set('candidat', null);
-			$session->set('listePublication', null);
-			$session->set('listeAnnonce', null);
-			$session->set('fonction', null);
-		}
-		
-		if($id == 3){
-			$session->set('liste', null);
-			$session->set('candidat', null);
-			$session->set('listePublication', null);
-			$session->set('listeAnnonce', null);
-			$session->set('fonction', null);
-		}
-	}
+	
 }

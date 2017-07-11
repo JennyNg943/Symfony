@@ -21,11 +21,33 @@
 	{% endfor %}
 		
 		
-	{% if app.user.type == "Admin" %}	
-		
+	{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+		{% if annonce.idRecruteur is not empty %}
+			{% if app.user.id == annonce.idRecruteur.id and app.user.type != "Admin"%}
+				<a href="{{ path('admin_modif_syannonce',{'idAnnonce':annonce.id})}}" id='BoutonAnnonce'>Modifier</a>
+				{% if annonce.suspension != 11 %}
+					<a href="{{ path('annonce_sus_user',{'id':annonce.id})}}" id='BoutonAnnonce'>Suspendre</a>
+				{% else %}
+					<a href="{{ path('annonce_desus_user',{'id':annonce.id})}}" id='BoutonAnnonce'>Ne plus suspendre</a>
+				{% endif %}
+					<a href="{{ path('deleteSyAnnonce',{'idAnnonce':annonce.id})}}" style="background-color: red;color:white" id='BoutonAnnonce' onclick="return confirm('Voulez vous vraiment supprimer cette annonce?')">Supprimer</a>
+			{% endif %}		
+		{% else %}	
+			{% if  app.user.id == annonce.idEmployeur.id %}
+				<a href="{{ path('admin_modif_syannonce',{'idAnnonce':annonce.id})}}" id='BoutonAnnonce'>Modifier</a> 
+				{% if annonce.suspension != 11 %}
+					<a href="{{ path('annonce_sus_user',{'id':annonce.id})}}" id='BoutonAnnonce'>Suspendre</a>
+				{% else %}
+					<a href="{{ path('annonce_desus_user',{'id':annonce.id})}}" id='BoutonAnnonce'>Ne plus suspendre</a>
+				{% endif %}
+					<a href="{{ path('deleteSyAnnonce',{'idAnnonce':annonce.id})}}" style="background-color: red;color:white" id='BoutonAnnonce' onclick="return confirm('Voulez vous vraiment supprimer cette annonce?')">Supprimer</a>
+			{% endif %}
+		{% endif %}
+		{% if app.user.type == "Admin" %}	
 			<a href="{{ path('admin_modif_syannonce',{'idAnnonce':annonce.id}) }}">
 			<input type="submit" value="Modifier" id="BoutonAnnonce"></a>
-		{{ include("OCPlatformBundle:AdvertNew:FonctionAnnonce.html.twig") }}
+			{{ include("OCPlatformBundle:AdvertNew:FonctionAnnonce.html.twig") }}
+		{% endif %}
 	{% endif %}
 
 	</th>
@@ -38,7 +60,7 @@
 </tr>
 <tr>
 	<td><b><p id="TitrePetit">Niveau :  </p></b>{{ annonce.idNiveauSouhaite }}</td>
-	<td COLSPAN=2><b><p id="TitrePetit">Recruteur :  </p></b>{{ annonce.idRecruteur }}</td>
+	<td COLSPAN=2><b><p id="TitrePetit">Recruteur :  </p></b>{% if annonce.idRecruteur == null %}{{ annonce.idEmployeur }}{% else %}{{ annonce.idRecruteur }}{% endif %}</td>
 </tr>
 <tr>
 	<td><b><p id="TitrePetit">Rémunération :   </p></b>{{ annonce.Remuneration }}</td>

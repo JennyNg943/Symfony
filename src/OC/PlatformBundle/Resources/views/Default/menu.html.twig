@@ -18,16 +18,11 @@
 			{% endif %}
 		</li>
 		{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-			{% if (app.user.type != "Candidat") and (app.user.type != "Employeur") %}
+			{% if (app.user.type != "Candidat") %}
 				<li>
 					<a href="{{ path('annonceAjout')}}">Ajouter une annonce</a>
 				</li>
 			{% endif %}	
-			{% if app.user.type == "Employeur" %}
-				<li>
-					<a href="{{ path('annonceAjoutEmp')}}">Ajouter une annonce</a>
-				</li>
-			{% endif %}
 		{% else %}	
 			<li>
 				<a href="{{ path('fos_user_security_login')}}">Ajouter une annonce</a>
