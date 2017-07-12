@@ -26,7 +26,7 @@ class SiteType extends AbstractType
 				'choice_label'	=> 'intitulesiteemploi',
 				'placeholder' => '',
 				'label'			=> false
-			))
+			))->add('Valider le site',	SubmitType::class)	
 			
 			;
 		
@@ -77,7 +77,7 @@ class SiteType extends AbstractType
 					$form->add('idFonction', HiddenType::class, array(
 						'data'	=> 0
 						))
-						->add('Valider le site',	SubmitType::class)		
+							
 						;
 				}
 			 

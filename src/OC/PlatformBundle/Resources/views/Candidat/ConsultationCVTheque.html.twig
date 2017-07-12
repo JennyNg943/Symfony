@@ -10,7 +10,7 @@
 				<tr>
 					{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 						{% if app.user.type == "Admin" %}
-					<th>{{ candidat.nom}} {{ candidat.prenom }} <a href="{{ path('CVtheque') }}"><input type="submit" value="Retour" id="BoutonAnnonce"></a>			</th>
+					<th>{{ candidat.nom}} {{ candidat.prenom }} <a href=javascript:history.go(-1)><input type="submit" value="Retour" id="BoutonAnnonce"></a>			</th>
 						{% else %}
 					<th>{{ candidat.nom| truncate(3)}} {{ candidat.prenom }} <a href="{{ path('CVtheque') }}"><input type="submit" value="Retour" id="BoutonAnnonce"></a>			</th>
 						{% endif %}

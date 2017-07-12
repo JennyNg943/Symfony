@@ -6,7 +6,7 @@
 
 {% block body %}
 	<table id='ModifCV'>
-		<tr><th>Contacter ce candidat<a href="{{ path('CVtheque') }}"><input type="submit" value="Retour" id="BoutonAnnonce" style='color:white;'></a></th></tr>
+		<tr><th>Contacter ce candidat<a href=javascript:history.go(-1)><input type="submit" value="Retour" id="BoutonAnnonce"></a></th></tr>
 		<tr><td>{{ form(form)}}</td></tr>
 	</table>	
 	

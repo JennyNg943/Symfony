@@ -39,11 +39,16 @@ class CandidatRepository extends \Doctrine\ORM\EntityRepository
 	function getCVThequeTrie($site,$dept)
 	{
 		$qb = $this->createQueryBuilder('a');
-		$qb 
-			->orderBy('a.nom','ASC');
+		$qb ->select('a,count(annonce.id) AS HIDDEN nb')
+			->orderBy('a.nom','ASC')
+			->join('a.annonce','annonce')
+			->groupBy('annonce.id')
+			->orderBy('nb','DESC')
+				;
 			
 			if($site != null && $dept != null){
-				$qb->where('a.idSite = :site')
+				$qb->join('annonce.site','s')
+					->where('s.idSiteemploi = :site')
 					->setParameter('site', $site)
 					->join('a.codePostal','v')
 					->join('v.departement','d')
@@ -51,7 +56,8 @@ class CandidatRepository extends \Doctrine\ORM\EntityRepository
 					->setParameter('dept', $dept);
 			}else{
 				if($site != null){
-				$qb->where('a.idSite = :site')
+				$qb->join('annonce.site','s')
+					->where('s.idSiteemploi = :site')
 					->setParameter('site', $site);
 				}
 

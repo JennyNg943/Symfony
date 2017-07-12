@@ -23,7 +23,7 @@
 					</tr>
 				{% for candidat in pagination %}
 					<tr>
-						<td>{{ candidat.nom| truncate(3) }}</td>
+						<td>{{ candidat.nom| truncate(3) |upper}}</td>
 						<td>{{ candidat.prenom }}</td>
 						<td>{{ candidat.codePostal }}</td>
 						<td id="CvThequeInteraction"><a href="{{ path('consultCVTheque', {'id':candidat.id})}}">

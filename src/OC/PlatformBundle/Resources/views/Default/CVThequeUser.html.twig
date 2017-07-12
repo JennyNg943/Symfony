@@ -25,7 +25,7 @@
 		</tr>
 		{% for candidat in pagination %}
 		<tr>
-			<td>{{ candidat.nom| truncate(3) }}</td>
+			<td>{{ candidat.nom| truncate(3)|upper }}</td>
 			<td>{{ candidat.prenom }}</td>
 			<td >{{ candidat.codePostal }}</td>
 		{% if app.user.type == "Admin" %}

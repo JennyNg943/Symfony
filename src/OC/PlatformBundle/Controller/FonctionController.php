@@ -25,7 +25,6 @@ class FonctionController extends Controller
 		
 		$repository = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Fonction');
 		
-		$listeFonction = $repository->findAll();
 		$fonction = new \OC\UserBundle\Entity\Sy_Fonction;
 		$form = $this->createForm(FonctionType::class,$fonction);
 		$formBuilder = $this->get('form.factory')->createBuilder(FormType::class);
@@ -103,7 +102,6 @@ class FonctionController extends Controller
 		$listeannonce2 = $repository2->getFonctionAdmin($id);
 		$listeannonce3 = new ArrayCollection(array_merge($listeannonce,$listeannonce2));
 		$paginator = $this->get('knp_paginator');
-		$msg='';
 		$pagination = $paginator->paginate($listeannonce3,$request->query->get('page', 1),20);
 		return $this->render('OCPlatformBundle:Admin:Admin_Fonction_Annonce.html.twig',array('pagination'=>$pagination));
 	}

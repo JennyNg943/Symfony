@@ -54,7 +54,7 @@ class DefaultController extends Controller
 		$paginator = $this->get('knp_paginator');
 		$pagination = $paginator->paginate(
 		$candidat,
-		$request->query->get('page',1),50
+		$request->query->get('page',1),10
 		);
 		
         return $this->render('OCPlatformBundle:Default:CVTheque.html.twig',array(
@@ -84,7 +84,7 @@ class DefaultController extends Controller
 		$paginator = $this->get('knp_paginator');
 		$pagination = $paginator->paginate(
 		$candidat,
-		$request->query->get('page',1),50
+		$request->query->get('page',1),10
 		);
         return $this->render('OCPlatformBundle:Default:CVThequeUser.html.twig',array(
 			'pagination' => $pagination,
