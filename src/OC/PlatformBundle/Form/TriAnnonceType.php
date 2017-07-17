@@ -28,7 +28,8 @@ class TriAnnonceType extends AbstractType
 						'A valider par le recruteur'	=> -2,
 						'Suspendu'	=> 2,
 						'Suspendu par le recruteur'		=> 1,
-						'Pré-saisies'	=> -3
+						'Pré-saisies'	=> -3,
+						'Rejeter'		=> 30
 					),'label'		=> 'Type d\'annonce',
 					'placeholder'	=>'',
 					'required'	=>false

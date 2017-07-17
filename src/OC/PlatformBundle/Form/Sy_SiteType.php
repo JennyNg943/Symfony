@@ -37,7 +37,6 @@ class Sy_SiteType extends AbstractType
             $form->add('idFonction', EntityType::class, array(
 						'label'		=>'Fonction',
 						'class'       => 'OCUserBundle:Sy_Fonction',
-						'placeholder' => '',
 						'choices'     => $fonction,
 						'invalid_message'=>false))
 					

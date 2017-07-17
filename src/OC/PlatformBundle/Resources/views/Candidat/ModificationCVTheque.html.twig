@@ -9,7 +9,14 @@
 			<p style="display:block; text-align: center; background-color: green;color:white;padding:1%;">Le candidat a été modifié</p>
 	{% endif %}
 	<table id='ModifCV'>
-		<tr><th>Modification d'un candidat <a href="{{ path('CVtheque') }}"><input type="submit" value="Retour" id="BoutonAnnonce" style='color:white;'></a></th></tr>
+		<tr><th>Modification d'un candidat 
+		{% if message == "Le candidat a été modifié" %}
+			<a href=javascript:history.go(-2)><input type="submit" value="Retour" id="BoutonAnnonce"></a>
+		{% else %}	
+			<a href=javascript:history.go(-1)><input type="submit" value="Retour" id="BoutonAnnonce"></a>
+		{% endif %}
+			
+			</th></tr>
 		<tr><td>{{ form(form)}}</td></tr>
 	</table>	
 	

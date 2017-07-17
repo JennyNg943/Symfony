@@ -154,11 +154,10 @@ class XmlPE {
 														$Bdd->setRequete($Requete);
 														$annonceFaite = $Bdd->RequeteSelect();
 														
-														$Val_Fonction = substr($fonction, 0, 10);
 														$Requete = '
 																SELECT id,id_site_emploi_id
 																FROM Sy_fonction
-																WHERE intitulefonction LIKE"' . $Val_Fonction . '%"';
+																WHERE id =' . $fonction;
 														$Bdd->setRequete($Requete);
 														$Id_Fonction = $Bdd->RequeteSelect();
 

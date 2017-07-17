@@ -75,6 +75,9 @@ admin_formule3:
     defaults: { _controller: OCPlatformBundle:Recruteur:formule3 }
     
 #																	AnnonceAncienne
+modif:
+    path:	/User/Annonce/Modification/{id}
+    defaults: {_controller: OCPlatformBundle:Advert:modifOk}
 
 admin_annonce:
     path:	  /Admin/Annonce
@@ -108,8 +111,15 @@ DepremiumOld:
     path:	/User/DeSponsoriser/{idAnnonce}
     defaults: {_controller: OCPlatformBundle:Advert:DeSponsoriserAnnonce}    
 
-#																	AnnonceNouvelle
-
+#																AnnonceNouvelle
+modifSy:
+    path:	/User/Annonce/Modification/{id}
+    defaults: {_controller: OCPlatformBundle:NewAdvert:modif}
+    
+rejet:
+    path:	/User/Annonce/Rejet/{id}
+    defaults: {_controller: OCPlatformBundle:Advert:rejet}
+    
 annonceAjoutEmp:
     path:	/User/AjoutAnnonceEmp
     defaults: {_controller: OCPlatformBundle:NewAdvert:AjoutAnnonceEmp}
@@ -240,3 +250,7 @@ admin_fonction_modif:
 admin_fonction_annonce:
     path:	/Admin/Fonction/{id}
     defaults: {_controller: OCPlatformBundle:Fonction:annonce}    
+    
+admin_fonction_annonce_maj:
+    path:	/Admin/FonctionMaj/{id}
+    defaults: {_controller: OCPlatformBundle:Fonction:annonceMaj}    

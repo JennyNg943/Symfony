@@ -16,7 +16,6 @@ use OC\PlatformBundle\Form\FonctionType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-
 class FonctionController extends Controller
 {
 	//Page d'accueil
@@ -98,13 +97,51 @@ class FonctionController extends Controller
 	public function annonceAction($id,Request $request){
 		$repository = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Annonce');
 		$repository2 = $this->getDoctrine()->getManager()->getRepository('OCPlatformBundle:Annonce');
-		$listeannonce = $repository->getFonctionAdmin($id);
-		$listeannonce2 = $repository2->getFonctionAdmin($id);
+		$listeannonce = $repository->getFonctionAdmin($id,null);
+		$listeannonce2 = $repository2->getFonctionAdmin($id,null);
 		$listeannonce3 = new ArrayCollection(array_merge($listeannonce,$listeannonce2));
+		$session = $request->getSession();
+		$session->set('url',null);
+		$session->set('url',$request->getUri());
+		$session->set('liste',$listeannonce3);
 		$paginator = $this->get('knp_paginator');
 		$pagination = $paginator->paginate($listeannonce3,$request->query->get('page', 1),20);
 		return $this->render('OCPlatformBundle:Admin:Admin_Fonction_Annonce.html.twig',array('pagination'=>$pagination));
 	}
 	
+	public function annonceMajAction($id,Request $request){
+		$repository = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Annonce');
+		$repository2 = $this->getDoctrine()->getManager()->getRepository('OCPlatformBundle:Annonce');
+		$listeannonce = $repository->getFonctionAdmin($id,1);
+		$listeannonce2 = $repository2->getFonctionAdmin($id,1);
+		$listeannonce3 = new ArrayCollection(array_merge($listeannonce,$listeannonce2));
+		$session = $request->getSession();
+		$session->set('url',null);
+		$session->set('url',$request->getUri());
+		$session->set('liste',$listeannonce3);
+		$paginator = $this->get('knp_paginator');
+		$pagination = $paginator->paginate($listeannonce3,$request->query->get('page', 1),20);
+		return $this->render('OCPlatformBundle:Admin:Admin_Fonction_Annonce.html.twig',array('pagination'=>$pagination));
+	}
+	
+	public function nbAnnonceAction($id){
+		$repository = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Annonce');
+		$repository2 = $this->getDoctrine()->getManager()->getRepository('OCPlatformBundle:Annonce');
+		$listeannonce = $repository->getFonctionAdminNum($id,null);
+		$listeannonce2 = $repository2->getFonctionAdminNum($id,null);
+		$listeannonce3 = $listeannonce + $listeannonce2;
+		
+		return new Response($listeannonce3);
+	}
+	
+	public function nbAnnonceMajAction($id){
+		$repository = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Annonce');
+		$repository2 = $this->getDoctrine()->getManager()->getRepository('OCPlatformBundle:Annonce');
+		$listeannonce = $repository->getFonctionAdminNum($id,1);
+		$listeannonce2 = $repository2->getFonctionAdminNum($id,1);
+		$listeannonce3 = $listeannonce + $listeannonce2;
+		
+		return new Response($listeannonce3);
+	}
 	
 }

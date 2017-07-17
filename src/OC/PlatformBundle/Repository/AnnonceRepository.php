@@ -277,7 +277,7 @@ class AnnonceRepository extends \Doctrine\ORM\EntityRepository
 				->getResult();
 	}
 	
-	function getFonctionAdmin($id){
+	function getFonctionAdmin($id,$nb){
 		
 		$qb = $this->createQueryBuilder('a');
 		$qb
@@ -286,8 +286,37 @@ class AnnonceRepository extends \Doctrine\ORM\EntityRepository
 			->setParameter('id', $id)
 			;
 		
+		if($nb != null){
+			$qb->andWhere('a.dateMAJ < :date or a.dateMAJ = :nb')
+			->setParameter('date', new \DateTime('-30days'))
+			->setParameter('nb', null);
+		}
+		
 		return $qb->getQuery()
-				->getResult();;
+				->getResult();
 	}
 	
+	function getFonctionAdminNum($id,$nb){
+		
+		$qb = $this->createQueryBuilder('a');
+		$qb ->select('count(a.id)')
+			->join('a.fonction','f')
+			->where('f.idFonction = :id')
+			->setParameter('id', $id)
+			;
+		
+		if($nb != null){
+			$qb->andWhere('a.dateMAJ < :date or a.dateMAJ = :nb')
+			->setParameter('date', new \DateTime('-30days'))
+			->setParameter('nb', null);
+		}
+		
+		return $qb->getQuery()
+				->getSingleScalarResult();
+	}
+	
+	
+	
 }
+
+//SELECT annonce.id FROM `annonce`,annonce_sy_siteemploi WHERE id_fonction_id = 199 and dateMAJ > '2017-07-13' 
