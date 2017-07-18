@@ -77,7 +77,7 @@ admin_formule3:
 #																	AnnonceAncienne
 modif:
     path:	/User/Annonce/Modification/{id}
-    defaults: {_controller: OCPlatformBundle:Advert:modifOk}
+    defaults: {_controller: OCPlatformBundle:Advert:modif}
 
 admin_annonce:
     path:	  /Admin/Annonce
@@ -113,7 +113,7 @@ DepremiumOld:
 
 #																AnnonceNouvelle
 modifSy:
-    path:	/User/Annonce/Modification/{id}
+    path:	/User/AnnonceSy/Modification/{id}
     defaults: {_controller: OCPlatformBundle:NewAdvert:modif}
     
 rejet:

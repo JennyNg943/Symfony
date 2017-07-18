@@ -45,6 +45,7 @@ class NewAdvertController extends Controller
 			$erreur = "L'annonce a été validée";
 			return $this->render('OCPlatformBundle:AdvertNew:AjoutAnnonceValide.html.twig');
 		}
+		$erreur = "L'annonce n'a pas été validée";
 		return $this->render('OCPlatformBundle:AdvertNew:AjoutAnnonce.html.twig',array('form' => $form->createView(),'message' => $erreur));
 	}
 	
@@ -62,6 +63,9 @@ class NewAdvertController extends Controller
 			$recruteur = $repository1->find($idUser);
 			$listeannonce = $repository2->getAnnonceByEmp($recruteur);
 		}
+		$session = $request->getSession();
+		$session->set('liste',$listeannonce);
+		$session->set('url',$request->getUri());
 		$paginator = $this->get('knp_paginator');
 		$pagination = $paginator->paginate($listeannonce,$request->query->get('page', 1),20);
 		return $this->render('OCPlatformBundle:Advert:ConsultAnnonce.html.twig',array('listecandidat'=>$listeannonce,'pagination' => $pagination));
@@ -83,6 +87,7 @@ class NewAdvertController extends Controller
 			}
 			$i = $i+1;
 		}
+		
 		$paginator = $this->get('knp_paginator');
 		$pagination = $paginator->paginate($liste,$request->query->get('page', $j),1);
 		return $this->render('OCPlatformBundle:Admin:Admin_Modif_AnnonceNew.html.twig',array(
@@ -95,45 +100,38 @@ class NewAdvertController extends Controller
 	
 	public function modifAction($id,Request $request){
 		$repository = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Annonce');
-		$erreur="";
 		$annonce2 = $repository->find($id);
-		if($annonce2 != null){
-			
-			$form = $this->createForm(AnnonceSyType::class, $annonce2);
-			
-			
-			return $this->render('OCPlatformBundle:AdvertNew:Form.html.twig',array(
+		
+			$listeSite = new ArrayCollection();
+			foreach ($annonce2->getSite() as $site) {	//Récupération des sites
+				$listeSite->add($site);
+			}
+			$form = $this->createForm(AnnonceSyType::class, $annonce2, array(
+				'action' => $this->generateUrl('modifSy',array('id'=>$annonce2->getId()))));
+			$em = $this->getDoctrine()->getManager();
+			if ($request->isMethod('POST')) {
+			$form->handleRequest($request);
+			if ($form->isValid()) {
+				
+				foreach($listeSite as $site){
+					if (false === $annonce2->getSite()->contains($site)){
+						$annonce2->getSite()->removeElement($site);
+						$em->remove($site);		//Suppresion des sites non désirés.
+					}
+				}
+				$annonce2->setDateMAJ(new \DateTime('now'));
+				$em->persist($annonce2);
+				$em->flush();
+				$referer = $request->headers->get('referer');
+				return $this->redirect($referer);
+				}
+			}	
+		
+		return $this->render('OCPlatformBundle:AdvertNew:Form.html.twig',array(
 				'form' => $form->createView(),
 				'annonce'=>$annonce2));
-		}else{
-			$session = $request->getSession();
-			$url = $session->get('url');
-			return $this->redirect($url);
-		}
 	}
 	
-	public function modifOkAction($id){
-		$repository = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Annonce');
-		$erreur="";
-		$annonce2 = $repository->find($id);
-		$em = $this->getDoctrine()->getManager();
-		$listeSite = new ArrayCollection();
-		foreach ($annonce2->getSite() as $site) {	//Récupération des sites
-			$listeSite->add($site);
-		}
-		foreach($listeSite as $site){
-			if (false === $annonce2->getSite()->contains($site)){
-				$annonce2->getSite()->removeElement($site);
-				$em->remove($site);		//Suppresion des sites non désirés.
-			}
-		}
-			$annonce2->setDateMAJ(new \DateTime('now'))->setTitreAnnonce($request->get('annonce[TitreAnnonce]'));
-			$em->persist($annonce2);
-			$em->flush();
-			
-			echo "Annonce Ok";
-			
-		}
 	
 	
 	//Supprimer les annonces new

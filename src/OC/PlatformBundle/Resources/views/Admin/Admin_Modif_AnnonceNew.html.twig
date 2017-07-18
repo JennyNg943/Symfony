@@ -5,15 +5,13 @@
 {% endblock %}
 
 {% block body %}
+	
+	{% for annonce in pagination %}
+	<div id="ModifAnnonce">
+		<p style="display:block; text-align: center; background-color: green;color:white;padding:1%;">Derniere modification : {{ annonce.dateMaj|date('d/m/y')}}</p>
 	<div class="navigation">
 		{{ knp_pagination_render(pagination) }}
 	</div>
-	{% for annonce in pagination %}
-	<div id="ModifAnnonce">
-		{% if message == "L'annonce a été validée" %}
-			<p style="display:block; text-align: center; background-color: green;color:white;padding:1%;">L'annonce a été modifiée</p>
-		{% endif %}	
-	
 	<h1>	{% if annonce.premium == 1 %}
 				{% image 'bundles/app/img/Premium.png' %}
 					<img src="{{ asset_url }}" style="width: 10%;"/>

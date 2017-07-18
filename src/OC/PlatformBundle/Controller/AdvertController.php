@@ -83,19 +83,19 @@ class AdvertController extends Controller
 	
 	public function modifAction($id,Request $request){
 		$repository = $this->getDoctrine()->getManager()->getRepository('OCPlatformBundle:Annonce');
-		$erreur="";
 		$annonce2 = $repository->find($id);
-		if($annonce2 != null){
+		
 			$listeSite = new ArrayCollection();
 			foreach ($annonce2->getSite() as $site) {	//Récupération des sites
 				$listeSite->add($site);
 			}
-			$form = $this->createForm(AnnonceType::class, $annonce2);
+			$form = $this->createForm(AnnonceType::class, $annonce2, array(
+				'action' => $this->generateUrl('modif',array('id'=>$annonce2->getId()))));
 			$em = $this->getDoctrine()->getManager();
 			if ($request->isMethod('POST')) {
-			$form->bind($request);
+			$form->handleRequest($request);
 			if ($form->isValid()) {
-				echo "ok";
+				
 				foreach($listeSite as $site){
 					if (false === $annonce2->getSite()->contains($site)){
 						$annonce2->getSite()->removeElement($site);
@@ -105,22 +105,13 @@ class AdvertController extends Controller
 				$annonce2->setDateMAJ(new \DateTime('now'));
 				$em->persist($annonce2);
 				$em->flush();
-				echo "L'annonce a été validée";
-				
+				return $this->redirectToRoute('admin_modif_annonce',array('idAnnonce'=>$annonce2->getId()));
 				}
 			}	
-
-			
-			return $this->render('OCPlatformBundle:Advert:Form.html.twig',array(
+		
+		return $this->render('OCPlatformBundle:Advert:Form.html.twig',array(
 				'form' => $form->createView(),
 				'annonce'=>$annonce2));
-		}else{
-			$session = $request->getSession();
-			$url = $session->get('url');
-			return $this->redirect($url);
-		}
-		
-		
 	}
 	
 	

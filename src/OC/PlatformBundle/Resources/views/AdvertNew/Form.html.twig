@@ -1,5 +1,5 @@
 <div class="well">
-	<form action="{{ path('modifSy',{'id':annonce.id})}}">
+	
 	{{ form_start(form)}}
 		{{ form(form)}}
 		{% for site in form.site %}
@@ -7,7 +7,7 @@
 		{% endfor %}	
 		<a href="#" id="add_category" class="btn btn-default" style="color:blue">Ajouter un site et une fonction</a>
 	{{ form_end (form)}}	
-	</form>
+	
 </div>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
