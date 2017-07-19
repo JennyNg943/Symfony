@@ -145,8 +145,9 @@ class AdvertController extends Controller
 		}
 		$em->remove($annonce);
 		$em->flush();
-		$referer = $request->headers->get('referer');
-		return $this->redirect($referer);
+		$session = $request->getSession();
+		$url = $session->get('url');
+		return $this->redirect($url);
 	}
 	
 	//Publier une annonce

@@ -44,8 +44,10 @@ class NewAdvertController extends Controller
 			$em->flush();
 			$erreur = "L'annonce a été validée";
 			return $this->render('OCPlatformBundle:AdvertNew:AjoutAnnonceValide.html.twig');
+		}else{
+			$erreur = "L'annonce n'a pas été validée";
 		}
-		$erreur = "L'annonce n'a pas été validée";
+		
 		return $this->render('OCPlatformBundle:AdvertNew:AjoutAnnonce.html.twig',array('form' => $form->createView(),'message' => $erreur));
 	}
 	
@@ -163,8 +165,9 @@ class NewAdvertController extends Controller
 		}
 		$em->remove($annonce);
 		$em->flush();
-		$referer = $request->headers->get('referer');
-		return $this->redirect($referer);
+		$session = $request->getSession();
+		$url = $session->get('url');
+		return $this->redirect($url);
 	}
 
 	//Publier les annonces new
