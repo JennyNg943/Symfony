@@ -232,7 +232,10 @@ test:
     path:	/Test
     defaults: {_controller: OCPlatformBundle:Advert:Test}
     
-    
+creationflux:
+    path:	 /fluxRss.xml
+    defaults: {_controller: OCUserBundle:HelloService:creationfluxRss}
+
 #																		Fonction
 
 admin_fonction:

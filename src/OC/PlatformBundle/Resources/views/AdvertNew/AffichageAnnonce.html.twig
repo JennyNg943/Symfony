@@ -6,7 +6,7 @@
 	{% else %}
 		<th style="background-color: rgb(195,195,195)" COLSPAN=2>
 	{% endif %}
-			<p id="Titre">{{ annonce.datepublication|date('d/m/Y') }}</p></br>
+			<p id="Titre">{{ annonce.datecreation|date('d/m/Y') }}</p></br>
 			<p id="TitreAnnonceAdmin">{{ annonce.TitreAnnonce|upper}}</br>
 			{{ annonce.GrandeVilleProche }} ({{ annonce.idDepartement }})</p>
 			{% if annonce.premium == 1 %}

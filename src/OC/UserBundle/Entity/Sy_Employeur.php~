@@ -120,7 +120,7 @@ class Sy_Employeur extends User
 	/**
      * @var integer
      * 
-     * @ORM\OneToOne(targetEntity="OC\PlatformBundle\Entity\Sy_Premium")
+     * @ORM\OneToOne(targetEntity="OC\PlatformBundle\Entity\Sy_Premium",cascade={"persist"})
      */
 	private $premium;
 
@@ -136,4 +136,360 @@ class Sy_Employeur extends User
     
 
     
+
+    /**
+     * Set societe
+     *
+     * @param string $societe
+     *
+     * @return Sy_Employeur
+     */
+    public function setSociete($societe)
+    {
+        $this->societe = $societe;
+
+        return $this;
+    }
+
+    /**
+     * Get societe
+     *
+     * @return string
+     */
+    public function getSociete()
+    {
+        return $this->societe;
+    }
+
+    /**
+     * Set idCivilitecontactcomm
+     *
+     * @param integer $idCivilitecontactcomm
+     *
+     * @return Sy_Employeur
+     */
+    public function setIdCivilitecontactcomm($idCivilitecontactcomm)
+    {
+        $this->idCivilitecontactcomm = $idCivilitecontactcomm;
+
+        return $this;
+    }
+
+    /**
+     * Get idCivilitecontactcomm
+     *
+     * @return integer
+     */
+    public function getIdCivilitecontactcomm()
+    {
+        return $this->idCivilitecontactcomm;
+    }
+
+    /**
+     * Set nomcontactcomm
+     *
+     * @param string $nomcontactcomm
+     *
+     * @return Sy_Employeur
+     */
+    public function setNomcontactcomm($nomcontactcomm)
+    {
+        $this->nomcontactcomm = $nomcontactcomm;
+
+        return $this;
+    }
+
+    /**
+     * Get nomcontactcomm
+     *
+     * @return string
+     */
+    public function getNomcontactcomm()
+    {
+        return $this->nomcontactcomm;
+    }
+
+    /**
+     * Set prenomcontactcomm
+     *
+     * @param string $prenomcontactcomm
+     *
+     * @return Sy_Employeur
+     */
+    public function setPrenomcontactcomm($prenomcontactcomm)
+    {
+        $this->prenomcontactcomm = $prenomcontactcomm;
+
+        return $this;
+    }
+
+    /**
+     * Get prenomcontactcomm
+     *
+     * @return string
+     */
+    public function getPrenomcontactcomm()
+    {
+        return $this->prenomcontactcomm;
+    }
+
+    /**
+     * Set cp
+     *
+     * @param string $cp
+     *
+     * @return Sy_Employeur
+     */
+    public function setCp($cp)
+    {
+        $this->cp = $cp;
+
+        return $this;
+    }
+
+    /**
+     * Get cp
+     *
+     * @return string
+     */
+    public function getCp()
+    {
+        return $this->cp;
+    }
+
+    /**
+     * Set ville
+     *
+     * @param string $ville
+     *
+     * @return Sy_Employeur
+     */
+    public function setVille($ville)
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+    /**
+     * Get ville
+     *
+     * @return string
+     */
+    public function getVille()
+    {
+        return $this->ville;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Sy_Employeur
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set tel
+     *
+     * @param string $tel
+     *
+     * @return Sy_Employeur
+     */
+    public function setTel($tel)
+    {
+        $this->tel = $tel;
+
+        return $this;
+    }
+
+    /**
+     * Get tel
+     *
+     * @return string
+     */
+    public function getTel()
+    {
+        return $this->tel;
+    }
+
+    /**
+     * Set datecreation
+     *
+     * @param \DateTime $datecreation
+     *
+     * @return Sy_Employeur
+     */
+    public function setDatecreation($datecreation)
+    {
+        $this->datecreation = $datecreation;
+
+        return $this;
+    }
+
+    /**
+     * Get datecreation
+     *
+     * @return \DateTime
+     */
+    public function getDatecreation()
+    {
+        return $this->datecreation;
+    }
+
+    /**
+     * Set datemaj
+     *
+     * @param \DateTime $datemaj
+     *
+     * @return Sy_Employeur
+     */
+    public function setDatemaj($datemaj)
+    {
+        $this->datemaj = $datemaj;
+
+        return $this;
+    }
+
+    /**
+     * Get datemaj
+     *
+     * @return \DateTime
+     */
+    public function getDatemaj()
+    {
+        return $this->datemaj;
+    }
+
+    /**
+     * Set newsletter
+     *
+     * @param integer $newsletter
+     *
+     * @return Sy_Employeur
+     */
+    public function setNewsletter($newsletter)
+    {
+        $this->newsletter = $newsletter;
+
+        return $this;
+    }
+
+    /**
+     * Get newsletter
+     *
+     * @return integer
+     */
+    public function getNewsletter()
+    {
+        return $this->newsletter;
+    }
+
+    /**
+     * Add annonce
+     *
+     * @param \OC\UserBundle\Entity\Sy_Annonce $annonce
+     *
+     * @return Sy_Employeur
+     */
+    public function addAnnonce(\OC\UserBundle\Entity\Sy_Annonce $annonce)
+    {
+        $this->annonce[] = $annonce;
+
+        return $this;
+    }
+
+    /**
+     * Remove annonce
+     *
+     * @param \OC\UserBundle\Entity\Sy_Annonce $annonce
+     */
+    public function removeAnnonce(\OC\UserBundle\Entity\Sy_Annonce $annonce)
+    {
+        $this->annonce->removeElement($annonce);
+    }
+
+    /**
+     * Get annonce
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAnnonce()
+    {
+        return $this->annonce;
+    }
+
+    /**
+     * Add candidat
+     *
+     * @param \OC\UserBundle\Entity\Sy_CvTheque $candidat
+     *
+     * @return Sy_Employeur
+     */
+    public function addCandidat(\OC\UserBundle\Entity\Sy_CvTheque $candidat)
+    {
+        $this->candidat[] = $candidat;
+
+        return $this;
+    }
+
+    /**
+     * Remove candidat
+     *
+     * @param \OC\UserBundle\Entity\Sy_CvTheque $candidat
+     */
+    public function removeCandidat(\OC\UserBundle\Entity\Sy_CvTheque $candidat)
+    {
+        $this->candidat->removeElement($candidat);
+    }
+
+    /**
+     * Get candidat
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCandidat()
+    {
+        return $this->candidat;
+    }
+
+    /**
+     * Set premium
+     *
+     * @param \OC\PlatformBundle\Entity\Sy_Premium $premium
+     *
+     * @return Sy_Employeur
+     */
+    public function setPremium(\OC\PlatformBundle\Entity\Sy_Premium $premium = null)
+    {
+        $this->premium = $premium;
+
+        return $this;
+    }
+
+    /**
+     * Get premium
+     *
+     * @return \OC\PlatformBundle\Entity\Sy_Premium
+     */
+    public function getPremium()
+    {
+        return $this->premium;
+    }
 }

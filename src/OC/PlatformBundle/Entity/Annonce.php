@@ -1164,54 +1164,7 @@ class Annonce
         return $this->fonction;
     }
 
-    /**
-     * Set dateSuspension
-     *
-     * @param \DateTime $dateSuspension
-     *
-     * @return Annonce
-     */
-    public function setDateSuspension($dateSuspension)
-    {
-        $this->dateSuspension = $dateSuspension;
-
-        return $this;
-    }
-
-    /**
-     * Get dateSuspension
-     *
-     * @return \DateTime
-     */
-    public function getDateSuspension()
-    {
-        return $this->dateSuspension;
-    }
-
-    /**
-     * Set dateMAJ
-     *
-     * @param \DateTime $dateMAJ
-     *
-     * @return Annonce
-     */
-    public function setDateMAJ($dateMAJ)
-    {
-        $this->dateMAJ = $dateMAJ;
-
-        return $this;
-    }
-
-    /**
-     * Get dateMAJ
-     *
-     * @return \DateTime
-     */
-    public function getDateMAJ()
-    {
-        return $this->dateMAJ;
-    }
-	
+   
 	/**
 	 * String representation of this object
 	 * @return string
@@ -1304,5 +1257,53 @@ class Annonce
     public function getNew()
     {
         return $this->New;
+    }
+
+    /**
+     * Set dateSuspension
+     *
+     * @param \DateTime $dateSuspension
+     *
+     * @return Annonce
+     */
+    public function setDateSuspension($dateSuspension)
+    {
+        $this->dateSuspension = $dateSuspension;
+
+        return $this;
+    }
+
+    /**
+     * Get dateSuspension
+     *
+     * @return \DateTime
+     */
+    public function getDateSuspension()
+    {
+        return $this->dateSuspension;
+    }
+
+    /**
+     * Set dateMAJ
+     *
+     * @param \DateTime $dateMAJ
+     *
+     * @return Annonce
+     */
+    public function setDateMAJ($dateMAJ)
+    {
+        $this->dateMAJ = $dateMAJ;
+
+        return $this;
+    }
+
+    /**
+     * Get dateMAJ
+     *
+     * @return \DateTime
+     */
+    public function getDateMAJ()
+    {
+        return $this->dateMAJ;
     }
 }

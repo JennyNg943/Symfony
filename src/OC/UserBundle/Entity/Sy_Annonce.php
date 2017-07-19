@@ -3,14 +3,14 @@
 namespace OC\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Eko\FeedBundle\Item\Writer\ItemInterface;
 /**
  * Sy_Annonce
  *
  * 
  * @ORM\Entity(repositoryClass="OC\PlatformBundle\Repository\AnnonceRepository")
  */
-class Sy_Annonce
+class Sy_Annonce implements ItemInterface
 {
     /**
      * @ORM\Id
@@ -1176,53 +1176,6 @@ class Sy_Annonce
         return $this->fonction;
     }
 
-    /**
-     * Set dateSuspension
-     *
-     * @param \DateTime $dateSuspension
-     *
-     * @return Annonce
-     */
-    public function setDateSuspension($dateSuspension)
-    {
-        $this->dateSuspension = $dateSuspension;
-
-        return $this;
-    }
-
-    /**
-     * Get dateSuspension
-     *
-     * @return \DateTime
-     */
-    public function getDateSuspension()
-    {
-        return $this->dateSuspension;
-    }
-
-    /**
-     * Set dateMAJ
-     *
-     * @param \DateTime $dateMAJ
-     *
-     * @return Annonce
-     */
-    public function setDateMAJ($dateMAJ)
-    {
-        $this->dateMAJ = $dateMAJ;
-
-        return $this;
-    }
-
-    /**
-     * Get dateMAJ
-     *
-     * @return \DateTime
-     */
-    public function getDateMAJ()
-    {
-        return $this->dateMAJ;
-    }
 	
 	/**
 	 * String representation of this object
@@ -1366,4 +1319,72 @@ class Sy_Annonce
     {
         return $this->New;
     }
+
+    /**
+     * Set dateSuspension
+     *
+     * @param \DateTime $dateSuspension
+     *
+     * @return Sy_Annonce
+     */
+    public function setDateSuspension($dateSuspension)
+    {
+        $this->dateSuspension = $dateSuspension;
+
+        return $this;
+    }
+
+    /**
+     * Get dateSuspension
+     *
+     * @return \DateTime
+     */
+    public function getDateSuspension()
+    {
+        return $this->dateSuspension;
+    }
+
+    /**
+     * Set dateMAJ
+     *
+     * @param \DateTime $dateMAJ
+     *
+     * @return Sy_Annonce
+     */
+    public function setDateMAJ($dateMAJ)
+    {
+        $this->dateMAJ = $dateMAJ;
+
+        return $this;
+    }
+
+    /**
+     * Get dateMAJ
+     *
+     * @return \DateTime
+     */
+    public function getDateMAJ()
+    {
+        return $this->dateMAJ;
+    }
+	
+	public function getFeedItemTitle() { 
+		return $this->titreannonce;
+	}
+	
+	public function getFeedItemDescription() {
+		return $this->descriptifannonce;
+	}
+	
+	public function getFeedItemPubDate() { 
+		return $this->datepublication;
+	}
+	
+	public function getFeedItemLink() {
+		$site = $this->site;
+		foreach($site as $s){
+			$siteURL = $s->getIdSiteemploi()->getUrlsiteemploi();
+		}
+		return $siteURL."/Consultation/".$this->id;
+	}
 }

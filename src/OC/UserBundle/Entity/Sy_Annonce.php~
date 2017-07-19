@@ -131,14 +131,14 @@ class Sy_Annonce
 	/**
      * @var \DateTime
      *
-     * @ORM\Column(name="$dateSuspension", type="date", nullable=true)
+     * @ORM\Column(name="DateSuspension", type="date", nullable=true)
      */
     private $dateSuspension;
 	
 	/**
      * @var \DateTime
      *
-     * @ORM\Column(name="$dateMAJ", type="date", nullable=true)
+     * @ORM\Column(name="DateMAJ", type="date", nullable=true)
      */
     private $dateMAJ;
 	
@@ -1176,53 +1176,6 @@ class Sy_Annonce
         return $this->fonction;
     }
 
-    /**
-     * Set dateSuspension
-     *
-     * @param \DateTime $dateSuspension
-     *
-     * @return Annonce
-     */
-    public function setDateSuspension($dateSuspension)
-    {
-        $this->dateSuspension = $dateSuspension;
-
-        return $this;
-    }
-
-    /**
-     * Get dateSuspension
-     *
-     * @return \DateTime
-     */
-    public function getDateSuspension()
-    {
-        return $this->dateSuspension;
-    }
-
-    /**
-     * Set dateMAJ
-     *
-     * @param \DateTime $dateMAJ
-     *
-     * @return Annonce
-     */
-    public function setDateMAJ($dateMAJ)
-    {
-        $this->dateMAJ = $dateMAJ;
-
-        return $this;
-    }
-
-    /**
-     * Get dateMAJ
-     *
-     * @return \DateTime
-     */
-    public function getDateMAJ()
-    {
-        return $this->dateMAJ;
-    }
 	
 	/**
 	 * String representation of this object

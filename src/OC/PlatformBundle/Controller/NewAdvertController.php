@@ -12,7 +12,7 @@ use OC\UserBundle\Entity\Sy_Annonce;
 use Doctrine\Common\Collections\ArrayCollection;
 use OC\PlatformBundle\Form\AjouterAnnonceType;
 use OC\PlatformBundle\Form\AnnonceSyType;
-
+use Symfony\Component\HttpFoundation\Response;
 
 
 class NewAdvertController extends Controller
@@ -109,7 +109,7 @@ class NewAdvertController extends Controller
 			$form = $this->createForm(AnnonceSyType::class, $annonce2, array(
 				'action' => $this->generateUrl('modifSy',array('id'=>$annonce2->getId()))));
 			$em = $this->getDoctrine()->getManager();
-			if ($request->isMethod('POST')) {
+		if ($request->isMethod('POST')) {
 			$form->handleRequest($request);
 			if ($form->isValid()) {
 				
@@ -122,11 +122,29 @@ class NewAdvertController extends Controller
 				$annonce2->setDateMAJ(new \DateTime('now'));
 				$em->persist($annonce2);
 				$em->flush();
-				$referer = $request->headers->get('referer');
-				return $this->redirect($referer);
+				return $this->redirectToRoute('admin_modif_syannonce',array('idAnnonce'=>$annonce2->getId()));	
+			}else{
+				$session = $request->getSession();
+				$url = $session->get('url');
+				$liste = $session->get('liste');
+				$i = 1;
+				foreach($liste as $l){
+					if($l->getId() == $annonce2->getId()){
+						$j = $i;
+					}
+					$i = $i+1;
 				}
-			}	
-		
+
+				$paginator = $this->get('knp_paginator');
+				$pagination = $paginator->paginate($liste,$request->query->get('page', $j),1);
+				return $this->render('OCPlatformBundle:AdvertNew:FormSite.html.twig',array(
+					'pagination' => $pagination,
+					'url'	=>$url,
+					'form'	=> $form->createView()
+					));
+				
+			}
+		}	
 		return $this->render('OCPlatformBundle:AdvertNew:Form.html.twig',array(
 				'form' => $form->createView(),
 				'annonce'=>$annonce2));

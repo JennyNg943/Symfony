@@ -105,8 +105,27 @@ class AdvertController extends Controller
 				$annonce2->setDateMAJ(new \DateTime('now'));
 				$em->persist($annonce2);
 				$em->flush();
-				return $this->redirectToRoute('admin_modif_annonce',array('idAnnonce'=>$annonce2->getId()));
-				}
+				return $this->redirectToRoute('admin_modif_annonce',array('idAnnonce'=>$annonce2->getId()));	
+				}else{
+					$session = $request->getSession();
+					$url = $session->get('url');
+					$liste = $session->get('liste');
+					$i = 1;
+					foreach($liste as $l){
+						if($l->getId() == $annonce2->getId()){
+							$j = $i;
+						}
+						$i = $i+1;
+					}
+
+					$paginator = $this->get('knp_paginator');
+					$pagination = $paginator->paginate($liste,$request->query->get('page', $j),1);
+					return $this->render('OCPlatformBundle:Advert:FormSite.html.twig',array(
+						'pagination' => $pagination,
+						'url'	=>$url,
+						'form'	=> $form->createView()
+						));
+					}
 			}	
 		
 		return $this->render('OCPlatformBundle:Advert:Form.html.twig',array(
@@ -177,7 +196,8 @@ class AdvertController extends Controller
 		$repository2 = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Annonce');
 		$form = $this->createForm(TriAnnonceType::class);
 		$form2 = $this->createForm(RechercheType::class);
-
+		$session = $request->getSession();
+		$session->set('url',$request->getUri());
 		$listeannonce = $repository->getSuspension(-1,null,null,null,null);
 		$listeannonce2 = $repository2->getSuspension(-1,null,null,null,null);
 		
@@ -201,6 +221,7 @@ class AdvertController extends Controller
 			}
 		$listeannonce3 = new ArrayCollection(array_merge($listeannonce, $listeannonce2));
 		$listeannonceF = $this->trieListe($listeannonce3);
+		$session->set('liste',$listeannonceF);
 		$paginator = $this->get('knp_paginator');
 		$pagination = $paginator->paginate($listeannonceF,$request->query->get('page', 1),20);
 		return $this->render('OCPlatformBundle:Admin:Admin_Annonce.html.twig',array(

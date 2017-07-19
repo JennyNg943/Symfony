@@ -31,6 +31,7 @@ class AppKernel extends Kernel
 			new Debril\RssAtomBundle\DebrilRssAtomBundle(),
 			new Liip\ImagineBundle\LiipImagineBundle(),
 			new PUGX\MultiUserBundle\PUGXMultiUserBundle(),
+			new JMS\SerializerBundle\JMSSerializerBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

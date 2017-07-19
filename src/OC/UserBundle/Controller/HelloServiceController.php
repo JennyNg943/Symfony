@@ -8,6 +8,7 @@ use OC\UserBundle\Form\ManeomType;
 use SoapClient;
 use OC\PlatformBundle\Moulinette\Bdd;
 use OC\PlatformBundle\Moulinette\Bdd2;
+use JMS\Serializer\SerializerBuilder;
 
 class HelloServiceController extends Controller
 {
@@ -33,6 +34,18 @@ class HelloServiceController extends Controller
         $em->flush();
 		
 		
+	}
+	
+	public function creationfluxRssAction(){
+		$repository = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Annonce');
+		$annonce = $repository->findByPremium(1);
+		
+		//return $this->render('OCUserBundle:Flux:FluxRSS.xml',array('annonce'=>$annonce));
+		
+		$feed = $this->get('eko_feed.feed.manager')->get('article');
+        $feed->addFromArray($annonce);
+
+        return new Response($feed->render('rss')); 
 	}
 	
 	//Test du webService de recrutic avec affichage d'un message en cas d'erreur
