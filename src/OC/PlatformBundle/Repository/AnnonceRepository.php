@@ -171,7 +171,7 @@ class AnnonceRepository extends \Doctrine\ORM\EntityRepository
 				->getResult();
 	}
 	
-	function getSite($nb,$dept){
+	function getSite($nb,$dept,$type){
 		
 		$qb = $this->createQueryBuilder('a');
 		$qb
@@ -181,12 +181,14 @@ class AnnonceRepository extends \Doctrine\ORM\EntityRepository
 			->setParameter('id2', 10)
 			->orderBy('a.datepublication','DESC')
 			->addOrderBy('a.premium','DESC');
-		if($nb != null && $dept != null){
+		if($nb != null && $dept != null && $type != null){
 			$qb->join('a.site','s')
 			->andWhere('s.idSiteemploi = :id')
 			->setParameter('id', $nb)
 			->andWhere('a.idDepartement = :dept')
 			->setParameter('dept', $dept)
+			->andWhere('a.idTypecontrat = :type')
+			->setParameter('type', $type)
 				
 					
 			;
@@ -200,6 +202,11 @@ class AnnonceRepository extends \Doctrine\ORM\EntityRepository
 			if($dept != null){
 				$qb->andWhere('a.idDepartement = :dept')
 					->setParameter('dept', $dept);
+			}
+			
+			if($type != null){
+				$qb->andWhere('a.idTypecontrat = :type')
+					->setParameter('type', $type);
 			}
 		}
 		

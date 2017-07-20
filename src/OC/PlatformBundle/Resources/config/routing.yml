@@ -18,7 +18,15 @@ CVthequeUser:
 oc_platform_offreEmploi:
     path:     /Nos_offres_d_emploi/
     defaults: { _controller: OCPlatformBundle:Default:NosOffresDEmploi }
-
+    
+detail_offreEmploi:    
+    path:     /Offres_d_emploi/{id}
+    defaults: { _controller: OCPlatformBundle:Default:NosOffresDEmploiAnnonce }
+    
+detail_offreEmploiNew:    
+    path:     /Nos_offres_d_emploi/{id}
+    defaults: { _controller: OCPlatformBundle:Default:NosOffresDEmploiAnnonceNew }
+    
 retour:
     path:     /Retour/
     defaults: { _controller: OCPlatformBundle:Default:Retour }

@@ -299,7 +299,6 @@ class Annonce
      */
 	private $New = false;
 	
-	
     /**
      * Get id
      *

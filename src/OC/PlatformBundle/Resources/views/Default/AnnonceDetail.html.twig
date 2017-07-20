@@ -1,0 +1,59 @@
+{% extends "OCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+	{{ annonce.titreAnnonce|upper }}
+{% endblock %}
+
+{% block body %}
+<table id="AnnonceTable">
+		<tr>
+			{% if annonce.premium == 1 %}
+				<th  id="Premium" COLSPAN=3>
+			{% else %}		
+				<th  id="NoPremium" COLSPAN=3>
+					<p id="Titre">{{ annonce.datepublication|date('d/m/Y') }}</p>
+			{% endif %}
+				
+				<p id="TitreAnnonce">{{ annonce.TitreAnnonce|upper }} - {{ annonce.GrandeVilleProche }} ({{ annonce.idDepartement }})</p>
+			</th>
+		</tr>
+		<tr>
+			<td COLSPAN=3><b><p id="TitrePetit">Le poste (ref: {{ annonce.id }}) :  </p></b>{{ annonce.DescriptifAnnonce }}</td>
+		</tr>
+		<tr>
+			<td COLSPAN=3><b><p id="TitrePetit">Profil recherché :  </p></b>{{ annonce.ProfilRecherche }}</td>
+		</tr>
+		<tr>
+			<td><b><p id="TitrePetit">Rémunération :   </p></b>{{ annonce.Remuneration }}</td>
+			<td COLSPAN=2><b><p id="TitrePetit">Avantage :   </p></b>{% if annonce.avantage == "Null" %}A voir{% else %}{{ annonce.avantage }}{% endif %}</td>
+		</tr>
+		<tr>
+			<td><b><p id="TitrePetit">Horaire :   </p></b>{% if annonce.idHoraire == 0 %}A voir{% else %}{{ annonce.idHoraire }}{% endif %}</td>
+			<td><b><p id="TitrePetit">Contrat :   </p></b>{% if annonce.idTypecontrat == 0 %}A voir{% else %}{{ annonce.idTypecontrat }}{% endif %}</td>
+			<td><b><p id="TitrePetit">Nombre d'heures :   </p></b>{{ annonce.nbHeure }}</td>
+		</tr>
+		</table>
+		{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+			{% if app.user.type == "Candidat" %}
+				{% if annonce.New == 1 %}
+					<div id="BoutonPostuler">
+						<a href="{{ path('oc_platform_formParNew',{'id': annonce.id})}}">Postuler</a>	
+					</div>
+				{% else %}
+					<div id="BoutonPostuler">
+						<a href="{{ path('oc_platform_formPar',{'id': annonce.id})}}">Postuler</a>
+					</div>	
+				{% endif %}		
+			{% endif %}	
+		{% else %}	
+			{% if annonce.New == 1 %}
+				<div id="BoutonPostuler">
+					<a href="{{ path('oc_platform_formParNew',{'id': annonce.id})}}">Postuler</a>	
+				</div>
+			{% else %}
+				<div id="BoutonPostuler">
+					<a href="{{ path('oc_platform_formPar',{'id': annonce.id})}}">Postuler</a>
+				</div>	
+			{% endif %}
+		{% endif %}	
+{% endblock %}		

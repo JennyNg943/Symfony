@@ -105,8 +105,9 @@ class DefaultController extends Controller
 			if ($form->isSubmitted() && $form->isValid()) {
 				$site = $form->get('Domaine')->getData();
 				$dept = $form->get('Departement')->getData();
-				$listeannonce = $repository->getSite($site,$dept);
-				$listeannonce2 = $repository2->getSite($site,$dept);
+				$type = $form->get('Type')->getData();
+				$listeannonce = $repository->getSite($site,$dept,$type);
+				$listeannonce2 = $repository2->getSite($site,$dept,$type);
 				
 			}
 		
@@ -123,6 +124,24 @@ class DefaultController extends Controller
 			'form' => $form->createView()
 			));
     }
+	
+	public function NosOffresDEmploiAnnonceAction($id,Request $request){
+		$repository = $this->getDoctrine()->getManager()->getRepository('OCPlatformBundle:Annonce');//Recup annonce new
+		$annonce = $repository->find($id);
+	
+		return $this->render('OCPlatformBundle:Default:AnnonceDetail.html.twig',array(
+			'annonce' => $annonce,
+			));
+	}
+	
+	public function NosOffresDEmploiAnnonceNewAction($id,Request $request){
+		$repository = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Annonce');//Recup annonce new
+		$annonce = $repository->find($id);
+	
+		return $this->render('OCPlatformBundle:Default:AnnonceDetail.html.twig',array(
+			'annonce' => $annonce,
+			));
+	}
 	
 	//Ma page + Verification de l'identité de l'utilisateur
 	public function MaPageAction(Request $request)
