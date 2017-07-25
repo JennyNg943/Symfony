@@ -34,7 +34,7 @@
 				{% for annonce in candidat.annonce %}	
 					{% if domaine != null %}
 						{% for site in annonce.site %}
-							{% if site.idSiteemploi == domaine %}
+							{% if site.idFonction == domaine %}
 						<li><b>{{ annonce.TitreAnnonce}}</b> ayant comme compétence demandée <b>
 								{% for fonction in annonce.fonction %}{{ fonction.idFonction }}, {% endfor %}
 							</b> dans le <b>{{ annonce.idDepartement }}</b>
@@ -73,6 +73,12 @@
 			<img src="{{ asset_url }}" alt="Supprimer" id="CVThequeImg"/>
 			{% endimage %}Supprimer</div></a></br>
 		{% endif %}
+		{% if app.user.premium is not empty %}
+			<a href="{{ path('contactCandidat', {'id':candidat.id})}}"><div>
+			{% image 'bundles/app/img/Mail.png' %}
+				<img src="{{ asset_url }}" alt="Mail" id="CVThequeImg"/>
+			{% endimage %}Contacter</div></a></br>
+		{% endif %}	
 	{% else %}	
 			
 		<a href="#" onclick="return alert('Il faut déposer une annonce premium pour avoir accès à ce service.')"><div>

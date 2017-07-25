@@ -27,8 +27,8 @@ class AnnonceSyType extends AbstractType
 		$builder
 				
 				->add('TitreAnnonce',		TextType::class)
-				->add('DescriptifAnnonce',	TextareaType::class,array('attr' => array('rows' => '2')))
-				->add('ProfilRecherche',	TextareaType::class,array('attr' => array('rows' => '2')))
+				->add('DescriptifAnnonce',	TextareaType::class,array('attr' => array('rows' => '4')))
+				->add('ProfilRecherche',	TextareaType::class,array('attr' => array('rows' => '4')))
 				->add('site',				CollectionType::class,array(
 						'entry_type'   => Sy_SiteType::class,
 						'allow_add'    => true,

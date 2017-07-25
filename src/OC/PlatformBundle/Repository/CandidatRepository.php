@@ -39,17 +39,16 @@ class CandidatRepository extends \Doctrine\ORM\EntityRepository
 	function getCVThequeTrie($site,$dept)
 	{
 		$qb = $this->createQueryBuilder('a');
-		$qb ->select('a,count(annonce.id) AS HIDDEN nb')
+		$qb 
 			->orderBy('a.nom','ASC')
 			->join('a.annonce','annonce')
-			->groupBy('annonce.id')
-			->orderBy('nb','DESC')
 				;
 			
 			if($site != null && $dept != null){
 				$qb->join('annonce.site','s')
-					->where('s.idSiteemploi = :site')
-					->setParameter('site', $site)
+					->join('s.idSiteemploi','site')
+					->where('site.id = :ss')	
+					->setParameter('ss', $site)
 					->join('a.codePostal','v')
 					->join('v.departement','d')
 					->AndWhere('d.id = :dept')
@@ -57,8 +56,9 @@ class CandidatRepository extends \Doctrine\ORM\EntityRepository
 			}else{
 				if($site != null){
 				$qb->join('annonce.site','s')
-					->where('s.idSiteemploi = :site')
-					->setParameter('site', $site);
+					->join('s.idSiteemploi','site')
+					->where('site.id = :ss')	
+					->setParameter('ss', $site);
 				}
 
 				if($dept != null){
@@ -129,6 +129,33 @@ class CandidatRepository extends \Doctrine\ORM\EntityRepository
 				->getQuery()
 				->getResult();
 	}
+	
+	//Fonction pour compter le nombre de reponse dans les anciennes annonces
+	function getNbAnnonce($id){
+		$qb = $this->createQueryBuilder('a');
+		$qb ->select('count(a.id)')
+			->join('a.annonce', 'e')
+			->where	('e.id = :id')
+			->setParameter('id', $id);
+		
+		return $qb->getQuery()
+				->getSingleScalarResult();
+	}
+	
+	//Récupération des candidats selon une fonction
+	function getCVThequeByFonction($id){
+		$qb = $this->createQueryBuilder('c');
+		$qb->orderBy('c.nom','ASC')
+			->join('c.annonce','a')
+			->join('a.site','s')
+			->where('s.idFonction = :id')
+			->setParameter('id', $id);
+		
+		return $qb
+				->getQuery()->getResult();
+				
+	}
+	
 	
 }
 

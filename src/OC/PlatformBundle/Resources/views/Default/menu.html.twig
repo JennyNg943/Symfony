@@ -11,11 +11,7 @@
 			<a href="{{ path('oc_platform_offreEmploi') }}" style="color:red">Voir toutes nos offres</a>
 		</li>
 		<li>
-			{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-				<a href="{{ path('CVthequeUser') }}">Evaluer notre CVThèque</a> 
-			{% else %}
-				<a href="{{ path('CVtheque') }}">Evaluer notre CVThèque</a> 
-			{% endif %}
+			<a href="{{ path('CVtheque') }}">Evaluer notre CVThèque</a> 
 		</li>
 		{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 			{% if (app.user.type != "Candidat") %}
@@ -43,7 +39,7 @@
 					<ul>
 						<li><a href="{{ path('admin_annonce')}}">Gestion des annonces</a></li> 
 						<li><a href="{{ path('admin_annonce_valide')}}">Publier des annonces</a></li>
-						<li><a href="{{ path('CVthequeUser') }}">Gestion des candidats</a></li> 
+						<li><a href="{{ path('CVtheque') }}">Gestion des candidats</a></li> 
 						<li><a href="{{ path('admin_fonction') }}">Gestion des fonctions</a></li> 
 						<li><a href="{{ path('admin_recruteur') }}">Gestion des recruteurs</a></li> 
 					</ul>	

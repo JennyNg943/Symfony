@@ -14,6 +14,6 @@
 		{% endif %}	
 		<a href="{{ path('delete', {'idAnnonce':annonce.id}) }}"onclick="return confirm('Voulez vous vraiment supprimer cette annonce? {{ annonce.id }} - {{ annonce.TitreAnnonce|upper }} - {{ annonce.datepublication|date('d/m/Y') }} - {{ annonce.GrandeVilleProche }} ({{ annonce.idDepartement }})' )" ><input type="submit" value="Supprimer" id="BoutonAnnonce" style="color:red; "></a>
 		<a href="{{ path('rejet', {'id':annonce.id}) }}" onclick="return confirm('Rejeter cette annonce? {{ annonce.id }} - {{ annonce.TitreAnnonce|upper }} - {{ annonce.datepublication|date('d/m/Y') }} - {{ annonce.GrandeVilleProche }} ({{ annonce.idDepartement }})' )" ><input type="submit" value="Rejeter" id="BoutonAnnonce" ></a>
-				
+		<a href="{{ path('copieBW', {'id':annonce.id}) }}" onclick="return confirm('Copier cette annonce? {{ annonce.id }} - {{ annonce.TitreAnnonce|upper }} - {{ annonce.datepublication|date('d/m/Y') }} - {{ annonce.GrandeVilleProche }} ({{ annonce.idDepartement }})' )" ><input type="submit" value="CopierBW" id="BoutonAnnonce" ></a>
 			
 

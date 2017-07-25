@@ -34,7 +34,8 @@ class NewAdvertController extends Controller
 			$recruteur = $repository->find($user->getId());
 			$annonce->setIdRecruteur($recruteur);
 		}
-		if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+		if ($request->isMethod('POST') ){
+			if($form->handleRequest($request)->isValid()) {
 			$listeSite = $annonce->getSite();
 			foreach ($site as $listeSite){
 				$em->persist($site);	
@@ -47,8 +48,42 @@ class NewAdvertController extends Controller
 		}else{
 			$erreur = "L'annonce n'a pas été validée";
 		}
-		
+		}
 		return $this->render('OCPlatformBundle:AdvertNew:AjoutAnnonce.html.twig',array('form' => $form->createView(),'message' => $erreur));
+	}
+	
+	public function copieBWAction($id,Request $request){
+		$repository = $this->getDoctrine()->getManager()->getRepository('OCPlatformBundle:Annonce');
+		$repository2 = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Recruteur');
+		$recruteur = $repository2->find(84080);
+		$annonce = $repository->find($id);
+		$copie = new Sy_Annonce();
+		$copie->setTitreannonce($annonce->getTitreAnnonce())
+			->setDescriptifannonce($annonce->getDescriptifannonce())
+			->setProfilrecherche($annonce->getProfilrecherche())
+			->setRemuneration($annonce->getRemuneration())
+			->setAvantage($annonce->getAvantage())
+			->setGrandevilleproche($annonce->getGrandevilleproche())
+			->setIdDepartement($annonce->getIdDepartement())
+			->setIdNiveauSouhaite($annonce->getIdNiveauSouhaite())
+			->setIdTypecontrat($annonce->getIdTypecontrat())
+			->setIdHoraire($annonce->getIdHoraire())
+			->setNbheure($annonce->getNbheure())
+			->setReference($annonce->getReference())
+			->setIdRecruteur($recruteur)	
+				;
+		foreach ($annonce->getSite() as $site){
+			$s = new \OC\UserBundle\Entity\Sy_Annonce_Sy_Siteemploi();
+			$s->setIdSiteemploi($site->getIdSiteemploi())->setIdFonction($site->getIdFonction());
+			$copie->addSite($s);
+		}
+		
+		$em = $this->getDoctrine()->getManager();
+		$em->persist($copie);
+		$em->flush();
+		
+		$referer = $request->headers->get('referer');
+		return $this->redirect($referer);
 	}
 	
 	//Consulter ses annonces
@@ -187,8 +222,9 @@ class NewAdvertController extends Controller
 				->setSubject("RECRUTIC - Validation de l\'annonce - ".$annonce->getReference())
 				->setFrom("support@recrutic.com")
 				->setTo($recruteur->getEmail())
-				->setBody("Votre annonce de référence ".$annonce->getReference()." a été validée par nos services.\n"
-						. "Titre de l\'annonce : ".$annonce->getTitreannonce()."\n"
+				->setBody("Bonjour, \n"
+						. "Votre annonce référence ".$annonce->getReference()." a été validée par nos services.\n"
+						. "Titre de l'annonce : ".$annonce->getTitreannonce().".\n"
 						. "Lieu : ".$annonce->getGrandeVilleProche()." (".$annonce->getIdDepartement()."\n"
 						. "Si vous souhaitez modifier des éléments, vous pouvez vous rendre dans votre espace. Pour toute information concernant cette annonce, préciser la référence de celle-ci.\n \n"
 						. "Besoin de plus de visibilité ? Pensez au mode premium ! \n"

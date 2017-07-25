@@ -5,74 +5,22 @@
 {% endblock %}
 
 {% block body %}
-	
-	{{ form(form)}}
+	<b>	{{ pagination.getTotalItemCount }} </b> candidats correspondant à votre annonce.
    
 <div class="navigation">
 	{{ knp_pagination_render(pagination) }}
 </div>	
-	<table id="CVTable">
-		<tr>
-			<th COLSPAN="6" id="Cvtheque">CVThèque</th>
-		</tr>
-		<tr>
-			<th>Nom</th>
-			<th>Prénom</th>
-			<th>Code Postal / Ville</th>
-			{% if app.user.type != "Candidat" %}
-			<th >Voir / Contacter</th>
-			{% endif %}
-		</tr>
+	<div id="TableOffreEmploi" style="width: 100%;">
+		<h1>CVThèque <a href="javascript:history.go(-1)" style="float:right;" id='BoutonAnnonce'>Retour</a></h1>
 		{% for candidat in pagination %}
-		<tr>
-			<td>{{ candidat.nom| truncate(3)|upper }}</td>
-			<td>{{ candidat.prenom }}</td>
-			<td >{{ candidat.codePostal }}</td>
-		{% if app.user.type == "Admin" %}
-			<td id="CvThequeInteraction"><a href="{{ path('consultCVTheque', {'id':candidat.id})}}">
-				{% image 'bundles/app/img/voir.png' %}
-					<img src="{{ asset_url }}" alt="Voir" id="CVThequeImg"/>
-					{% endimage %}</a>
-				<a href="{{ path('contactCandidat', {'id':candidat.id})}}">
-				{% image 'bundles/app/img/Mail.png' %}
-					<img src="{{ asset_url }}" alt="Mail" id="CVThequeImg"/>
-				{% endimage %}</a>
-				<a href="{{ path('modifCv', {'id':candidat.id})}}">
-				{% image 'bundles/app/img/Modifier.jpg' %}
-					<img src="{{ asset_url }}" alt="Modifier" id="CVThequeImg"/>
-				{% endimage %}</a>
-				<a href="{{ path('deleteCv', {'id':candidat.id})}}" onclick="return confirm('Voulez vous vraiment supprimer cette personne ? {{ candidat.id }} - {{ candidat.nom }} - {{ candidat.prenom }}')">
-					{% image 'bundles/app/img/Supprimer.png' %}
-					<img src="{{ asset_url }}" alt="Supprimer" id="CVThequeImg"/>
-					{% endimage %}</a>
-			</td>
-		{% endif %}
-		{% if app.user.type == "Recruteur" or app.user.type == "Employeur" %}
-			{% if utilisateur.premium is not empty %}	
-					<td id="CvThequeInteraction"><a href="{{ path('consultCVTheque', {'id':candidat.id})}}">
-						{% image 'bundles/app/img/voir.png' %}
-							<img src="{{ asset_url }}" alt="Voir" id="CVThequeImg"/>
-							{% endimage %}</a>
-						<a href="{{ path('contactCandidat', {'id':candidat.id})}}">
-						{% image 'bundles/app/img/Mail.png' %}
-							<img src="{{ asset_url }}" alt="Mail" id="CVThequeImg"/>
-						{% endimage %}</a>
-					</td>
-			{% else %}
-					<td id="CvThequeInteraction"><a href="{{ path('consultCVTheque', {'id':candidat.id})}}">
-						{% image 'bundles/app/img/voir.png' %}
-						<img src="{{ asset_url }}" alt="Voir" id="CVThequeImg"/>
-						{% endimage %}</a>
-					<a href="#" onclick="return alert('Il faut déposer une annonce premium pour avoir accès à ce service.')">
-						{% image 'bundles/app/img/Mail.png' %}
-						<img src="{{ asset_url }}" alt="Recrutic" id="CVThequeImg"/>
-						{% endimage %}</a>
-					</td>			
-			{% endif %}
-		{% endif %}
-		</tr>
-		{% endfor %}
-	</table>
+			<a href="{{ path('consultCVThequeUser', {'id':candidat.id})}}">
+				<div id="OffreEmploi">
+			<h2>{{ candidat.nom| truncate(3)|upper }} {{ candidat.prenom }}</h2>
+			<p style="font-size: 15px;">{{ candidat.codePostal }}</p>
+				
+			</div></a>
+	{% endfor %}
+</div>	
 <div class="navigation">
 	{{ knp_pagination_render(pagination) }}
 </div>		

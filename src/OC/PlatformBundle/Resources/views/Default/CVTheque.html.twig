@@ -5,42 +5,27 @@
 {% endblock %}
 
 {% block body %}
-	
-	{{ form(form)}}
+	<div id="TriOffre">
+		{{ form(form)}}
+	</div>
    
-			<div class="navigation">
-				{{ knp_pagination_render(pagination) }}
-			</div>	
-				<table id="CVTable">
-					<tr>
-						<th COLSPAN="6" id="Cvtheque">CVThèque</th>
-					</tr>
-					<tr>
-						<th>Nom</th>
-						<th>Prénom</th>
-						<th>Code Postal / Ville</th>
-						<th >Voir / Contacter</th>
-					</tr>
-				{% for candidat in pagination %}
-					<tr>
-						<td>{{ candidat.nom| truncate(3) |upper}}</td>
-						<td>{{ candidat.prenom }}</td>
-						<td>{{ candidat.codePostal }}</td>
-						<td id="CvThequeInteraction"><a href="{{ path('consultCVTheque', {'id':candidat.id})}}">
-					{% image 'bundles/app/img/voir.png' %}
-						<img src="{{ asset_url }}" alt="Voir" id="CVThequeImg"/>
-						{% endimage %}</a>
-				<a href="#" onclick="return alert('Il faut déposer une annonce premium pour avoir accès à ce service.')">
-					{% image 'bundles/app/img/Mail.png' %}
-						<img src="{{ asset_url }}" alt="Recrutic" id="CVThequeImg"/>
-						{% endimage %}</a>
-					</td>
-					</tr>
-				{% endfor %}
-				</table>
-			<div class="navigation">
-				{{ knp_pagination_render(pagination) }}
-			</div>		
+<div class="navigation">
+	{{ knp_pagination_render(pagination) }}
+</div>	
+	<div id="TableOffreEmploi">
+		<h1>CVThèque</h1>
+		{% for candidat in pagination %}
+			<a href="{{ path('consultCVTheque', {'id':candidat.id})}}">
+				<div id="OffreEmploi">
+			<h2>{{ candidat.nom| truncate(3)|upper }} {{ candidat.prenom }}</h2>
+			<p style="font-size: 15px;">{{ candidat.codePostal }}</p>
+				
+			</div></a>
+	{% endfor %}
+</div>	
+<div class="navigation">
+	{{ knp_pagination_render(pagination) }}
+</div>		
 
 	
 	

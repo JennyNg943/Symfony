@@ -9,11 +9,13 @@
 			<p id="Titre">{{ annonce.datecreation|date('d/m/Y') }}</p></br>
 			<p id="TitreAnnonceAdmin">{{ annonce.TitreAnnonce|upper}}</br>
 			{{ annonce.GrandeVilleProche }} ({{ annonce.idDepartement }})</p>
-			{% if annonce.premium == 1 %}
-				{% image 'bundles/app/img/Premium.png' %}
-					<img src="{{ asset_url }}" style="width: 10%"/>
-				{% endimage %}
+			{% if annonce.premium is not empty and app.user.premium == 1 or app.user.type == "Admin"%}
+				<a href="{{ path('CVthequeUser',{'id':annonce.id})}}">
+					{% image 'bundles/app/img/Cvtheque.png' %}
+					<img src="{{ asset_url }}" style="width: 10%;float:right"/>
+			{% endimage %}</a>
 			{% endif %}
+			<p id="Titre">Nouvelle annonce</p></br>
 	</th>
 	<th>
 	{% for site in annonce.site %} 

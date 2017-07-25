@@ -12,7 +12,7 @@ use OC\UserBundle\Form\CandidatType;
 use OC\PlatformBundle\Form\TriCandidatType;
 use OC\PlatformBundle\Form\CVThequeModifType;
 use OC\PlatformBundle\Form\ContactCandidatType;
-
+use Doctrine\Common\Collections\ArrayCollection;
 
 class CandidatController extends Controller
 {
@@ -97,14 +97,39 @@ class CandidatController extends Controller
 	
 	public function candidatCVThequeAction(Request $request,$id){
 		$repository = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_CvTheque');
+		$repository2 = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Siteemploi');
 		$candidat = $repository->find($id);
-		$annonce = $candidat->getAnnonce();
-		if($annonce == null){
-			$retour = 1;
+		$session = $request->getSession();
+		$domaine = $session->get('domaine');
+		if($domaine != null){
+			$site = $repository2->find($domaine);
 		}else{
-			$retour = 2;
+			$site = null;
 		}
-		return $this->render('OCPlatformBundle:Candidat:ConsultationCVTheque.html.twig',array('candidat'=>$candidat,'retour'=>$retour));
+		
+		
+		return $this->render('OCPlatformBundle:Candidat:ConsultationCVTheque.html.twig',array(
+			'candidat'=>$candidat,
+			'domaine'=>$site));
+		
+	}
+	
+	public function candidatCVThequeUserAction(Request $request,$id){
+		$repository = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_CvTheque');
+		$repository2 = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Fonction');
+		$candidat = $repository->find($id);
+		$session = $request->getSession();
+		$domaine = $session->get('fonction');
+		if($domaine != null){
+			$site = $repository2->find($domaine);
+		}else{
+			$site = null;
+		}
+		
+		
+		return $this->render('OCPlatformBundle:Candidat:ConsultationCVThequeUser.html.twig',array(
+			'candidat'=>$candidat,
+			'domaine'=>$site));
 		
 	}
 	
@@ -171,6 +196,25 @@ class CandidatController extends Controller
 	}
 	
 	
-	
+	public function generateCsvAction(Request $request) {
+		$repository = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_CvTheque');
+		$site = $request->get('Domaine');
+		$dept = $request->get('Departement');
+		
+		fputcsv($handle, ['Nom', 'Prenom', 'Mail'], ';');
+
+		$results = $repository->getCVThequeTrie($site,$dept);
+		foreach ($results as $user) {
+			fputcsv(
+				$handle,
+				[$user->getNom(), $user->getPrenom(), $user->getMail()],
+				';'
+			 );
+		}
+
+		fclose($handle);
+
+		return $response;
+	}
 	
 }

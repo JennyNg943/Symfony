@@ -12,7 +12,13 @@
 	<div id="info">
 		Si le titre de votre annonce est <p style="background-color: rgb(242,128,179);display: initial;">rose</p>, elle n'est pas encore validée et donc pas publiée.</br>
 		Si le titre de votre annonce est <p style="background-color: rgb(224,234,137);display: initial;">vert</p>, elle est validée et publiée.
+		</br>
+		En mode PREMIUM, pour acceder à la CvTheque correspondante à vos annonces, il suffit de cliquer sur 
+		{% image 'bundles/app/img/Cvtheque.png' %}
+			<img src="{{ asset_url }}" style="width: 5%;"/>
+		{% endimage %}
 	</div>
+	
 	<table>
 	{% for annonce in pagination %}
 		<table id="Admin">

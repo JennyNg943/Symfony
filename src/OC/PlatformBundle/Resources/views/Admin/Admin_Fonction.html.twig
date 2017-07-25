@@ -12,7 +12,8 @@
 	<div class="navigation">
 		{{ knp_pagination_render(pagination) }}
 	</div>
-	Nombre total fonction : {{ pagination.getTotalItemCount }}
+		Nombre total fonction : {{ pagination.getTotalItemCount }}</br>
+		Nombre de rouge restant : <p style="color:red;display: inline-block;">{{ render(controller('OCPlatformBundle:Fonction:nbAnnonceMaj',{'id':0})) }}</p>
 	<table id="TableCandidat">
 		<tr>
 			<th>Id</th>

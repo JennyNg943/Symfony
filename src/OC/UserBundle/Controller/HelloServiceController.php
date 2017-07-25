@@ -38,6 +38,7 @@ class HelloServiceController extends Controller
 	
 	public function creationfluxRssAction(){
 		$repository = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Annonce');
+		
 		$annonce = $repository->findByPremium(1);
 		
 		//return $this->render('OCUserBundle:Flux:FluxRSS.xml',array('annonce'=>$annonce));

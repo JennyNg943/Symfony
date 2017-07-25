@@ -12,9 +12,12 @@ use OC\PlatformBundle\Form\AnnonceType;
 use Doctrine\Common\Collections\ArrayCollection;
 use OC\PlatformBundle\Form\TriAnnonceType;
 use OC\PlatformBundle\Form\RechercheType;
+use Symfony\Component\HttpFoundation\Response;
 
 class AdvertController extends Controller
 {
+	
+	//Affichage des annonces
 	public function admin_AnnonceAction(Request $request){
 		$repository = $this->getDoctrine()->getManager()->getRepository('OCPlatformBundle:Annonce');
 		$repository2 = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Annonce');
@@ -65,7 +68,7 @@ class AdvertController extends Controller
 			$url = $session->get('url');
 			$liste = $session->get('liste');
 			$i = 1;
-			foreach($liste as $l){
+			foreach($liste as $l){						//Calcul de la position de l'annonce pour la pagination
 				if($l->getId() == $annonce2->getId()){
 					$j = $i;
 				}
@@ -81,6 +84,7 @@ class AdvertController extends Controller
 				));
 	}
 	
+	//Formulaire de modification qui va changer selon l'annonce entré en parametre
 	public function modifAction($id,Request $request){
 		$repository = $this->getDoctrine()->getManager()->getRepository('OCPlatformBundle:Annonce');
 		$annonce2 = $repository->find($id);
@@ -164,6 +168,7 @@ class AdvertController extends Controller
 		return $this->redirect($referer);
 	}
 	
+	//Rejetter une annonce
 	public function rejetAction($id,Request $request){
 		$repository = $this->getDoctrine()->getManager()->getRepository('OCPlatformBundle:Annonce');
 		$annonce = $repository->find($id);
@@ -231,6 +236,7 @@ class AdvertController extends Controller
 			'form2' => $form2->createView()));
 	}
 	
+	//Sponsoriser une annonce
 	public function SponsoriserAnnonceAction(Request $request,$idAnnonce){
 		$repository = $this->getDoctrine()->getManager()->getRepository('OCPlatformBundle:Annonce');
 		if($idAnnonce != 0){
@@ -245,6 +251,7 @@ class AdvertController extends Controller
 		return $this->redirect($referer);
 	}
 	
+	//Deponsoriser une annonce
 	public function DeSponsoriserAnnonceAction(Request $request,$idAnnonce){
 		$repository = $this->getDoctrine()->getManager()->getRepository('OCPlatformBundle:Annonce');
 		if($idAnnonce != 0){
@@ -259,6 +266,19 @@ class AdvertController extends Controller
 		return $this->redirect($referer);
 	}
 	
+	
+	//Affiche le nombre de reponse par annonce
+	public function ReponseAction($id){
+		$repository = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_CvTheque');
+		$reponse = $repository->getNbAnnonce($id);
+		
+		return new Response($reponse);
+		
+		
+	}
+	
+	
+	//Trie une liste d'annonce en mettant en premier les premiums
 	function trieListe($liste){
 		$listeannonce = new ArrayCollection();
 		$tmp = new ArrayCollection();

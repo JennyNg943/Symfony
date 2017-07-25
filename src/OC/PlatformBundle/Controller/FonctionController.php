@@ -140,6 +140,12 @@ class FonctionController extends Controller
 		$listeannonce = $repository->getFonctionAdminNum($id,1);
 		$listeannonce2 = $repository2->getFonctionAdminNum($id,1);
 		$listeannonce3 = $listeannonce + $listeannonce2;
+		if($id == 0){
+			$listeannonce = $repository->getFonctionAllAdminNum();
+			$listeannonce2 = $repository2->getFonctionAllAdminNum();
+		} 
+		$listeannonce3 = $listeannonce + $listeannonce2;
+		
 		
 		return new Response($listeannonce3);
 	}

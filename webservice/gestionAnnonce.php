@@ -50,10 +50,10 @@ class XmlPE {
 			$annonceDoublon = $Bdd->RequeteSelect();
 
 			$recruteurLogin = $User[0]["email"];
-			$Retour = "Je suis pas entrée ici,je crois";
+			
 			if ($recruteurLogin != "kenini") {
 				if ($annonceDoublon == "kenini") {
-					$Retour = "Youpi";
+					
 					$Titre = $annonceFlux->jobs->job[$i]->titre;
 					$etablissement = $annonceFlux->jobs->job[$i]->etablissement;
 					$Description = $annonceFlux->jobs->job[$i]->description;

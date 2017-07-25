@@ -12,7 +12,7 @@ CVtheque:
     defaults: { _controller: OCPlatformBundle:Default:CVtheque }
     
 CVthequeUser:
-    path:     /CVTheque/
+    path:     /CVTheque/{id}
     defaults: { _controller: OCPlatformBundle:Default:CVthequeUser }
     
 oc_platform_offreEmploi:
@@ -38,6 +38,7 @@ APropos:
 contact:  
     path:     /Contact
     defaults: { _controller: OCPlatformBundle:Default:Contact }
+    
     
 #																Inscription
 register:
@@ -118,6 +119,10 @@ premiumOld:
 DepremiumOld:
     path:	/User/DeSponsoriser/{idAnnonce}
     defaults: {_controller: OCPlatformBundle:Advert:DeSponsoriserAnnonce}    
+    
+copieBW:
+    path:	/Admin/Annonce/Copie/{id}
+    defaults: {_controller: OCPlatformBundle:NewAdvert:copieBW}    
 
 #																AnnonceNouvelle
 modifSy:
@@ -200,15 +205,15 @@ candidatModif:
     
 CandidatCompetence:    
     path:     /User/ModificationCompetenceCandidat
-    defaults: { _controller: OCPlatformBundle:Candidat:candidatCompetence }
-    
-admin_maneom:
-    path:     /User/Maneom
-    defaults: { _controller: OCUserBundle:HelloService:ManeomSQL }
+    defaults: { _controller: OCPlatformBundle:Candidat:candidatCompetence } 
     
 consultCVTheque:
     path:     /ConsultationCVTheque/{id}
     defaults: { _controller: OCPlatformBundle:Candidat:candidatCVTheque }
+    
+consultCVThequeUser:
+    path:     /ConsultationCVThequeUser/{id}
+    defaults: { _controller: OCPlatformBundle:Candidat:candidatCVThequeUser }
     
 deleteCv:
     path:     /Admin/Delete/{id}
@@ -235,10 +240,6 @@ soap:
 moulinette:
     path:	/Moulinette
     defaults: {_controller: OCUserBundle:HelloService:Moulinette}
-    
-test:
-    path:	/Test
-    defaults: {_controller: OCPlatformBundle:Advert:Test}
     
 creationflux:
     path:	 /fluxRss.xml

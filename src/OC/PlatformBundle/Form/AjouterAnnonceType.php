@@ -21,8 +21,8 @@ class AjouterAnnonceType extends AbstractType
 		$builder
 				
 				->add('TitreAnnonce',		TextType::class,array('label'=>'Titre de l\'annonce*'))
-				->add('DescriptifAnnonce',	TextareaType::class,array('attr' => array('rows' => '2'),'label'=>'Description du poste*'))
-				->add('ProfilRecherche',	TextareaType::class,array('attr' => array('rows' => '2'),'label'=>'Profil Recherché*'))
+				->add('DescriptifAnnonce',	TextareaType::class,array('attr' => array('rows' => '4'),'label'=>'Description du poste*'))
+				->add('ProfilRecherche',	TextareaType::class,array('attr' => array('rows' => '4'),'label'=>'Profil Recherché*'))
 				
 				->add('Remuneration',		TextType::class,array('label'=>'Rémunération*'))
 				->add('avantage',			TextType::class,array(

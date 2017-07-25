@@ -26,8 +26,8 @@ class AnnonceType extends AbstractType
 		$builder
 				
 				->add('TitreAnnonce',		TextType::class,array('label'=>'Titre de l\'annonce'))
-				->add('DescriptifAnnonce',	TextareaType::class,array('attr' => array('rows' => '2'),'label'=>'Description'))
-				->add('ProfilRecherche',	TextareaType::class,array('attr' => array('rows' => '2'),'label'=>'Profil recherché'))
+				->add('DescriptifAnnonce',	TextareaType::class,array('attr' => array('rows' => '4'),'label'=>'Description'))
+				->add('ProfilRecherche',	TextareaType::class,array('attr' => array('rows' => '4'),'label'=>'Profil recherché'))
 				->add('site',				CollectionType::class,array(
 						'entry_type'   => SiteType::class,
 						'allow_add'    => true,

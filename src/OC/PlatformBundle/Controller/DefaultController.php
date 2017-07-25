@@ -41,12 +41,14 @@ class DefaultController extends Controller
 		$repository = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_CvTheque');
 		$form = $this->createForm(TriSiteType::class);
 		$candidat = $repository->getCVThequeTrie(null,null);
-
+		$session = $request->getSession();
+		$session->set('domaine',null);
 		$form->handleRequest($request);
 			if ($form->isSubmitted() && $form->isValid()) {
 				$site = $form->get('Domaine')->getData();
 				$dept = $form->get('Departement')->getData();
 				
+				$session->set('domaine',$site);
 				$candidat = $repository->getCVThequeTrie($site,$dept);
 				
 			}	
@@ -62,25 +64,17 @@ class DefaultController extends Controller
 			'form' => $form->createView()));
     }
 	
-	public function CVthequeUserAction(Request $request)
+	public function CVthequeUserAction(Request $request,$id)
     {
-		$user = $this->getUser();
 		$repository = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_CvTheque');
-		$repository2 = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Recruteur');
-		$recruteur = $repository2->find($user->getId());
-		if($recruteur == null){
-			$repository3 = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Employeur');
-			$recruteur = $repository3->find($user->getId());
+		$repository2 = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Annonce');
+		$annonce = $repository2->find($id);
+		$session = $request->getSession();
+		foreach($annonce->getFonction() as $fonction){
+			$candidat = $repository->getCVThequeByFonction($fonction->getIdFonction());
+			$session->set('fonction',$fonction->getIdFonction());
 		}
-		$form = $this->createForm(TriSiteType::class);
-		$candidat = $repository->getCVThequeTrie(null,null);
-
-		$form->handleRequest($request);
-			if ($form->isSubmitted() && $form->isValid()) {
-				$site = $form->get('Domaine')->getData();
-				$dept = $form->get('Departement')->getData();	
-				$candidat = $repository->getCVThequeTrie($site,$dept);	
-			}	
+			
 		$paginator = $this->get('knp_paginator');
 		$pagination = $paginator->paginate(
 		$candidat,
@@ -88,8 +82,7 @@ class DefaultController extends Controller
 		);
         return $this->render('OCPlatformBundle:Default:CVThequeUser.html.twig',array(
 			'pagination' => $pagination,
-			'form' => $form->createView(),
-			'utilisateur'	=> $recruteur));
+			));
     }
 	
 	//Route pour la page Nos Offre d'emploi

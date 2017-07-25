@@ -258,22 +258,7 @@ class AnnonceRepository extends \Doctrine\ORM\EntityRepository
 				->getResult();
 	}
 	
-	function getAnnonceDoublon($mail,$reference){
-		$qb = $this->createQueryBuilder('a');
-		$qb 
-			->join('a.idRecruteur','r')
-			->join('r.user','u')	
-			->where('u.email = :mail')
-			->setParameter('mail', $mail)
-			->andWhere('a.referencerecruteur = :reference')
-			->setParameter('reference', $reference)
-			;
-		
-		return $qb
-				->getQuery()
-				->getResult();
-	}
-	
+	//Fonction de recherche de fonction
 	function getFonctionWS($id){
 		$qb = $this->createQueryBuilder('a');
 		$qb ->where('a.intitulefonction = :id')
@@ -284,6 +269,7 @@ class AnnonceRepository extends \Doctrine\ORM\EntityRepository
 				->getResult();
 	}
 	
+	//Affichage des annonces correspondantes à une fonction
 	function getFonctionAdmin($id,$nb){
 		
 		$qb = $this->createQueryBuilder('a');
@@ -303,6 +289,7 @@ class AnnonceRepository extends \Doctrine\ORM\EntityRepository
 				->getResult();
 	}
 	
+	// Fonction qui va compter le nombre d'annonce par fonction
 	function getFonctionAdminNum($id,$nb){
 		
 		$qb = $this->createQueryBuilder('a');
@@ -317,6 +304,20 @@ class AnnonceRepository extends \Doctrine\ORM\EntityRepository
 			->setParameter('date', new \DateTime('-30days'))
 			->setParameter('nb', null);
 		}
+		
+		return $qb->getQuery()
+				->getSingleScalarResult();
+	}
+	
+	function getFonctionAllAdminNum(){
+		
+		$qb = $this->createQueryBuilder('a');
+		$qb ->select('count(a.id)')
+			
+			->where('a.dateMAJ < :date or a.dateMAJ = :nb')
+			->setParameter('date', new \DateTime('-30days'))
+			->setParameter('nb', null);
+	
 		
 		return $qb->getQuery()
 				->getSingleScalarResult();
