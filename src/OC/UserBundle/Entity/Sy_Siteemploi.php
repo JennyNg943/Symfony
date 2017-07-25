@@ -71,6 +71,16 @@ class Sy_Siteemploi
      */
 	private $annonce;
 	
+	/**
+     * @var \Image
+     *
+     * @ORM\ManyToOne(targetEntity="Image")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="pub_id", referencedColumnName="id")
+     * })
+     */
+    private $pub;
+	
     /**
      * Set intitulesiteemploi
      *

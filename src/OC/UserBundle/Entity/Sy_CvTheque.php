@@ -68,6 +68,13 @@ class Sy_CvTheque
 	/**
      * @var integer
      *
+     * @ORM\ManyToMany(targetEntity="OC\UserBundle\Entity\Sy_Annonce")
+     */
+    private $sy_annonce;
+	
+	/**
+     * @var integer
+     *
      * @ORM\ManyToMany(targetEntity="OC\UserBundle\Entity\Sy_Fonction")
      */
 	private $fonction;

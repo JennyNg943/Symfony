@@ -74,6 +74,49 @@ class CandidatRepository extends \Doctrine\ORM\EntityRepository
 				->getResult();
 	}
 	
+	function getCandidatureTrie($site,$dept)
+	{
+		$qb = $this->createQueryBuilder('a');
+		$qb 
+			->orderBy('a.nomcandidat','ASC')
+			->join('a.annonce','annonce')
+			->join('a.Sy_annonce','sya')
+				;
+			
+			if($site != null && $dept != null){
+				$qb	->join('annonce.site','s')
+					->join('s.idSiteemploi','site')
+					->join('sya.site','sy')
+					->join('sy.idSiteemploi','si')	
+					->where('site.id = :ss or si.id = :ss')	
+					->setParameter('ss', $site)
+					->join('a.codePostal','v')
+					->join('v.departement','d')
+					->AndWhere('d.id = :dept')
+					->setParameter('dept', $dept);
+			}else{
+				if($site != null){
+				$qb->join('annonce.site','s')
+					->join('s.idSiteemploi','site')
+					->join('sya.site','sy')
+					->join('sy.idSiteemploi','si')	
+					->where('site.id = :ss or si.id = :ss')	
+					->setParameter('ss', $site);
+				}
+
+				if($dept != null){
+					$qb->join('a.codePostal','v')
+						->join('v.departement','d')
+						->where('d.id = :dept')
+						->setParameter('dept', $dept);
+				}
+			}
+		
+		return $qb
+				->getQuery()
+				->getResult();
+	}
+	
 	function getCandidatCandidature($id)
 	{
 		$qb = $this->createQueryBuilder('a');
@@ -154,6 +197,22 @@ class CandidatRepository extends \Doctrine\ORM\EntityRepository
 		return $qb
 				->getQuery()->getResult();
 				
+	}
+	
+	function getCVThequeBySite($id)
+	{
+		$qb = $this->createQueryBuilder('a');
+		$qb ->select('count(a.id)')
+			->orderBy('a.nom','ASC')
+			->join('a.annonce','annonce')
+			->join('annonce.site','s')
+			->join('s.idSiteemploi','site')
+			->where('site.id = :ss')	
+			->setParameter('ss', $id);
+		
+		return $qb
+				->getQuery()
+				->getSingleScalarResult();
 	}
 	
 	

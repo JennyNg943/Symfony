@@ -23,7 +23,11 @@
 			
 			{{ include("OCPlatformBundle:AdvertNew:FonctionAnnonce.html.twig") }}
 		{% endif %}</h1>
+		{% if annonce.new != 1 %}
+		{{ render(controller("OCPlatformBundle:Advert:modif",{'id':annonce.id})) }}
+	{% else %}
 		{{ render(controller("OCPlatformBundle:NewAdvert:modif",{'id':annonce.id})) }}
+	{% endif %}	
 	{% endfor %}	 
 
 	</div>

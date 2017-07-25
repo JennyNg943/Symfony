@@ -1,0 +1,41 @@
+{% extends "OCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+	Recrutic
+{% endblock %}
+
+{% block body %}
+	<table style="text-align: center;">
+		<tr>
+			<th>Id</th>
+			<th>URL</th>
+			<th>Nb annonces</th>
+			<th>Nb candidats </th>
+			<th>Nb fonctions</th>
+		</tr>
+		{% for s in site %}
+		<tr>
+			<td>{{ s.id }}</td>
+			<td><a href="{{ s.urlSiteEmploi }}">{{ s.urlSiteEmploi }}</a></td>
+			<td>{{ render(controller('OCPlatformBundle:Admin:NbAnnoncesSite',{'id':s.id}))}}</td>
+			<td>{{ render(controller('OCPlatformBundle:Admin:NbCandidatSite',{'id':s.id}))}}</td>
+			<td>{{ render(controller('OCPlatformBundle:Admin:NbFonctionSite',{'id':s.id}))}}</td>
+		</tr>
+		{% endfor %}		
+	</table>
+		
+	<b>Audience :</b></br>
+	<a href="https://analytics.google.com/analytics/web/#report/visitors-overview/a42197475w71875799p74191120/" style="color:blue">Recrutic</a></br>
+	<a href="https://analytics.google.com/analytics/web/#report/visitors-overview/a55935881w89279703p92773728/" style="color:blue">Appros Achats</a></br>
+	<a href="https://analytics.google.com/analytics/web/#report/visitors-overview/a55943866w89257494p92773400/" style="color:blue">BE-Methodes</a></br>
+	<a href="https://analytics.google.com/analytics/web/#report/visitors-overview/a92287338w136612576p140932202/" style="color:blue">Biz and Coach</a></br>
+	<a href="https://analytics.google.com/analytics/web/#report/visitors-overview/a43600877w73701703p76097728/" style="color:blue">BTP VRD</a></br>
+	<a href="https://analytics.google.com/analytics/web/#report/visitors-overview/a43602861w73674978p76071790/" style="color:blue">Chaudronniers Toliers</a></br>
+	<a href="https://analytics.google.com/analytics/web/#report/visitors-overview/a55949068w89274004p92758892/" style="color:blue">Managers Emploi</a></br>
+	<a href="https://analytics.google.com/analytics/web/#report/visitors-overview/a55947181w89273600p92769620/" style="color:blue">NTIC Emploi</a></br>
+	<a href="https://analytics.google.com/analytics/web/#report/visitors-overview/a55958060w89269274p92764577/" style="color:blue">Plastic Emploi</a></br>
+	<a href="https://analytics.google.com/analytics/web/#report/visitors-overview/a19889109w39681503p39387473/" style="color:blue">Tourneur Fraiseur</a></br>
+	
+	
+	</p>
+{% endblock %}

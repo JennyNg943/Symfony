@@ -323,7 +323,24 @@ class AnnonceRepository extends \Doctrine\ORM\EntityRepository
 				->getSingleScalarResult();
 	}
 	
-	
+	//Nb annonces par site
+	function getSiteAnnonce($id){
+		
+		$qb=$this->createQueryBuilder('c');
+		
+		
+		$qb	->select('count(c.id)')
+			->join('c.site','s')
+			->where('s.idSiteemploi = :id')
+			->setParameter('id',$id)
+			->andWhere('c.suspension = :nb')
+			->setParameter('nb',10)	
+			->andWhere('c.datepublication > :date')
+			->setParameter('date',new \DateTime('-2 month'))	
+			->orderBy('c.datepublication','DESC');
+		
+		return $qb->getQuery()->getSingleScalarResult();
+	}
 	
 }
 
