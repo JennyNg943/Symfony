@@ -84,6 +84,11 @@ admin_formule3:
     defaults: { _controller: OCPlatformBundle:Recruteur:formule3 }
     
 #																	AnnonceAncienne
+
+rejet:
+    path:	/User/Annonce/Rejet/{id}
+    defaults: {_controller: OCPlatformBundle:Advert:rejet}
+    
 modif:
     path:	/User/Annonce/Modification/{id}
     defaults: {_controller: OCPlatformBundle:Advert:modif}
@@ -129,9 +134,9 @@ modifSy:
     path:	/User/AnnonceSy/Modification/{id}
     defaults: {_controller: OCPlatformBundle:NewAdvert:modif}
     
-rejet:
-    path:	/User/Annonce/Rejet/{id}
-    defaults: {_controller: OCPlatformBundle:Advert:rejet}
+rejetSy:
+    path:	/User/SyAnnonce/Rejet/{id}
+    defaults: {_controller: OCPlatformBundle:NewAdvert:rejet}
     
 annonceAjoutEmp:
     path:	/User/AjoutAnnonceEmp
@@ -227,6 +232,9 @@ contactCandidat:
     path:     /Contacter/{id}
     defaults: { _controller: OCPlatformBundle:Candidat:contacterCandidat }
     
+candidatConsulte:
+    path:     /User/MesCandidats
+    defaults: { _controller: OCPlatformBundle:Candidat:MesCandidats }
 #																		Flux RSS    
 
 FluxRSS:

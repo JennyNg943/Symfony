@@ -130,7 +130,7 @@ class Sy_Recruteur extends User
 	/**
      * @var integer
      * 
-     * @ORM\OneToOne(targetEntity="OC\PlatformBundle\Entity\Sy_Premium",cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="OC\PlatformBundle\Entity\Sy_Premium")
      */
 	private $premium;
 	

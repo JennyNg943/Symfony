@@ -1,0 +1,18 @@
+{% extends "OCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+	Recrutic
+{% endblock %}
+
+{% block body %}
+	{% for  annonce in app.user.annonce %}
+		<h1>{{ annonce.id }} - {{ annonce.Titreannonce }}</h1>
+		{% for candidat in annonce.candidatContact %}
+		<div id="OffreEmploi" style="width: 30%;display: inline-block;">
+			<h2>{{ candidat.nom|truncate(3) }} {{ candidat.prenom }}</h2>
+			<p style="font-size: 15px;">{{ candidat.codePostal }}</p>
+		</div>
+		{% endfor %}
+	{% endfor %}
+	
+{% endblock %}

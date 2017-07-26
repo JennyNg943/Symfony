@@ -326,4 +326,38 @@ class Sy_CvTheque
     {
         return $this->fonction;
     }
+
+    /**
+     * Add syAnnonce
+     *
+     * @param \OC\UserBundle\Entity\Sy_Annonce $syAnnonce
+     *
+     * @return Sy_CvTheque
+     */
+    public function addSyAnnonce(\OC\UserBundle\Entity\Sy_Annonce $syAnnonce)
+    {
+        $this->sy_annonce[] = $syAnnonce;
+
+        return $this;
+    }
+
+    /**
+     * Remove syAnnonce
+     *
+     * @param \OC\UserBundle\Entity\Sy_Annonce $syAnnonce
+     */
+    public function removeSyAnnonce(\OC\UserBundle\Entity\Sy_Annonce $syAnnonce)
+    {
+        $this->sy_annonce->removeElement($syAnnonce);
+    }
+
+    /**
+     * Get syAnnonce
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSyAnnonce()
+    {
+        return $this->sy_annonce;
+    }
 }

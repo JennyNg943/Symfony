@@ -19,16 +19,19 @@ class DefaultController extends Controller
 	//Page d'accueil
     public function indexAction(Request $request)
     {
-		$repository = $this->getDoctrine()->getManager()->getRepository('OCPlatformBundle:Sy_Premium');
-		$premium = $repository->findAll();
-		$date = new \DateTime('now');
+		$repository = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Recruteur');
+		$repository2 = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Employeur');
+		$recruteur = $repository->getPremium();
+		$employeur = $repository2->getPremium();
+		$user = new ArrayCollection(array_merge($recruteur,$employeur));
 		$em = $this->getDoctrine()->getManager();
-		foreach ($p as $premium){
-			if($p->getDateFin()==$date){
-				$em->remove($p);
-			}
+		foreach ($user as $u){
+			$p = $u->getPremium();
+			$u->setPremium(null);
+			$em->remove($p);
 		}
 		$em->flush();
+		
         $content = $this
 			->get('templating')
 			->render('OCPlatformBundle:Default:index.html.twig');
@@ -74,7 +77,7 @@ class DefaultController extends Controller
 			$candidat = $repository->getCVThequeByFonction($fonction->getIdFonction());
 			$session->set('fonction',$fonction->getIdFonction());
 		}
-			
+		$session->set('annonce',$annonce->getId());	
 		$paginator = $this->get('knp_paginator');
 		$pagination = $paginator->paginate(
 		$candidat,

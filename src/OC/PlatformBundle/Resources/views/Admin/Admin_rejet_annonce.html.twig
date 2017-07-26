@@ -1,0 +1,16 @@
+{% extends "OCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+	Rejeter une annonce
+{% endblock %}
+
+{% block body %}
+	<h1>Rejet de l'annonce {{ annonce.id }}</h1>
+	{{ annonce.TitreAnnonce }}
+	
+	{{ form(form) }}
+
+
+
+	
+{% endblock %}

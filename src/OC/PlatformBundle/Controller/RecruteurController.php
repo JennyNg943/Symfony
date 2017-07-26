@@ -99,6 +99,7 @@ class RecruteurController extends Controller
 		$premium->setIdFormule($formule)->setDateDebut(new \DateTime('now'))->setDateFin(new \DateTime('+1 month'));
 		$recruteur->setPremium($premium);
 		$em = $this->getDoctrine()->getManager();
+		$em->persist($premium);
 		$em->persist($recruteur);
 		$em->flush();
 		$referer = $request->headers->get('referer');
@@ -120,6 +121,7 @@ class RecruteurController extends Controller
 		$premium->setIdFormule($formule)->setDateDebut(new \DateTime('now'))->setDateFin(new \DateTime('+3 month'));
 		$recruteur->setPremium($premium);
 		$em = $this->getDoctrine()->getManager();
+		$em->persist($premium);
 		$em->persist($recruteur);
 		$em->flush();
 		$referer = $request->headers->get('referer');
@@ -141,6 +143,7 @@ class RecruteurController extends Controller
 		$premium->setIdFormule($formule)->setDateDebut(new \DateTime('now'))->setDateFin(new \DateTime('+1 year'));
 		$recruteur->setPremium($premium);
 		$em = $this->getDoctrine()->getManager();
+		$em->persist($premium);
 		$em->persist($recruteur);
 		$em->flush();
 		$referer = $request->headers->get('referer');

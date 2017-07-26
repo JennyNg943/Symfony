@@ -40,5 +40,16 @@ class RecruteurRepository extends \Doctrine\ORM\EntityRepository
 				->getQuery()
 				->getResult();
 	}
+	
+	function getPremium(){
+		$qb = $this->createQueryBuilder('a');
+		$qb ->join('a.premium','p')
+			->where('p.dateFin <= :date')
+			->setParameter('date', new \DateTime('now'));
+		
+		return $qb
+				->getQuery()
+				->getResult();
+	}
 }
 ?>

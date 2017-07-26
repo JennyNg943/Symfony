@@ -41,7 +41,6 @@ class Sy_Premium
      * @ORM\Column(name="DateFin", type="date", length=255, nullable=false)
      */
 	private $dateFin;
-
    
 
     /**

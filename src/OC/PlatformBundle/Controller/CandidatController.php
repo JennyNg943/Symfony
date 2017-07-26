@@ -169,6 +169,10 @@ class CandidatController extends Controller
 	public function contacterCandidatAction(Request $request,$id){
 		$repository = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_CvTheque');
 		$repository2 = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Recruteur');
+		$repository3 = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Annonce');
+		$session = $request->getSession();
+		$idAnnonce = $session->get('annonce');
+		$annonce = $repository3->find($idAnnonce);
 		$candidat = $repository->find($id);
 		$user = $this->getUser();
 		if(($recruteur = $repository2->find($user->getId()))==null){
@@ -179,14 +183,15 @@ class CandidatController extends Controller
 		
 		if ($request->isMethod('POST')) {
 			if ($form->handleRequest($request)->isValid()) {
-				$recruteur->addCandidat($candidat);
+				$annonce->addCandidatContact($candidat);
 				$em = $this->getDoctrine()->getManager();
-				$em->persist($recruteur);
+				$em->persist($annonce);
 				$em->flush();
 				$message = \Swift_Message::newInstance()
 						->setSubject($form->get('Object')->getData())
 						->setFrom($user->getEmail())
 						->setTo($candidat->getMail())
+						//->setTo('a.bouteille@maneom.com')
 						->setBody($form->get('Message')->getData());
 					$this->get('mailer')->send($message);
 				return $this->render('OCPlatformBundle:Candidat:EnvoiOk.html.twig');
@@ -215,6 +220,10 @@ class CandidatController extends Controller
 		fclose($handle);
 
 		return $response;
+	}
+	
+	public function mesCandidatsAction(){
+		return $this->render('OCPlatformBundle:Candidat:CandidatContacte.html.twig');
 	}
 	
 }

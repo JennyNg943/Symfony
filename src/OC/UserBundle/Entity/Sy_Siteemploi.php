@@ -72,14 +72,12 @@ class Sy_Siteemploi
 	private $annonce;
 	
 	/**
-     * @var \Image
      *
-     * @ORM\ManyToOne(targetEntity="Image")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="pub_id", referencedColumnName="id")
-     * })
+     * @var integer
+     * 
+     * @ORM\OneToOne(targetEntity="OC\UserBundle\Entity\Image", cascade={"persist"})
      */
-    private $pub;
+	private $pub;
 	
     /**
      * Set intitulesiteemploi
@@ -315,5 +313,29 @@ class Sy_Siteemploi
     public function removeAnnonce(\OC\PlatformBundle\Entity\Annonce_Sy_Siteemploi $annonce)
     {
         $this->annonce->removeElement($annonce);
+    }
+
+    /**
+     * Set pub
+     *
+     * @param \OC\UserBundle\Entity\Image $pub
+     *
+     * @return Sy_Siteemploi
+     */
+    public function setPub(\OC\UserBundle\Entity\Image $pub = null)
+    {
+        $this->pub = $pub;
+
+        return $this;
+    }
+
+    /**
+     * Get pub
+     *
+     * @return \OC\UserBundle\Entity\Image
+     */
+    public function getPub()
+    {
+        return $this->pub;
     }
 }

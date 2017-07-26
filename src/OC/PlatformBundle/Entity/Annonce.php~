@@ -299,7 +299,6 @@ class Annonce
      */
 	private $New = false;
 	
-	
     /**
      * Get id
      *
@@ -1257,5 +1256,53 @@ class Annonce
     public function getNew()
     {
         return $this->New;
+    }
+
+    /**
+     * Set dateSuspension
+     *
+     * @param \DateTime $dateSuspension
+     *
+     * @return Annonce
+     */
+    public function setDateSuspension($dateSuspension)
+    {
+        $this->dateSuspension = $dateSuspension;
+
+        return $this;
+    }
+
+    /**
+     * Get dateSuspension
+     *
+     * @return \DateTime
+     */
+    public function getDateSuspension()
+    {
+        return $this->dateSuspension;
+    }
+
+    /**
+     * Set dateMAJ
+     *
+     * @param \DateTime $dateMAJ
+     *
+     * @return Annonce
+     */
+    public function setDateMAJ($dateMAJ)
+    {
+        $this->dateMAJ = $dateMAJ;
+
+        return $this;
+    }
+
+    /**
+     * Get dateMAJ
+     *
+     * @return \DateTime
+     */
+    public function getDateMAJ()
+    {
+        return $this->dateMAJ;
     }
 }

@@ -13,6 +13,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use OC\PlatformBundle\Form\AjouterAnnonceType;
 use OC\PlatformBundle\Form\AnnonceSyType;
 use Symfony\Component\HttpFoundation\Response;
+use OC\PlatformBundle\Form\RejetType;
 
 
 class NewAdvertController extends Controller
@@ -299,5 +300,40 @@ class NewAdvertController extends Controller
 		
 		$referer = $request->headers->get('referer');
 		return $this->redirect($referer);
+	}
+	
+	public function rejetAction($id,Request $request){
+		$form = $this->createForm(RejetType::class);
+		$repository = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Annonce');
+		$annonce = $repository->find($id);
+		$form->handleRequest($request);
+		$session = $request->getSession();
+		$url = $session->get('url');
+			if ($form->isSubmitted() && $form->isValid()) {
+				$annonce->setSuspension(30);
+				$recruteur = $annonce->getIdRecruteur();
+				if($recruteur == null){
+					$recruteur = $annonce->getIdEmployeur();
+				}
+				$em = $this->getDoctrine()->getManager();
+				$em->persist($annonce);
+				$em->flush();	
+				$message = \Swift_Message::newInstance()
+					->setSubject('Rejet de votre annonce sur RECRUTIC')
+					->setFrom('support@recrutic.com')
+					->setTo('a.bouteille@maneom.com')
+					->setBody("Bonjour, \n"
+							. "Votre annonce de ref ".$annonce->getId()." a été rejeter pour le motif suivant : ".$form->get('Motif')->getData().".\n"
+							. "Veuillez modifier votre annonce dans votre espace pour qu'elle corresponde à nos critère de validation. \n"
+							. "\n"
+							. "\n"
+							. "Cordialement,"
+							. "\n"
+							. "Le support de Recrutic.");
+				$this->get('mailer')->send($message);
+				return $this->redirect($url);
+			}
+		
+		return $this->render('OCPlatformBundle:Admin:Admin_rejet_annonce.html.twig',array('annonce'=>$annonce,'form'=>$form->createView()));
 	}
 }

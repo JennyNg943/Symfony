@@ -301,6 +301,13 @@ class Sy_Annonce implements ItemInterface
 	/**
      * @var integer
      *
+     * @ORM\ManyToMany(targetEntity="OC\UserBundle\Entity\Sy_CvTheque")
+     */
+	private $candidatContact;
+	
+	/**
+     * @var integer
+     *
      * @ORM\Column(name="CodePostal", type="integer", nullable=true)
      */
 	private $codePostal;
@@ -1387,4 +1394,38 @@ class Sy_Annonce implements ItemInterface
 		}
 		return $siteURL."/Consultation/".$this->id;
 	}
+
+    /**
+     * Add candidatContact
+     *
+     * @param \OC\UserBundle\Entity\Sy_CvTheque $candidatContact
+     *
+     * @return Sy_Annonce
+     */
+    public function addCandidatContact(\OC\UserBundle\Entity\Sy_CvTheque $candidatContact)
+    {
+        $this->candidatContact[] = $candidatContact;
+
+        return $this;
+    }
+
+    /**
+     * Remove candidatContact
+     *
+     * @param \OC\UserBundle\Entity\Sy_CvTheque $candidatContact
+     */
+    public function removeCandidatContact(\OC\UserBundle\Entity\Sy_CvTheque $candidatContact)
+    {
+        $this->candidatContact->removeElement($candidatContact);
+    }
+
+    /**
+     * Get candidatContact
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCandidatContact()
+    {
+        return $this->candidatContact;
+    }
 }

@@ -12,6 +12,6 @@
 			<a href="{{ path('DevaliderSyAnnonce', {'idAnnonce':annonce.id}) }}"onclick="return confirm('Devalider cette annonce? {{ annonce.id }} - {{ annonce.TitreAnnonce|upper }} - {{ annonce.datepublication|date('d/m/Y') }} - {{ annonce.GrandeVilleProche }} ({{ annonce.idDepartement }})' )" >
 				<input type="submit" value="Dépublier" id="BoutonAnnonce" ></a>
 		{% endif %}	
-		<a href="{{ path('rejet', {'id':annonce.id}) }}" onclick="return confirm('Rejeter cette annonce? {{ annonce.id }} - {{ annonce.TitreAnnonce|upper }} - {{ annonce.datepublication|date('d/m/Y') }} - {{ annonce.GrandeVilleProche }} ({{ annonce.idDepartement }})' )" ><input type="submit" value="Rejeter" id="BoutonAnnonce" ></a>
+		<a href="{{ path('rejetSy', {'id':annonce.id}) }}" ><input type="submit" value="Rejeter" id="BoutonAnnonce" ></a>
 		<a href="{{ path('deleteSyAnnonce', {'idAnnonce':annonce.id}) }}"onclick="return confirm('Voulez vous vraiment supprimer cette annonce? {{ annonce.id }} - {{ annonce.TitreAnnonce|upper }} - {{ annonce.datepublication|date('d/m/Y') }} - {{ annonce.GrandeVilleProche }} ({{ annonce.idDepartement }})' )" ><input type="submit" value="Supprimer" id="BoutonAnnonce" style="color:red"></a>
 		

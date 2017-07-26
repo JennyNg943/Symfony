@@ -67,15 +67,28 @@
 			<a href="{{ path('fos_user_change_password') }}"> Modifier mon mot de passe</a>
 		</div>
 	<h1>Annonce</h1>
-	{% for annonce in listeannonce %}
+		{% for annonce in listeannonce %}
 			<table id="MAPAGEANNONCE">
 				{{ include("OCPlatformBundle:Advert:AffichageAnnonceMaPage.html.twig") }}
 			</table>	
-	{% endfor %}
+		{% endfor %}
 		<div class="modifProfile">
 			<a href="{{ path('annonceConsultation')}}">Voir toutes mes annonces</a> - 
 			<a href="{{ path('annonceAjout')}}">Ajouter une annonce</a>
-		</div>		
+		</div>
+	<h1>Candidat Contactés </h1>
+		{% for  annonce in app.user.annonce %}
+			{% for candidat in annonce.candidatContact|slice(0,3) %}
+			<div id="OffreEmploi" style="width: 30%;display: inline-block;">
+				<h2>{{ candidat.nom|truncate(3) }} {{ candidat.prenom }}</h2>
+				<p style="font-size: 15px;">{{ candidat.codePostal }}</p>
+			</div>
+			{% endfor %}
+		{% endfor %}
+		<div class="modifProfile">
+			<a href="{{ path('candidatConsulte')}}">Voir tous les candidats contactés</a>
+		</div>
+		
 	{% endif %}
 	
 	

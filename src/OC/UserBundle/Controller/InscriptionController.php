@@ -28,6 +28,7 @@ class InscriptionController extends Controller
 		$repository = $this->getDoctrine()->getManager()->getRepository('OCPlatformBundle:Annonce');
 		$repository2 = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Recruteur');
 		$repository3 = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Candidature');
+		$repository4 = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_CvTheque');
 		$user = $this->getUser();
 		$candidat = $repository3->find($user->getId());
 		$candidat->setMailCandidat($user->getEmail())->setCvcandidat(null);
@@ -53,6 +54,8 @@ class InscriptionController extends Controller
 				if($ok == -1){
 					return $this->render('OCUserBundle:Inscription:FormPar.html.twig', array('form' => $form->createView(),'annonce'=>$annonce,'erreur'=>$erreur));
 				}else{
+					$cv = $repository4->findOneByMail($user->getEmail());
+					$cv->addAnnonce($annonce);
 					$candidat->addAnnonce($annonce);
 					$file = $candidat->getCvcandidat();
 					$fileName = $user->getEmail().'.'.$file->guessExtension();
@@ -60,6 +63,7 @@ class InscriptionController extends Controller
 
 					$em = $this->getDoctrine()->getManager();
 					$em->persist($candidat);
+					$em->persist($cv);
 					$em->flush();
 
 					$titre = $annonce->getTitreAnnonce();
@@ -92,6 +96,7 @@ class InscriptionController extends Controller
 		$repository = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Annonce');
 		$repository3 = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_Candidature');
 		$repository4 = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:User');
+		$repository5 = $this->getDoctrine()->getManager()->getRepository('OCUserBundle:Sy_CvTheque');
 		$user = $this->getUser();
 		$candidat = $repository3->find($user->getId());	//Récupération du candidat par rapport à son idUser
 			//Utilisation du mail de connexion comme mail de contact.
@@ -125,6 +130,8 @@ class InscriptionController extends Controller
 				if($ok == -1){ //Si le candidat a déjà postulé à cette annonce, on l'empeche de repostuler.
 					return $this->render('OCUserBundle:Inscription:FormPar.html.twig', array('form' => $form->createView(),'annonce'=>$annonce,'erreur'=>$erreur));
 				}else{
+					$cv = $repository5->findOneByMail($user->getEmail());
+					$cv->addSyAnnonce($annonce);
 					$candidat->addSyAnnonce($annonce);
 					$file = $candidat->getCvcandidat();
 					$fileName = $user->getEmail().'.'.$file->guessExtension();
@@ -132,6 +139,7 @@ class InscriptionController extends Controller
 
 					$em = $this->getDoctrine()->getManager();
 					$em->persist($candidat);
+					$em->persist($cv);
 					$em->flush();
 					$titre = $annonce->getTitreAnnonce();
 					$reference = $annonce->getReferenceRecruteur();

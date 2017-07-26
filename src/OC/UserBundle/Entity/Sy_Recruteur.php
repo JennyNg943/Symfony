@@ -52,12 +52,6 @@ class Sy_Recruteur extends User
      */
     private $prenomcontactcomm;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Adresse", type="string", length=255, nullable=true)
-     */
-    private $adresse;
 
     /**
      * @var string
@@ -131,6 +125,7 @@ class Sy_Recruteur extends User
      * @var integer
      * 
      * @ORM\OneToOne(targetEntity="OC\PlatformBundle\Entity\Sy_Premium")
+	 * 
      */
 	private $premium;
 	
